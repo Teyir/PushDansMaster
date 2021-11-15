@@ -1,0 +1,16 @@
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.exe
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.deps.json
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.runtimeconfig.json
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.runtimeconfig.dev.json
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.dll
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\ref\PushDansMaster.dll
+W:\C#\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.pdb
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.csproj.AssemblyReference.cache
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.GeneratedMSBuildEditorConfig.editorconfig
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.AssemblyInfoInputs.cache
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.AssemblyInfo.cs
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.csproj.CoreCompileInputs.cache
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.dll
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\ref\PushDansMaster.dll
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.pdb
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.genruntimeconfig.cache
