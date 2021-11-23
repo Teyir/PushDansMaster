@@ -1,0 +1,13 @@
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\bin\Debug\net5.0\appsettings.json
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\bin\Debug\net5.0\PushDansMaster.DAL.deps.json
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\bin\Debug\net5.0\PushDansMaster.DAL.dll
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\bin\Debug\net5.0\ref\PushDansMaster.DAL.dll
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\bin\Debug\net5.0\PushDansMaster.DAL.pdb
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.csproj.AssemblyReference.cache
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.AssemblyInfoInputs.cache
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.AssemblyInfo.cs
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.csproj.CoreCompileInputs.cache
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.dll
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\ref\PushDansMaster.DAL.dll
+C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.pdb
