@@ -8,7 +8,7 @@ namespace PushDansMaster.DAL
     abstract class Depot_DAL<Type_DAL> : IDepot_DAL<Type_DAL>
     { 
         public string connectionString { get; set; }
-
+            
         protected SqlConnection connection;
         protected SqlCommand command;
         
