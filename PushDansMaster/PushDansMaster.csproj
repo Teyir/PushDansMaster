@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="App.DAL\**" />
+    <Compile Remove="App.GUI\**" />
+    <EmbeddedResource Remove="App.DAL\**" />
+    <EmbeddedResource Remove="App.GUI\**" />
+    <None Remove="App.DAL\**" />
+    <None Remove="App.GUI\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PushDansMaster.DAL\PushDansMaster.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
