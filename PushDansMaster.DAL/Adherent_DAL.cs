@@ -10,7 +10,7 @@ namespace PushDansMaster.DAL
 
     public class Adherent_DAL
     {
-    public int ID { get; set; }
+    public int idAdherent { get; set; }
 
     public string societeAdherent { get;  private set; }
 
@@ -27,9 +27,9 @@ namespace PushDansMaster.DAL
     public bool statusAdherent { get; private set; }
 
 
-    public Adherent_DAL(int id, string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
-        => (ID, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
-        = (id, societe, email, nom, prenom, adresse, DateTime.Now, status);
+    public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
+        => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+        = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
     internal void Insert(SqlConnection connection)
     {

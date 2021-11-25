@@ -8,6 +8,8 @@ namespace PushDansMaster
 {
     public class Adherent
     {
+
+        public int idAdherent { get; }
         public string societeAdherent { get; private set; }
 
         public string emailAdherent { get; private set; }
@@ -23,7 +25,7 @@ namespace PushDansMaster
         public bool statusAdherent { get; private set; }
 
 
-        public Adherent(int id, string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
+        public Adherent(string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
         {
             societeAdherent = societe;
             emailAdherent= email;
