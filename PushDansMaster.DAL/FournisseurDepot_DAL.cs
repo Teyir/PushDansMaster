@@ -83,7 +83,6 @@ namespace PushDansMaster.DAL
 
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
-            fournisseur.idFournisseur = ID;
 
             closeConnection();
 

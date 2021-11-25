@@ -14,7 +14,7 @@ namespace PushDansMaster
         public List<Fournisseur> getAll()
         {
             var fournisseurs = depot.getAll()
-                .Select(f => new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur))
+                .Select(f => new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur))
                 .ToList();
             return fournisseurs;
         }
@@ -26,8 +26,8 @@ namespace PushDansMaster
         {
             var f = depot.getByID(ID);
 
-            new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
 
+        return new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
         
         }
 
@@ -37,10 +37,11 @@ namespace PushDansMaster
         /// </summary>
         public Fournisseur insert(Fournisseur f)
         {
-            var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            var fournisseur = new Fournisseur_DAL(f.idFournisseur,f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
             depot.insert(fournisseur);
 
-            return fournisseur;
+
+            return f;
         }
 
         /// <summary>
@@ -50,6 +51,8 @@ namespace PushDansMaster
         {
             var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
             depot.update(fournisseur);
+
+            return f;
         }
 
         /// <summary>

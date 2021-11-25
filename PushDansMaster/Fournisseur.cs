@@ -27,11 +27,7 @@ namespace PushDansMaster
             adresseFournisseur = adresse;
         }
 
-       /* public override string ToString()
-        {
-            return $"()";
-        }*/
-
+       
     }
 
 }

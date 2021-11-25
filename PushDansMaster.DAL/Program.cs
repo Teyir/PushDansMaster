@@ -1,4 +1,6 @@
 ﻿using System;
+using PushDansMaster;
+using PushDansMaster.DAL;
 using System.Collections.Generic;
 
 
@@ -32,11 +34,7 @@ namespace PushDansMaster
             Console.WriteLine("Merci d'entrer votre adresse");
             string adresse =  Console.ReadLine();
 
-            var ezez = new Fournisseur(societe, civilite, nom, prenom, email, adresse);
-
-            //outpout
-
-            Console.WriteLine(ezez.societeFournisseur, ezez.civiliteFournisseur, ezez.nomFournisseur, ezez.prenomFournisseur, ezez.emailFournisseur, ezez.adresseFournisseur);
+ 
         }
     }
 }
