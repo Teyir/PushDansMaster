@@ -1,9 +1,6 @@
-﻿using PushDansMaster.DAL;
-using System;
+﻿using PushDansMaster.DAL
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster
 {
@@ -17,7 +14,7 @@ namespace PushDansMaster
         public List<Fournisseur> getAll()
         {
             var fournisseurs = depot.getAll()
-                .Select(f => new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur))
+                .Select(f => new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur))
                 .ToList();
             return fournisseurs;
         }
@@ -29,7 +26,9 @@ namespace PushDansMaster
         {
             var f = depot.getByID(ID);
 
-            return new Fournisseur(f.ID,)
+            new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+
+        
         }
 
 
@@ -38,7 +37,10 @@ namespace PushDansMaster
         /// </summary>
         public Fournisseur insert(Fournisseur f)
         {
-            throw new Exception("Insert pas fais");
+            var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            depot.insert(fournisseur);
+
+            return fournisseur;
         }
 
         /// <summary>
@@ -46,7 +48,8 @@ namespace PushDansMaster
         /// </summary>
         public Fournisseur update(Fournisseur f)
         {
-            throw new Exception("Update pas fais");
+            var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            depot.update(fournisseur);
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace PushDansMaster
         /// </summary>
         public void delete(Fournisseur f)
         {
-            var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            var fournisseur = new Fournisseur_DAL(f.idFournisseur,f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
             depot.delete(fournisseur);
         }
     }

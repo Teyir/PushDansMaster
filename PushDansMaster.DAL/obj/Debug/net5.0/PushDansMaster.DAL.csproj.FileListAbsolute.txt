@@ -11,3 +11,12 @@ C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\P
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.dll
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\ref\PushDansMaster.DAL.dll
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.pdb
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.csproj.AssemblyReference.cache
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.GeneratedMSBuildEditorConfig.editorconfig
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.AssemblyInfoInputs.cache
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.AssemblyInfo.cs
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.csproj.CoreCompileInputs.cache
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.dll
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\ref\PushDansMaster.DAL.dll
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.pdb
+W:\C#\PushDansMaster\PushDansMaster.DAL\obj\Debug\net5.0\PushDansMaster.DAL.csprojAssemblyReference.cache

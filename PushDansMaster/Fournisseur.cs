@@ -8,7 +8,7 @@ namespace PushDansMaster
 {
     public class Fournisseur
     {
-        public int idFournisseur { get; private set; }
+        public int idFournisseur { get; }
         public string societeFournisseur { get; private set; }
         public bool civiliteFournisseur { get; private set; }
         public string nomFournisseur { get; private set; }

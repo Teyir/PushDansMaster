@@ -48,3 +48,4 @@ C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushD
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster\bin\Debug\net5.0\PushDansMaster.DAL.pdb
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.csproj.CopyComplete
 C:\Users\gravy\Source\Repos\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.genruntimeconfig.cache
+W:\C#\PushDansMaster\PushDansMaster\obj\Debug\net5.0\PushDansMaster.csprojAssemblyReference.cache

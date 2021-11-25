@@ -738,23 +738,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gravy\\.nuget\\packages\\": {},
+    "C:\\Users\\Thomas\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gravy\\Source\\Repos\\PushDansMaster\\PushDansMaster\\PushDansMaster.csproj",
+      "projectUniqueName": "W:\\C#\\PushDansMaster\\PushDansMaster\\PushDansMaster.csproj",
       "projectName": "PushDansMaster",
-      "projectPath": "C:\\Users\\gravy\\Source\\Repos\\PushDansMaster\\PushDansMaster\\PushDansMaster.csproj",
-      "packagesPath": "C:\\Users\\gravy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gravy\\Source\\Repos\\PushDansMaster\\PushDansMaster\\obj\\",
+      "projectPath": "W:\\C#\\PushDansMaster\\PushDansMaster\\PushDansMaster.csproj",
+      "packagesPath": "C:\\Users\\Thomas\\.nuget\\packages\\",
+      "outputPath": "W:\\C#\\PushDansMaster\\PushDansMaster\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\gravy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Thomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -769,8 +772,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\gravy\\Source\\Repos\\PushDansMaster\\PushDansMaster.DAL\\PushDansMaster.DAL.csproj": {
-              "projectPath": "C:\\Users\\gravy\\Source\\Repos\\PushDansMaster\\PushDansMaster.DAL\\PushDansMaster.DAL.csproj"
+            "W:\\C#\\PushDansMaster\\PushDansMaster.DAL\\PushDansMaster.DAL.csproj": {
+              "projectPath": "W:\\C#\\PushDansMaster\\PushDansMaster.DAL\\PushDansMaster.DAL.csproj"
             }
           }
         }
@@ -799,7 +802,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
