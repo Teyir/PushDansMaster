@@ -34,6 +34,8 @@ namespace PushDansMaster
 
             var ezez = new Fournisseur(societe, civilite, nom, prenom, email, adresse);
 
+            //outpout
+
             Console.WriteLine(ezez.societeFournisseur, ezez.civiliteFournisseur, ezez.nomFournisseur, ezez.prenomFournisseur, ezez.emailFournisseur, ezez.adresseFournisseur);
         }
     }
