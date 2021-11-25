@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
-    class AdherentDepot_DAL : Depot_DAL<Adherent_DAL>
+    public class AdherentDepot_DAL : Depot_DAL<Adherent_DAL>
     {
 
         public override List<Adherent_DAL> getAll()
