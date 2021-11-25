@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 namespace PushDansMaster.DAL
 {
     //DAL class
-    abstract class Depot_DAL<Type_DAL> : IDepot_DAL<Type_DAL>
+    public abstract class Depot_DAL<Type_DAL> : IDepot_DAL<Type_DAL>
     { 
         public string connectionString { get; set; }
             
