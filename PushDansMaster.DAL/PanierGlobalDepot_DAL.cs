@@ -18,7 +18,7 @@ namespace PushDansMaster.DAL
             while (reader.Read())
             {
                 var p = new PanierGlobal_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(0));
+                                        reader.GetInt32(1));
 
                 listeDePaniers.Add(p);
             }
@@ -42,10 +42,10 @@ namespace PushDansMaster.DAL
             if (reader.Read())
             {
                 p = new PanierGlobal_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(0));
+                                        reader.GetInt32(1));
             }
             else
-                throw new Exception($"Pas de prix dans la BDD avec l'ID {ID}");
+                throw new Exception($"Pas de PanierGlobal dans la BDD avec l'ID {ID}");
 
             closeConnection();
 
@@ -77,7 +77,7 @@ namespace PushDansMaster.DAL
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour le prix d'ID : {panier.ID}");
+                throw new Exception($"Impossible de mettre à jour le PanierGlobal d'ID : {panier.ID}");
 
             closeConnection();
 
@@ -88,12 +88,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from panier where id = @ID";
+            command.CommandText = "delete from panier_global where id = @ID";
             command.Parameters.Add(new SqlParameter("@ID", panier.ID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer le prix d'ID {panier.ID}");
+                throw new Exception($"Impossible de supprimer le PanierGlobal d'ID {panier.ID}");
 
             closeConnection();
         }
