@@ -8,5 +8,6 @@ namespace PushDansMaster
 {
     class PanierAdherent
     {
+        
     }
 }
