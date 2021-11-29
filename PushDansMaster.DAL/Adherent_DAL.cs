@@ -6,15 +6,62 @@ namespace PushDansMaster.DAL
 
     public class Adherent_DAL
     {
-    public int ID { get; set; }
-    public string societeAdherent { get;  private set; }
-    public string emailAdherent { get ; private set; }
-    public string nomAdherent { get; private set; }
-    public string prenomAdherent { get; private set; }
-    public string adresseAdherent { get; private set; }
-    public DateTime dateAdhesionAdherent { get;  private set; }
+        private int ID;
+        private string societeAdherent;
+        private string emailAdherent;
+        private string nomAdherent;
+        private string prenomAdherent;
+        private string adresseAdherent;
+        private DateTime dateAdhesionAdherent;
+        private bool statusAdherent;
 
-    public bool statusAdherent { get; private set; }
+        #region Getters / Setters
+
+        public int getID
+        {
+            get { return ID; }
+            private set { ID = value; }
+        }
+
+        public string getSocieteAdherent
+        {
+            get { return societeAdherent; }
+            private set { societeAdherent = value; }
+        }
+        public string getEmailAdherent
+        {
+            get { return emailAdherent; }
+            private set { emailAdherent = value; }
+        }
+        public string getNomAdherent
+        {
+            get { return nomAdherent; }
+            private set { nomAdherent = value; }
+        }
+        public string getPrenomAdherent
+        {
+            get { return prenomAdherent; }
+            private set { prenomAdherent = value; }
+        }
+        public string getAdresseAdherent
+        {
+            get { return adresseAdherent; }
+            private set { adresseAdherent = value; }
+        }
+        public DateTime getDateAdhesionAdherent
+        {
+            get { return dateAdhesionAdherent; }
+            private set { dateAdhesionAdherent = value; }
+        }
+        public bool getStatus
+        {
+            get { return statusAdherent; }
+            private set { statusAdherent = value; }
+        }
+
+        #endregion
+
+        #region Constructeurs
         public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
         => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (societe, email, nom, prenom, adresse, dateAdhesion, status);
@@ -23,13 +70,16 @@ namespace PushDansMaster.DAL
         => (ID, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
-    internal void Insert(SqlConnection connection)
-    {
-        using (var command = new SqlCommand())
+        #endregion
+
+        #region Methodes
+        internal void Insert(SqlConnection connection)
         {
+            using (var command = new SqlCommand())
+            {
             command.Connection = connection;
-                    command.CommandText = "insert into adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
-                            + " values (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
+                    command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
+                            + " VALUES (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
                 command.Parameters.Add(new SqlParameter("@societe", societeAdherent));
                 command.Parameters.Add(new SqlParameter("@email", emailAdherent));
                 command.Parameters.Add(new SqlParameter("@nom", nomAdherent));
@@ -44,5 +94,6 @@ namespace PushDansMaster.DAL
 
             }
         }
- }
+        #endregion
+    }
 }
