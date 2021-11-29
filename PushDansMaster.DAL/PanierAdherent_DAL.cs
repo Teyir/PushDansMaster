@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
-    class PanierAdherent_DAL
+    public class PanierAdherent_DAL
     {
         public int ID { get; }
         public bool status { get; private set; }
         public int semaine { get; private set; }
         public int id_adherent { get; private set; }
         public int id_panierGlobal { get; private set; }
+
+
         public PanierAdherent_DAL(bool status, int semaine, int id_adh, int id_panierGlo) => (this.status, this.semaine, this.id_adherent, this.id_panierGlobal) = (status, semaine, id_adh, id_panierGlo);
+
+        public PanierAdherent_DAL(int id, bool status, int semaine, int id_adh, int id_panierGlo) => (this.ID, this.status, this.semaine, this.id_adherent, this.id_panierGlobal) = (id ,status, semaine, id_adh, id_panierGlo);
 
         internal void insert(SqlConnection connection)
         {

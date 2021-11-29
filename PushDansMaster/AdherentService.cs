@@ -30,7 +30,7 @@ namespace PushDansMaster
 
         public Adherent insert(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.dateAdhesionAdherent, f.statusAdherent);
+            var adherent = new Adherent_DAL(f.getIDAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.insert(adherent);
 
 
@@ -39,7 +39,7 @@ namespace PushDansMaster
 
         public Adherent update(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.dateAdhesionAdherent, f.statusAdherent);
+            var adherent = new Adherent_DAL(f.getIDAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.update(adherent);
 
             return f;
@@ -47,7 +47,7 @@ namespace PushDansMaster
 
         public void delete(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.dateAdhesionAdherent, f.statusAdherent);
+            var adherent = new Adherent_DAL(f.getIDAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.delete(adherent);
         }
 

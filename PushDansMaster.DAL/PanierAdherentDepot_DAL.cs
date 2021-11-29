@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
 {
-    class PanierAdherentDepot_DAL : Depot_DAL<PanierAdherent_DAL>
+    public class PanierAdherentDepot_DAL : Depot_DAL<PanierAdherent_DAL>
     {
         public override List<PanierAdherent_DAL> getAll()
         {
@@ -17,10 +17,11 @@ namespace PushDansMaster.DAL
 
             while (reader.Read())
             {
-                var p = new PanierAdherent_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(1),
+                var p = new PanierAdherent_DAL(reader.GetInt32(0), 
+                                        reader.GetBoolean(1),
                                         reader.GetInt32(2),
-                                        reader.GetInt32(3));
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4));
 
                 listeDePaniers.Add(p);
             }
@@ -34,7 +35,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select status, semaine, id_adherent, id_panierglobal from panier_global where id=@ID";
+            command.CommandText = "select id status, semaine, id_adherent, id_panierglobal from panier_global where id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -43,10 +44,11 @@ namespace PushDansMaster.DAL
             PanierAdherent_DAL p;
             if (reader.Read())
             {
-                p = new PanierAdherent_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(1),
+                p = new PanierAdherent_DAL(reader.GetInt32(0), 
+                                        reader.GetBoolean(1),
                                         reader.GetInt32(2),
-                                        reader.GetInt32(3));
+                                        reader.GetInt32(3),
+                                        reader.GetInt32(4));
             }
             else
                 throw new Exception($"Pas de PanierAdherent dans la BDD avec l'ID {ID}");
