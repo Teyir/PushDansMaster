@@ -2,13 +2,35 @@
 
 namespace PushDansMaster.DAL
 {
-    class Prix_DAL
+    public class Prix_DAL
     {
-        public int prix { get; private set; }
-        public int idFournisseur { get; private set; }
-        public int idLignesGlobal { get; private set; }
-        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal) => (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        private int prix;
+        private int idFournisseur;
+        private int idLignesGlobal;
 
+        #region Getters / Setters
+        public int getPrix
+        {
+            get { return prix; }
+            private set { prix = value; }
+        }
+        public int getIDFournisseur
+        {
+            get { return idFournisseur; }
+            private set { idFournisseur = value; }
+        }
+        public int getIDLignesGlobal
+        {
+            get { return idLignesGlobal; }
+            private set { idLignesGlobal = value; }
+        }
+        #endregion
+
+        #region Constructeur
+        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal) => (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        #endregion
+
+        #region Methodes
         internal void insert(SqlConnection connection)
         {
             // On insert un point dans la BDD
@@ -25,5 +47,6 @@ namespace PushDansMaster.DAL
                 command.ExecuteNonQuery();
             }
         }
+        #endregion
     }
 }
