@@ -73,7 +73,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update Prix set prix=@prix, id_fournisseur=@IDfournisseur, id_lignesglobal=@IDlignesglo)"
+            command.CommandText = "update prix set prix=@prix, id_fournisseur=@IDfournisseur, id_lignesglobal=@IDlignesglo)"
                                    + " where id_fournisseur = @IDfournisseur and id_lignesglobal = @IDlignesglo";
             command.Parameters.Add(new SqlParameter("@prix", prix.prix));
             command.Parameters.Add(new SqlParameter("@IDfournisseur", prix.idFournisseur));
@@ -95,7 +95,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from Prix where id_fournisseur = @IDfournisseur and id_lignesglobal = @IDlignesglo";
+            command.CommandText = "delete from prix where id_fournisseur = @IDfournisseur and id_lignesglobal = @IDlignesglo";
             command.Parameters.Add(new SqlParameter("@IDfournisseur", prix.idFournisseur));
             command.Parameters.Add(new SqlParameter("@IDlignesglo", prix.idLignesGlobal));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
