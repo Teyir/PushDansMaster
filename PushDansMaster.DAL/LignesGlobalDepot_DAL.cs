@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
-    class LignesGlobalDepot_DAL : Depot_DAL<LignesGlobal_DAL>
+    public class LignesGlobalDepot_DAL : Depot_DAL<LignesGlobal_DAL>
     {
         public override List<LignesGlobal_DAL> getAll()
         {
             createConnection();
 
-            command.CommandText = "select id, id_panier, quantite, reference, id_reference from lignes_global";
+            command.CommandText = "SELECT id, id_panier, quantite, reference, id_reference FROM lignes_global";
             var reader = command.ExecuteReader();
 
             var listeDeLignes = new List<LignesGlobal_DAL>();
@@ -38,7 +35,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, id_panier, quantite, reference, id_reference from lignes_global where id=@ID";
+            command.CommandText = "SELECT id, id_panier, quantite, reference, id_reference FROM lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -65,12 +62,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into lignes_global(id_panier, quantite, reference, id_reference)"
-                                    + " values (@id_panier, @quantite, @reference, @id_reference); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@id_panier", ligne.id_panier));
-            command.Parameters.Add(new SqlParameter("@quantite", ligne.quantite));
-            command.Parameters.Add(new SqlParameter("@reference", ligne.reference));
-            command.Parameters.Add(new SqlParameter("@id_reference", ligne.id_reference));
+            command.CommandText = "INSERT INTO lignes_global(id_panier, quantite, reference, id_reference)"
+                                    + " VALUES (@id_panier, @quantite, @reference, @id_reference); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@id_panier", ligne.getId_panier));
+            command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantite));
+            command.Parameters.Add(new SqlParameter("@reference", ligne.getReference));
+            command.Parameters.Add(new SqlParameter("@id_reference", ligne.getId_reference));
 
             closeConnection();
 
@@ -81,16 +78,17 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update lignes_global set id_panier=@id_panier, quantite=@quantite, reference=@reference, id_reference=@id_reference"
-                                   + " where id = @ID";
-            command.Parameters.Add(new SqlParameter("@id_panier", ligne.id_panier));
-            command.Parameters.Add(new SqlParameter("@quantite", ligne.quantite));
-            command.Parameters.Add(new SqlParameter("@reference", ligne.reference));
-            command.Parameters.Add(new SqlParameter("@id_reference", ligne.id_reference));
+            command.CommandText = "UPDATE lignes_global SET id_panier=@id_panier, quantite=@quantite, reference=@reference, id_reference=@id_reference"
+                                   + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
+            command.Parameters.Add(new SqlParameter("@id_panier", ligne.getId_panier));
+            command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantite));
+            command.Parameters.Add(new SqlParameter("@reference", ligne.getReference));
+            command.Parameters.Add(new SqlParameter("@id_reference", ligne.getId_reference));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour la ligne globale d'ID : {ligne.ID}");
+                throw new Exception($"Impossible de mettre à jour la ligne globale d'ID : {ligne.getID}");
 
             closeConnection();
 
@@ -101,12 +99,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from lignes_global where id = @ID";
-            command.Parameters.Add(new SqlParameter("@ID", ligne.ID));
+            command.CommandText = "DELETE * from lignes_global WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer la ligne globale d'ID {ligne.ID}");
+                throw new Exception($"Impossible de supprimer la ligne globale d'ID {ligne.getID}");
 
             closeConnection();
         }
