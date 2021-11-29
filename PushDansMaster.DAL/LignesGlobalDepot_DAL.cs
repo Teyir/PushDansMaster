@@ -22,8 +22,9 @@ namespace PushDansMaster.DAL
             {
                 var p = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
-                                        reader.GetString(2),
-                                        reader.GetInt32(3));
+                                        reader.GetInt32(2),
+                                        reader.GetString(3),
+                                        reader.GetInt32(4));
 
                 listeDeLignes.Add(p);
             }
@@ -37,7 +38,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id_panier, quantite, reference, id_reference from lignes_global where id=@ID";
+            command.CommandText = "select id, id_panier, quantite, reference, id_reference from lignes_global where id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -48,8 +49,9 @@ namespace PushDansMaster.DAL
             {
                 p = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
-                                        reader.GetString(2),
-                                        reader.GetInt32(3));
+                                        reader.GetInt32(2),
+                                        reader.GetString(3),
+                                        reader.GetInt32(4));
             }
             else
                 throw new Exception($"Pas de ligne globale dans la BDD avec l'ID {ID}");

@@ -16,6 +16,7 @@ namespace PushDansMaster.DAL
         public int id_reference { get; private set; }
 
         public LignesGlobal_DAL(int id_panier, int quantite, string reference, int id_reference) => (this.id_panier, this.quantite, this.reference, this.id_reference) = (id_panier, quantite, reference, id_reference);
+        public LignesGlobal_DAL(int ID, int id_panier, int quantite, string reference, int id_reference) => (this.ID, this.id_panier, this.quantite, this.reference, this.id_reference) = (ID, id_panier, quantite, reference, id_reference);
 
         internal void insert(SqlConnection connection)
         {
