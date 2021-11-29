@@ -10,13 +10,9 @@ namespace PushDansMaster.DAL
     public class LignesAdherent_DAL
     {
         public int ID { get; }
-
         public int quantiteAdherent { get; set; }
-
         public int idReference { get; set; }
-
         public int idPanier { get; set; }
-
         public LignesAdherent_DAL(int quantite, int id_reference, int id_panier)
            => (quantiteAdherent, idReference, idPanier)
            = (quantite, id_reference, id_panier);

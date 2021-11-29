@@ -72,9 +72,8 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into adherent(id, societe, email, nom, prenom, adresse, date_adhesion, status)"
-                                + " values (@id, @societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@id", adherent.ID));
+            command.CommandText = "insert into adherent(societe, email, nom, prenom, adresse, date_adhesion, status)"
+                                + " values (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status); select scope_identity()";
             command.Parameters.Add(new SqlParameter("@societe", adherent.societeAdherent));
             command.Parameters.Add(new SqlParameter("@email", adherent.emailAdherent));
             command.Parameters.Add(new SqlParameter("@nom", adherent.nomAdherent));
@@ -86,7 +85,6 @@ namespace PushDansMaster.DAL
             var ID = Convert.ToInt32((decimal)
                 command.ExecuteScalar());
 
-            adherent.ID = ID;
 
             closeConnection();
 

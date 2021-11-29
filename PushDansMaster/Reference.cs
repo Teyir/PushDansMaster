@@ -14,7 +14,6 @@ namespace PushDansMaster
         private string marque;
         private int quantite;
 
-
         #region Getters / Setters
         public int getID
         {
@@ -54,7 +53,5 @@ namespace PushDansMaster
 
         }
         #endregion
-
-
     }
 }
