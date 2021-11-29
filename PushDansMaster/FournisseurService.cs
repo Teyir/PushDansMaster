@@ -14,7 +14,7 @@ namespace PushDansMaster
         public List<Fournisseur> getAll()
         {
             var fournisseurs = depot.getAll()
-                .Select(f => new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur))
+                .Select(f => new Fournisseur(f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur))
                 .ToList();
             return fournisseurs;
         }
@@ -27,7 +27,7 @@ namespace PushDansMaster
             var f = depot.getByID(ID);
 
 
-            return new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            return new Fournisseur(f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur);
         
         }
 
