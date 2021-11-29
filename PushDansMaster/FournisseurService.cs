@@ -37,7 +37,7 @@ namespace PushDansMaster
         /// </summary>
         public Fournisseur insert(Fournisseur f)
         {
-            var fournisseur = new Fournisseur_DAL(f.idFournisseur,f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            var fournisseur = new Fournisseur_DAL(f.getID,f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur);
             depot.insert(fournisseur);
 
 
@@ -49,7 +49,7 @@ namespace PushDansMaster
         /// </summary>
         public Fournisseur update(Fournisseur f)
         {
-            var fournisseur = new Fournisseur_DAL(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            var fournisseur = new Fournisseur_DAL(f.getID, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur);
             depot.update(fournisseur);
 
             return f;
@@ -60,7 +60,7 @@ namespace PushDansMaster
         /// </summary>
         public void delete(Fournisseur f)
         {
-            var fournisseur = new Fournisseur_DAL(f.idFournisseur,f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur);
+            var fournisseur = new Fournisseur_DAL(f.getID, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur);
             depot.delete(fournisseur);
         }
     }

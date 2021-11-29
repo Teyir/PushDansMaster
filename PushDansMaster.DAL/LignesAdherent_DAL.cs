@@ -9,7 +9,7 @@ namespace PushDansMaster.DAL
 {
     public class LignesAdherent_DAL
     {
-        public int IdLignes{ get; }
+        public int ID { get; }
 
         public int quantiteAdherent { get; set; }
 
@@ -17,16 +17,28 @@ namespace PushDansMaster.DAL
 
         public int idPanier { get; set; }
 
+        public LignesAdherent_DAL(int quantite, int id_reference, int id_panier)
+           => (quantiteAdherent, idReference, idPanier)
+           = (quantite, id_reference, id_panier);
+
         public LignesAdherent_DAL(int id, int quantite, int id_reference, int id_panier)
-            => (IdLignes, quantiteAdherent, idReference, idPanier)
+            => (ID, quantiteAdherent, idReference, idPanier)
             = (id, quantite, id_reference, id_panier);
 
         internal void addLignesAdherent(SqlConnection connection)
         {
             using (var command = new SqlCommand())
             {
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO lignes_adherent(quantiteAdherent, idReference, idPanier) values (@quantiteAdherent, @idReference, @idPanier)";
 
+                command.Parameters.Add(new SqlParameter("@quantiteAdherent", quantiteAdherent));
+                command.Parameters.Add(new SqlParameter("@idReference", idReference));
+                command.Parameters.Add(new SqlParameter("@idPanier", idPanier));
+
+                command.ExecuteNonQuery();
             }
 
+        }
     }
 }
