@@ -14,8 +14,8 @@ namespace PushDansMaster.DAL
         public string adresseFournisseur { get; private set; }
 
         public Fournisseur_DAL(int id,string societe, bool civilite, string nom, string prenom, string email, string adresse)
-            => (societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur)
-            = (societe, civilite, nom, prenom, email, adresse);
+            => (idFournisseur, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur)
+            = (id,societe, civilite, nom, prenom, email, adresse);
 
         internal void addFournisseur(SqlConnection connection)
         {
