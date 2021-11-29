@@ -2,7 +2,7 @@
 using PushDansMaster;
 using PushDansMaster.DAL;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace PushDansMaster
 {
@@ -12,13 +12,13 @@ namespace PushDansMaster
         {
             Console.WriteLine("Hello World!");
 
-            
+
             /// TEST AJOUT D'UN FOURNISSEUR
 
             Console.WriteLine("Merci d'entrer le nom de la societe");
             string societe = Console.ReadLine();
 
-           // Console.WriteLine("Merci d'entrer votre civilite");
+            // Console.WriteLine("Merci d'entrer votre civilite");
             bool civilite = true;
 
 
@@ -32,9 +32,8 @@ namespace PushDansMaster
             string email = Console.ReadLine();
 
             Console.WriteLine("Merci d'entrer votre adresse");
-            string adresse =  Console.ReadLine();
+            string adresse = Console.ReadLine();
 
- 
         }
     }
 }

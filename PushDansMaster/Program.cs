@@ -8,10 +8,10 @@ namespace PushDansMaster
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Push dans master...");
 
-            
-            /// TEST AJOUT D'UN FOURNISSEUR
+
+            /* TEST AJOUT D'UN FOURNISSEUR
 
             Console.WriteLine("Merci d'entrer le nom de la societe");
             string societe = Console.ReadLine();
@@ -35,6 +35,15 @@ namespace PushDansMaster
             var ezez = new Fournisseur(societe, civilite, nom, prenom, email, adresse);
 
             Console.WriteLine(ezez.societeFournisseur, ezez.civiliteFournisseur, ezez.nomFournisseur, ezez.prenomFournisseur, ezez.emailFournisseur, ezez.adresseFournisseur);
+        
+            */
+
+            ///Import fournisseur
+
+            var import = new importReferences();
+
+            import.downloadFile();
+
         }
     }
 }
