@@ -7,12 +7,11 @@ namespace PushDansMaster.DAL
     public class ReferenceDepot_DAL : Depot_DAL<Reference_DAL>
     {
         
-
         public override List<Reference_DAL> getAll()
         {
             createConnection();
 
-            command.CommandText = "select id, libelle, reference, marque, quantite from reference";
+            command.CommandText = "SELECT id, libelle, reference, marque, quantite FROM reference";
             var reader = command.ExecuteReader();
 
             var references = new List<Reference_DAL>();
@@ -37,7 +36,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, libelle, reference, marque, quantite from reference where id=@ID";
+            command.CommandText = "SELECT id, libelle, reference, marque, quantite FROM reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -53,7 +52,7 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(4));
             }
             else
-                throw new Exception($"Pas de Reference dans la BDD avec l'ID {ID}");
+                throw new Exception($"Pas de reference dans la BDD avec l'ID {ID}");
 
             closeConnection();
 
@@ -64,12 +63,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into reference(libelle, reference, marque, quantite)"
-                                    + " values (@libelle, @reference, @marque, @quantite); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@libelle", item.ref_libelle));
-            command.Parameters.Add(new SqlParameter("@reference", item.ref_reference));
-            command.Parameters.Add(new SqlParameter("@marque", item.ref_marque));
-            command.Parameters.Add(new SqlParameter("@quantite", item.ref_quantite));
+            command.CommandText = "INSERT INTO reference(libelle, reference, marque, quantite)"
+                                    + " VALUES (@libelle, @reference, @marque, @quantite); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@libelle", item.getLibelle));
+            command.Parameters.Add(new SqlParameter("@reference", item.getReference));
+            command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
+            command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
 
             closeConnection();
 
@@ -80,17 +79,17 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update reference set libelle=@libelle, reference=@reference, marque=@marque, quantite=@quantite"
-                                   + " where id=@ID";
-            command.Parameters.Add(new SqlParameter("@ID", item.ID));
-            command.Parameters.Add(new SqlParameter("@libelle", item.ref_libelle));
-            command.Parameters.Add(new SqlParameter("@reference", item.ref_reference));
-            command.Parameters.Add(new SqlParameter("@marque", item.ref_marque));
-            command.Parameters.Add(new SqlParameter("@quantite", item.ref_quantite));
+            command.CommandText = "UPDATE reference SET libelle=@libelle, reference=@reference, marque=@marque, quantite=@quantite"
+                                   + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", item.getID));
+            command.Parameters.Add(new SqlParameter("@libelle", item.getLibelle));
+            command.Parameters.Add(new SqlParameter("@reference", item.getReference));
+            command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
+            command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour la reference d'ID : {item.ID}");
+                throw new Exception($"Impossible de mettre à jour la reference d'ID : {item.getID}");
 
             closeConnection();
 
@@ -100,12 +99,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from reference where id=@ID";
-            command.Parameters.Add(new SqlParameter("@ID", item.ID));
+            command.CommandText = "DELETE * from reference WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", item.getID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer la reference d'ID {item.ID}");
+                throw new Exception($"Impossible de supprimer la reference d'ID {item.getID}");
 
             closeConnection();
         }

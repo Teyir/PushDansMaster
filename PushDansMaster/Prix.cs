@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PushDansMaster
+﻿namespace PushDansMaster
 {
-    class Prix
+    public class Prix
     {
         private int prix;
         private int idFournisseur;

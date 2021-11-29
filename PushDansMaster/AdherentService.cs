@@ -1,9 +1,6 @@
-﻿using System;
-using PushDansMaster.DAL;
+﻿using PushDansMaster.DAL;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster
 {
@@ -14,7 +11,7 @@ namespace PushDansMaster
         public List<Adherent> getAll()
         {
             var adherents = depot.getAll()
-                .Select(f => new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.dateAdhesionAdherent,f.statusAdherent))
+                .Select(f => new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent,f.getStatus))
                 .ToList();
             return adherents;
         }
@@ -24,7 +21,7 @@ namespace PushDansMaster
             var f = depot.getByID(ID);
 
 
-            return new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.dateAdhesionAdherent, f.statusAdherent);
+            return new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatus);
 
         }
 

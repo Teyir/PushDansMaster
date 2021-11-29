@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
@@ -41,7 +38,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id,  societe, civilite, nom, prenom, email, adresse FROM fournisseur WHERE id=@id";
+            command.CommandText = "SELECT id,  societe, civilite, nom, prenom, email, adresse FROM fournisseur WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", ID));
             var reader = command.ExecuteReader();
 
@@ -74,12 +71,12 @@ namespace PushDansMaster.DAL
             command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse)"
                                     + " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse); select scope_identity()";
 
-            command.Parameters.Add(new SqlParameter("@societe", fournisseur.societeFournisseur));
-            command.Parameters.Add(new SqlParameter("@civilite", fournisseur.civiliteFournisseur));
-            command.Parameters.Add(new SqlParameter("@nom", fournisseur.nomFournisseur));
-            command.Parameters.Add(new SqlParameter("@prenom", fournisseur.prenomFournisseur));
-            command.Parameters.Add(new SqlParameter("@email", fournisseur.emailFournisseur));
-            command.Parameters.Add(new SqlParameter("@adresse", fournisseur.adresseFournisseur));
+            command.Parameters.Add(new SqlParameter("@societe", fournisseur.getSocieteFournisseur));
+            command.Parameters.Add(new SqlParameter("@civilite", fournisseur.getCiviliteFournisseur));
+            command.Parameters.Add(new SqlParameter("@nom", fournisseur.getNomFournisseur));
+            command.Parameters.Add(new SqlParameter("@prenom", fournisseur.getPrenomFournisseur));
+            command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
+            command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
 
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
@@ -94,23 +91,22 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom,"
-                                    +  " prenom=@prenom, email=@email, adresse=@adresse"
+            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse"                     
                                     +  " WHERE id=@ID";
 
-            command.Parameters.Add(new SqlParameter("@ID", fournisseur.idFournisseur));
-            command.Parameters.Add(new SqlParameter("@societe", fournisseur.societeFournisseur));
-            command.Parameters.Add(new SqlParameter("@civilite", fournisseur.civiliteFournisseur));
-            command.Parameters.Add(new SqlParameter("@nom", fournisseur.nomFournisseur));
-            command.Parameters.Add(new SqlParameter("@prenom", fournisseur.prenomFournisseur));
-            command.Parameters.Add(new SqlParameter("@email", fournisseur.emailFournisseur));
-            command.Parameters.Add(new SqlParameter("@adresse", fournisseur.adresseFournisseur));
+            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getID));
+            command.Parameters.Add(new SqlParameter("@societe", fournisseur.getSocieteFournisseur));
+            command.Parameters.Add(new SqlParameter("@civilite", fournisseur.getCiviliteFournisseur));
+            command.Parameters.Add(new SqlParameter("@nom", fournisseur.getNomFournisseur));
+            command.Parameters.Add(new SqlParameter("@prenom", fournisseur.getPrenomFournisseur));
+            command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
+            command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
 
             var linesAffected = (int)command.ExecuteNonQuery();
 
             if(linesAffected != 1)
             {
-                throw new Exception($"Impossible de mettre à jour le fournisseur {fournisseur.idFournisseur}");
+                throw new Exception($"Impossible de mettre à jour le fournisseur {fournisseur.getID}");
             }
 
             closeConnection();
@@ -125,14 +121,14 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE FROM fournisseur WHERE id=@ID";
-            command.Parameters.Add(new SqlParameter("@ID", fournisseur.idFournisseur));
+            command.CommandText = "DELETE * FROM fournisseur WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getID));
 
             var linesAffected = (int)command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {
-                throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.idFournisseur}");
+                throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.getID}");
             }
 
             closeConnection();
