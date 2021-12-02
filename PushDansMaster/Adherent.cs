@@ -72,11 +72,14 @@ namespace PushDansMaster
             this.prenomAdherent = prenom;
             this.adresseAdherent = adresse;
             this.dateAdhesionAdherent = DateTime.Now;
-            this.statusAdherent = status;
-
-            
+            this.statusAdherent = status; 
         }
 
+        public Adherent(int id,string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
+            : this(societe, email, nom, prenom, adresse, date_adhesion, status)
+        {
+            this.idAdherent = id;
+        }
         #endregion
     }
 }
