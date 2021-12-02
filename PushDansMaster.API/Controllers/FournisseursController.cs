@@ -21,8 +21,8 @@ namespace PushDansMaster.API.Controllers
             service = srv;
         }
 
-        // GET: api/Fournisseurs → get all fournisseurs
-        [HttpGet]
+        // GET: api/Fournisseurs/getall → get all fournisseurs
+        [HttpGet("getall/")]
         public IEnumerable<Fournisseurs_DTO> GetAllFournisseurs()
         {
             return service.getAll().Select(f => new Fournisseurs_DTO()
@@ -37,8 +37,8 @@ namespace PushDansMaster.API.Controllers
             });
         }
 
-        // GET: api/Fournisseurs/5 → get a fournisseur
-        [HttpGet("{id}")]
+        // GET: api/Fournisseurs/get/5 → get a fournisseur
+        [HttpGet("get/{id}")]
         public ActionResult<Fournisseurs_DTO> GetFournisseurs(int id)
         {
             var f = service.getByID(id);
@@ -63,8 +63,8 @@ namespace PushDansMaster.API.Controllers
             };
         }
 
-        // POST: api/Fournisseurs → Insert a new fournisseur
-        [HttpPost]
+        // POST: api/Fournisseurs/insert → Insert a new fournisseur
+        [HttpPost("insert/")]
         public ActionResult<Fournisseurs_DTO> Insert(Fournisseurs_DTO f)
         {
             var f_work = service.insert(new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur));
@@ -74,16 +74,24 @@ namespace PushDansMaster.API.Controllers
             return f;
         }
 
-        // DELETE: api/Fournisseurs/5 → Delete a fournisseur
-        [HttpDelete("{id}")]
+        // UPDATE: api/Fournisseurs/update/5 → Update a fournisseur
+        [HttpPut("update/{id}")]
+        public ActionResult<Fournisseurs_DTO> Update(Fournisseurs_DTO f, int id)
+        {
+            f.idFournisseur = id;
+
+            var f_work = service.update(new Fournisseur(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur));
+
+            return f;
+        }
+
+        // DELETE: api/Fournisseurs/delete/5 → Delete a fournisseur
+        [HttpDelete("delete/{id}")]
         public void Delete(int id) //todo terminer delete ( utiliser le deleteById() )
         {
-
             var f = service.getByID(id);
 
-            service.delete(new Fournisseur(f.getIdFournisseur, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur));
-
-                   
+            service.delete(new Fournisseur(f.getIdFournisseur, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur));            
         }
     }
 }
