@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
@@ -14,7 +11,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, societe, email, nom, prenom, adresse, date_adhesion, status from adherent";
+            command.CommandText = "SELECT id, societe, email, nom, prenom, adresse, date_adhesion, status FROM adherent";
             var reader = command.ExecuteReader();
 
             var listeAdherent = new List<Adherent_DAL>();      
@@ -42,7 +39,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, societe, email, nom, prenom, adresse, date_adhesion, status where id=@id";
+            command.CommandText = "SELECT id, societe, email, nom, prenom, adresse, date_adhesion, status FROM adherent WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", ID));
             var reader = command.ExecuteReader();
 
@@ -72,21 +69,19 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into adherent(id, societe, email, nom, prenom, adresse, date_adhesion, status)"
-                                + " values (@id, @societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@id", adherent.ID));
-            command.Parameters.Add(new SqlParameter("@societe", adherent.societeAdherent));
-            command.Parameters.Add(new SqlParameter("@email", adherent.emailAdherent));
-            command.Parameters.Add(new SqlParameter("@nom", adherent.nomAdherent));
-            command.Parameters.Add(new SqlParameter("@prenom", adherent.prenomAdherent));
-            command.Parameters.Add(new SqlParameter("@adresse", adherent.adresseAdherent));
-            command.Parameters.Add(new SqlParameter("@date_adhesion", adherent.dateAdhesionAdherent));
-            command.Parameters.Add(new SqlParameter("@status", adherent.statusAdherent));
+            command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status)"
+                                + " VALUES (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@societe", adherent.getSocieteAdherent));
+            command.Parameters.Add(new SqlParameter("@email", adherent.getEmailAdherent));
+            command.Parameters.Add(new SqlParameter("@nom", adherent.getNomAdherent));
+            command.Parameters.Add(new SqlParameter("@prenom", adherent.getPrenomAdherent));
+            command.Parameters.Add(new SqlParameter("@adresse", adherent.getAdresseAdherent));
+            command.Parameters.Add(new SqlParameter("@date_adhesion", adherent.getDateAdhesionAdherent));
+            command.Parameters.Add(new SqlParameter("@status", adherent.getStatus));
 
             var ID = Convert.ToInt32((decimal)
                 command.ExecuteScalar());
 
-            adherent.ID = ID;
 
             closeConnection();
 
@@ -97,21 +92,21 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update adherent set societe=@Societe, email=@Email, nom=@Nom, prenom=@Prenom, adresse=@Adresse, date_adhesion=@Date_adhesion, status=@Status)"
-                                    + " where id=@ID";
-            command.Parameters.Add(new SqlParameter("@Societe", adherent.societeAdherent));
-            command.Parameters.Add(new SqlParameter("@Email", adherent.emailAdherent));
-            command.Parameters.Add(new SqlParameter("@Nom", adherent.nomAdherent));
-            command.Parameters.Add(new SqlParameter("@Prenom", adherent.prenomAdherent));
-            command.Parameters.Add(new SqlParameter("@Adresse", adherent.adresseAdherent));
-            command.Parameters.Add(new SqlParameter("@Date_adhesion", adherent.dateAdhesionAdherent));
-            command.Parameters.Add(new SqlParameter("@Status", adherent.statusAdherent));
+            command.CommandText = "UPDATE adherent SET societe=@Societe, email=@Email, nom=@Nom, prenom=@Prenom, adresse=@Adresse, date_adhesion=@Date_adhesion, status=@Status)"
+                                    + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@Societe", adherent.getSocieteAdherent));
+            command.Parameters.Add(new SqlParameter("@Email", adherent.getEmailAdherent));
+            command.Parameters.Add(new SqlParameter("@Nom", adherent.getNomAdherent));
+            command.Parameters.Add(new SqlParameter("@Prenom", adherent.getPrenomAdherent));
+            command.Parameters.Add(new SqlParameter("@Adresse", adherent.getAdresseAdherent));
+            command.Parameters.Add(new SqlParameter("@Date_adhesion", adherent.getDateAdhesionAdherent));
+            command.Parameters.Add(new SqlParameter("@Status", adherent.getStatus));
             var nombreDeLignesAffectees = (int)
                 command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                throw new Exception($"Impossible de mettre à jour l'adherent d'ID {adherent.ID}");
+                throw new Exception($"Impossible de mettre à jour l'adherent d'ID {adherent.getID}");
             }
 
             closeConnection();
@@ -123,14 +118,14 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from adherent where id=@id";
-            command.Parameters.Add(new SqlParameter("@id", adherent.ID));
+            command.CommandText = "DELETE * FROM adherent WHERE id=@id";
+            command.Parameters.Add(new SqlParameter("@id", adherent.getID));
             var nombreDeLignesAffectees = (int)
                 command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                throw new Exception($"Impossible de supprimer l'adherent d'ID {adherent.ID}");
+                throw new Exception($"Impossible de supprimer l'adherent d'ID {adherent.getID}");
             }
 
             closeConnection();

@@ -349,3 +349,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /references.csv
+
+# App config
+PushDansMaster.DAL/appsettings.json
+PushDansMaster.API/appsettings.json

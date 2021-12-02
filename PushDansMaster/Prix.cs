@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PushDansMaster
+﻿namespace PushDansMaster
 {
-    class Prix
+    public class Prix
     {
         private int prix;
         private int idFournisseur;
@@ -14,9 +8,6 @@ namespace PushDansMaster
 
         #region Getters / Setters
 
-        /// <summary>
-        /// Permet d'obtenir le prix d'un objet grâce à l'ID d'un fournisseur et l'ID de sa ligne
-        /// </summary>
         public int getPrix
         {
             get { return prix; }
