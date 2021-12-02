@@ -16,9 +16,9 @@ namespace PushDansMaster.DAL
         {
             //Get the sqlserver configuration
             var builder = new ConfigurationBuilder();
-            var config = builder.AddJsonFile("appsettings.json", true, true).Build();
+            var config = builder.AddJsonFile("appsettings.json", false, true).Build();
 
-            connectionString = config.GetSection("ConnectionStrings:defailt").Value;
+            connectionString = config.GetSection("ConnectionStrings:default").Value;
         }
 
 
@@ -31,8 +31,6 @@ namespace PushDansMaster.DAL
 
             command = new SqlCommand();
             command.Connection = connection;
-
-            connection.Close();
         }
 
         //Close the connection to the sql server
