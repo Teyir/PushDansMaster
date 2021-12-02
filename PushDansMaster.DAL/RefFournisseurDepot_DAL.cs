@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
-    class RefFournisseurDepot_DAL : Depot_DAL<RefFournisseur_DAL>
+    public class RefFournisseurDepot_DAL : Depot_DAL<RefFournisseur_DAL>
     {
         public override List<RefFournisseur_DAL> getAll()
         {
@@ -61,8 +61,8 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "insert into ref_fournisseur(id_fournisseur, id_reference)"
                                     + " values (@id_fournisseur, @id_reference); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.id_fournisseur));
-            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.id_reference));
+            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
+            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
 
             closeConnection();
 
@@ -75,13 +75,13 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "update ref_fournisseur set id_fournisseur=@id_fournisseur, id_reference=@id_reference)"
                                    + " where id_fournisseur = @id_reference and id_reference = @id_reference";
-            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.id_fournisseur));
-            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.id_reference));
+            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
+            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                int rfException = int.Parse(refFournisseur.id_fournisseur.ToString() + refFournisseur.id_reference.ToString());
+                int rfException = int.Parse(refFournisseur.GetIDfournisseur.ToString() + refFournisseur.GetIDreference.ToString());
                 throw new Exception($"Impossible de mettre à jour la reference fournisseur d'ID : {rfException}");
             }
 
@@ -95,13 +95,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "delete from ref_fournisseur where id_fournisseur = @id_fournisseur and id_reference = @id_reference";
-            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.id_fournisseur));
-            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.id_reference));
+            command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
+            command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
-                int rfException = int.Parse(refFournisseur.id_fournisseur.ToString() + refFournisseur.id_reference.ToString());
+                int rfException = int.Parse(refFournisseur.GetIDfournisseur.ToString() + refFournisseur.GetIDreference.ToString());
                 throw new Exception($"Impossible de supprimer le prix d'ID {rfException}");
             }
 

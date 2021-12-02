@@ -7,12 +7,27 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 {
-    class RefFournisseur_DAL
+    public class RefFournisseur_DAL
     {
-        public int id_fournisseur { get; private set; }
-        public int id_reference { get; private set; }
-        public RefFournisseur_DAL(int id_fournisseur, int id_reference) => (this.id_fournisseur, this.id_reference) = (id_fournisseur, id_reference);
+        private int id_fournisseur;
+        private int id_reference;
+        #region Getters / Setters 
+        public int GetIDfournisseur
+        {
+            get { return id_fournisseur; }
+            private set { id_fournisseur = value; }
+        }
 
+        public int GetIDreference
+        {
+            get { return id_reference; }
+            private set { id_reference = value; }
+        }
+        #endregion
+        #region Constructeur
+        public RefFournisseur_DAL(int id_fournisseur, int id_reference) => (this.id_fournisseur, this.id_reference) = (id_fournisseur, id_reference);
+        #endregion
+        #region Méthodes
         internal void insert(SqlConnection connection)
         {
             // On insert un point dans la BDD
@@ -28,5 +43,6 @@ namespace PushDansMaster.DAL
                 command.ExecuteNonQuery();
             }
         }
+        #endregion
     }
 }
