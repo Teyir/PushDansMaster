@@ -69,6 +69,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_adherent", panier.getId_adherent));
             command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.getId_panierGlobal));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            panier.ID = ID;
+
             closeConnection();
 
             return panier;
@@ -107,6 +111,24 @@ namespace PushDansMaster.DAL
                 throw new Exception($"Impossible de supprimer le PanierAdherent d'ID {panier.getID}");
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM panier_adherent WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le panier_adherent {ID}");
+            }
+
+            closeConnection();
+
         }
     }
 }
