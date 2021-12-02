@@ -105,5 +105,23 @@ namespace PushDansMaster.DAL
             closeConnection();
         }
 
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM lignes_adherent WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer la ligne_adherent {ID}");
+            }
+
+            closeConnection();
+
+        }
+
     }
 }

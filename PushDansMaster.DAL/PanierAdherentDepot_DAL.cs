@@ -108,5 +108,23 @@ namespace PushDansMaster.DAL
 
             closeConnection();
         }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM panier_adherent WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le panier_adherent {ID}");
+            }
+
+            closeConnection();
+
+        }
     }
 }

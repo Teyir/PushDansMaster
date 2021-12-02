@@ -102,10 +102,28 @@ namespace PushDansMaster.DAL
             if (nombreDeLignesAffectees != 1)
             {
                 int rfException = int.Parse(refFournisseur.GetIDfournisseur.ToString() + refFournisseur.GetIDreference.ToString());
-                throw new Exception($"Impossible de supprimer le prix d'ID {rfException}");
+                throw new Exception($"Impossible de supprimer le ref_fournisseur d'ID {rfException}");
             }
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM ref_fournisseur WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le ref_fournisseur {ID}");
+            }
+
+            closeConnection();
+
         }
     }
 }

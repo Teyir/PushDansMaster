@@ -4,7 +4,7 @@ namespace PushDansMaster.DAL
 {
     public class Fournisseur_DAL
     {
-        private int ID;
+        public int ID;
         private string societeFournisseur;
         private bool civiliteFournisseur;
         private string nomFournisseur;
@@ -16,7 +16,7 @@ namespace PushDansMaster.DAL
         public int getID
         {
             get { return ID; }
-            private set { ID = value; }
+            set { ID = value; }
         }
 
         public bool getCiviliteFournisseur
