@@ -4,7 +4,7 @@ namespace PushDansMaster.DAL
 {
     public class Fournisseur_DAL
     {
-        private int ID;
+        private int idFournisseur;
         private string societeFournisseur;
         private bool civiliteFournisseur;
         private string nomFournisseur;
@@ -13,10 +13,10 @@ namespace PushDansMaster.DAL
         private string adresseFournisseur;
 
         #region Getters / Setters
-        public int getID
+        public int getIdFournisseur
         {
-            get { return ID; }
-            private set { ID = value; }
+            get { return idFournisseur; }
+            private set { idFournisseur = value; }
         }
 
         public bool getCiviliteFournisseur
@@ -59,7 +59,7 @@ namespace PushDansMaster.DAL
            = (societe, civilite, nom, prenom, email, adresse);
 
         public Fournisseur_DAL(int id,string societe, bool civilite, string nom, string prenom, string email, string adresse)
-            => (ID, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur)
+            => (idFournisseur, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur)
             = (id,societe, civilite, nom, prenom, email, adresse);
         #endregion
 
