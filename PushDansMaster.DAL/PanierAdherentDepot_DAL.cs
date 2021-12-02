@@ -10,7 +10,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, status, semaine, id_adherent, id_panierglobal from panier_adherent";
+            command.CommandText = "SELECT id, status, semaine, id_adherent, id_panierglobal FROM panier_adherent";
             var reader = command.ExecuteReader();
 
             var listeDePaniers = new List<PanierAdherent_DAL>();
@@ -35,7 +35,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id status, semaine, id_adherent, id_panierglobal from panier_global where id=@ID";
+            command.CommandText = "SELECT id, status, semaine, id_adherent, id_panierglobal FROM panier_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -62,12 +62,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into panier_adherent(status, semaine, id_adherent, id_panierglobal)"
-                                    + " values (@status, @semaine, @id_adherent, @id_panierglobal); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@status", panier.status));
-            command.Parameters.Add(new SqlParameter("@semaine", panier.semaine));
-            command.Parameters.Add(new SqlParameter("@id_adherent", panier.id_adherent));
-            command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.id_panierGlobal));
+            command.CommandText = "INSERT INTO panier_adherent(status, semaine, id_adherent, id_panierglobal)"
+                                    + " VALUES (@status, @semaine, @id_adherent, @id_panierglobal); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
+            command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
+            command.Parameters.Add(new SqlParameter("@id_adherent", panier.getId_adherent));
+            command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.getId_panierGlobal));
 
             closeConnection();
 
@@ -78,16 +78,17 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update panier_adherent set status=@status, semaine=@semaine, id_adherent=@id_adherent, id_panierglobal=@id_panierglobal"
-                                   + " where id = @ID";
-            command.Parameters.Add(new SqlParameter("@status", panier.status));
-            command.Parameters.Add(new SqlParameter("@semaine", panier.semaine));
-            command.Parameters.Add(new SqlParameter("@id_adherent", panier.id_adherent));
-            command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.id_panierGlobal));
+            command.CommandText = "UPDATE panier_adherent SET status=@status, semaine=@semaine, id_adherent=@id_adherent, id_panierglobal=@id_panierglobal"
+                                   + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", panier.getID));
+            command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
+            command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
+            command.Parameters.Add(new SqlParameter("@id_adherent", panier.getId_adherent));
+            command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.getId_panierGlobal));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour le PanierAdherent d'ID : {panier.ID}");
+                throw new Exception($"Impossible de mettre à jour le PanierAdherent d'ID : {panier.getID}");
 
             closeConnection();
 
@@ -98,12 +99,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from panier_adherent where id = @ID";
-            command.Parameters.Add(new SqlParameter("@ID", panier.ID));
+            command.CommandText = "DELETE * FROM panier_adherent where id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", panier.getID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer le PanierAdherent d'ID {panier.ID}");
+                throw new Exception($"Impossible de supprimer le PanierAdherent d'ID {panier.getID}");
 
             closeConnection();
         }

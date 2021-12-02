@@ -10,7 +10,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, quantite, id_reference, id_panier from lignes_adherent";
+            command.CommandText = "SELECT id, quantite, id_reference, id_panier FROM lignes_adherent";
             var reader = command.ExecuteReader();
 
             var listeLignes = new List<LignesAdherent_DAL>();
@@ -34,7 +34,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select id, quantite, id_reference, id_panier from lignes_adherent where id=@ID";
+            command.CommandText = "SELECT id, quantite, id_reference, id_panier FROM lignes_adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
@@ -60,11 +60,11 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into lignes_adherent(quantite, id_reference, id_panier)"
-                                    + " values (@quantite, @id_reference, @id_panier); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@quantite", ligne.quantiteAdherent));
-            command.Parameters.Add(new SqlParameter("@id_reference", ligne.idReference));
-            command.Parameters.Add(new SqlParameter("@id_panier", ligne.idPanier));
+            command.CommandText = "INSERT INTO lignes_adherent(quantite, id_reference, id_panier)"
+                                    + " VALUES (@quantite, @id_reference, @id_panier); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantiteAdherent));
+            command.Parameters.Add(new SqlParameter("@id_reference", ligne.getIdReference));
+            command.Parameters.Add(new SqlParameter("@id_panier", ligne.getIdPanier));
 
             closeConnection();
 
@@ -75,16 +75,16 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update lignes_adherent set quantite=@quantite, id_reference=@id_reference, id_panier=@id_panier"
-                                   + " where id=@ID";
-            command.Parameters.Add(new SqlParameter("@ID", ligne.ID));
-            command.Parameters.Add(new SqlParameter("@quantite", ligne.quantiteAdherent));
-            command.Parameters.Add(new SqlParameter("@id_reference", ligne.idReference));
-            command.Parameters.Add(new SqlParameter("@id_panier", ligne.idPanier));
+            command.CommandText = "UPDATE lignes_adherent SET quantite=@quantite, id_reference=@id_reference, id_panier=@id_panier"
+                                   + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
+            command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantiteAdherent));
+            command.Parameters.Add(new SqlParameter("@id_reference", ligne.getIdReference));
+            command.Parameters.Add(new SqlParameter("@id_panier", ligne.getIdPanier));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour la lignesAdherent d'ID : {ligne.ID}");
+                throw new Exception($"Impossible de mettre à jour la lignesAdherent d'ID : {ligne.getID}");
 
             closeConnection();
 
@@ -95,12 +95,12 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from lignes_adherent where id = @ID";
-            command.Parameters.Add(new SqlParameter("@ID", ligne.ID));
+            command.CommandText = "DELETE * from lignes_adherent where id = @ID";
+            command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer la lignesAdherent d'ID {ligne.ID}");
+                throw new Exception($"Impossible de supprimer la lignesAdherent d'ID {ligne.getID}");
 
             closeConnection();
         }

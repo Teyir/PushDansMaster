@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PushDansMaster
+﻿namespace PushDansMaster
 {
-    class LignesGlobal
+    public class LignesGlobal
     {
         private int ID;
         private int id_panier;
