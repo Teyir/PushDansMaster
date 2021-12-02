@@ -35,7 +35,8 @@ namespace PushDansMaster.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PushDansMaster.API", Version = "v1" });
             });
 
-            services.AddDbContext<DBContext>(opt => opt.UseInMemoryDatabase("fournisseurs"));
+            services.AddSingleton(typeof(IFournisseurService), new FournisseurService());
+            services.AddSingleton(typeof(IAdherentService), new AdherentService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

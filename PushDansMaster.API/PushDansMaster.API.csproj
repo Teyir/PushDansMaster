@@ -15,4 +15,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PushDansMaster.DTO\PushDansMaster.DTO.csproj" />
+    <ProjectReference Include="..\PushDansMaster\PushDansMaster.csproj" />
+  </ItemGroup>
+
 </Project>
