@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PushDansMaster
+﻿namespace PushDansMaster
 {
-    class PanierAdherent
+    public class PanierAdherent
     {
         private int ID;
         private bool status;

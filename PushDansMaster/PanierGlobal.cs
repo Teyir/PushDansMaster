@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster
 {
-    class PanierGlobal
+    public class PanierGlobal
     {
         private int ID;
         private bool status;
