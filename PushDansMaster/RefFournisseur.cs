@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster
 {
-    class RefFournisseur
+    public class RefFournisseur
     {
         private int id_fournisseur;
         private int id_reference;
