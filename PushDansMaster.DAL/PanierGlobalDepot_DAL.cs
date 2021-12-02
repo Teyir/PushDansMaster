@@ -63,6 +63,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
             command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            panier.ID = ID;
+
             closeConnection();
 
             return panier;
@@ -99,6 +103,24 @@ namespace PushDansMaster.DAL
                 throw new Exception($"Impossible de supprimer le PanierGlobal d'ID {panier.getID}");
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM panier_global WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le panier_global {ID}");
+            }
+
+            closeConnection();
+
         }
     }
 }

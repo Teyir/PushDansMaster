@@ -6,7 +6,7 @@ namespace PushDansMaster.DAL
 
     public class Adherent_DAL
     {
-        private int ID;
+        public int ID;
         private string societeAdherent;
         private string emailAdherent;
         private string nomAdherent;

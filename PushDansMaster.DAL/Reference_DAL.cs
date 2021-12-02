@@ -5,7 +5,7 @@ namespace PushDansMaster.DAL
 {
     public class Reference_DAL
     {
-        private int ID;
+        public int ID;
         private string ref_libelle;
         private string ref_reference;
         private string ref_marque;

@@ -6,12 +6,16 @@ namespace PushDansMaster.DAL
 {
     public class FournisseurDepot_DAL : Depot_DAL<Fournisseur_DAL>
     {
+        public FournisseurDepot_DAL()
+            :base()
+        {
 
+        }
         public override List<Fournisseur_DAL> getAll()
         {
             createConnection();
 
-            command.CommandText = "SELECT id,  societe, civilite, nom, prenom, email, adresse FROM fournisseur";
+            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse FROM fournisseur";
             var reader = command.ExecuteReader();
 
             var listFournisseur = new List<Fournisseur_DAL>();
@@ -78,7 +82,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
 
+
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            fournisseur.ID = ID;
 
 
             closeConnection();
@@ -129,6 +136,24 @@ namespace PushDansMaster.DAL
             if (linesAffected != 1)
             {
                 throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.getID}");
+            }
+
+            closeConnection();
+
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE FROM fournisseur WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le fournisseur {ID}");
             }
 
             closeConnection();

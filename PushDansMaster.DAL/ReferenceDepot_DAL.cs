@@ -70,6 +70,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
             command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            item.ID = ID;
+
             closeConnection();
 
             return item;
@@ -107,6 +111,24 @@ namespace PushDansMaster.DAL
                 throw new Exception($"Impossible de supprimer la reference d'ID {item.getID}");
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM reference WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le reference {ID}");
+            }
+
+            closeConnection();
+
         }
     }
 }

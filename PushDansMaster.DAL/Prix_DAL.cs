@@ -5,8 +5,9 @@ namespace PushDansMaster.DAL
     public class Prix_DAL
     {
         private int prix;
-        private int idFournisseur;
-        private int idLignesGlobal;
+        public int ID;
+        public int idFournisseur;
+        public int idLignesGlobal;
 
         #region Getters / Setters
         public int getPrix
