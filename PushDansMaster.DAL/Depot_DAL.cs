@@ -31,7 +31,7 @@ namespace PushDansMaster.DAL
 
             command = new SqlCommand();
             command.Connection = connection;
-
+            
         }
 
         //Close the connection to the sql server

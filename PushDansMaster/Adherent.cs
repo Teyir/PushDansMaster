@@ -5,7 +5,6 @@ namespace PushDansMaster
     public class Adherent
     {
         private int ID;
-        private int idAdherent;
         private string societeAdherent;
         private string emailAdherent;
         private string nomAdherent;
@@ -19,11 +18,6 @@ namespace PushDansMaster
         {
             get { return ID; }
             private set { ID = value; }
-        }
-        public int getIDAdherent
-        {
-            get { return idAdherent; }
-            private set { idAdherent = value; }
         }
         public string getSocieteAdherent
         {
@@ -72,11 +66,14 @@ namespace PushDansMaster
             this.prenomAdherent = prenom;
             this.adresseAdherent = adresse;
             this.dateAdhesionAdherent = DateTime.Now;
-            this.statusAdherent = status;
-
-            
+            this.statusAdherent = status; 
         }
 
+        public Adherent(int id,string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
+            : this(societe, email, nom, prenom, adresse, date_adhesion, status)
+        {
+            this.ID = id;
+        }
         #endregion
     }
 }

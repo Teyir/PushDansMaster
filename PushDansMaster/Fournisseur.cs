@@ -2,7 +2,7 @@
 {
     public class Fournisseur
     {
-        private int ID;
+        private int idFournisseur;
         private string societeFournisseur;
         private bool civiliteFournisseur;
         private string nomFournisseur;
@@ -11,10 +11,10 @@
         private string adresseFournisseur;
 
         #region Getters / Setters
-        public int getID
+        public int getIdFournisseur
         {
-            get { return ID; }
-            private set { ID = value; }
+            get { return idFournisseur; }
+            private set { idFournisseur = value; }
         }
         public string getSocieteFournisseur
         {
@@ -57,6 +57,11 @@
             this.prenomFournisseur = prenom;
             this.emailFournisseur = email;
             this.adresseFournisseur = adresse;
+        }
+        public Fournisseur(int id,string societe, bool civilite, string nom, string prenom, string email, string adresse)
+            :this(societe,civilite,nom,prenom,email,adresse)
+        {
+            this.idFournisseur = id;
         }
         #endregion
     }

@@ -42,7 +42,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "SELECT id,  societe, civilite, nom, prenom, email, adresse FROM fournisseur WHERE id=@id";
+            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse FROM fournisseur WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", ID));
             var reader = command.ExecuteReader();
 
@@ -101,7 +101,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse"                     
                                     +  " WHERE id=@ID";
 
-            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getID));
+            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
             command.Parameters.Add(new SqlParameter("@societe", fournisseur.getSocieteFournisseur));
             command.Parameters.Add(new SqlParameter("@civilite", fournisseur.getCiviliteFournisseur));
             command.Parameters.Add(new SqlParameter("@nom", fournisseur.getNomFournisseur));
@@ -113,7 +113,7 @@ namespace PushDansMaster.DAL
 
             if(linesAffected != 1)
             {
-                throw new Exception($"Impossible de mettre à jour le fournisseur {fournisseur.getID}");
+                throw new Exception($"Impossible de mettre à jour le fournisseur {fournisseur.getIdFournisseur}");
             }
 
             closeConnection();
@@ -129,13 +129,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "DELETE * FROM fournisseur WHERE id=@ID";
-            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getID));
+            command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
 
             var linesAffected = (int)command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {
-                throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.getID}");
+                throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.getIdFournisseur}");
             }
 
             closeConnection();
