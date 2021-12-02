@@ -27,7 +27,7 @@ namespace PushDansMaster.API.Controllers
         {
             return service.getAll().Select(f => new Adherent_DTO()
             {
-                idAdherent = f.getIDAdherent,
+                idAdherent = f.getID,
                 societeAdherent = f.getSocieteAdherent,
                 emailAdherent = f.getEmailAdherent,
                 nomAdherent = f.getNomAdherent,
