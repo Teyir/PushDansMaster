@@ -64,6 +64,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
             command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
 
+            int ID = int.Parse(refFournisseur.GetIDfournisseur.ToString() + refFournisseur.GetIDreference.ToString());
+
+            refFournisseur.ID = ID;
+
             closeConnection();
 
             return refFournisseur;

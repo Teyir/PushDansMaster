@@ -70,6 +70,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
             command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            item.ID = ID;
+
             closeConnection();
 
             return item;

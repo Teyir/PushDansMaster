@@ -82,6 +82,8 @@ namespace PushDansMaster.DAL
             var ID = Convert.ToInt32((decimal)
                 command.ExecuteScalar());
 
+            adherent.ID = ID;
+
 
             closeConnection();
 

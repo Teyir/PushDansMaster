@@ -69,6 +69,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_adherent", panier.getId_adherent));
             command.Parameters.Add(new SqlParameter("@id_panierglobal", panier.getId_panierGlobal));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            panier.ID = ID;
+
             closeConnection();
 
             return panier;

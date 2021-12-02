@@ -63,6 +63,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
             command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
 
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            panier.ID = ID;
+
             closeConnection();
 
             return panier;

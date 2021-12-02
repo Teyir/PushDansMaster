@@ -4,7 +4,7 @@ namespace PushDansMaster.DAL
 {
     public class PanierAdherent_DAL
     {
-        private int ID;
+        public int ID;
         private bool status;
         private int semaine;
         private int id_adherent;

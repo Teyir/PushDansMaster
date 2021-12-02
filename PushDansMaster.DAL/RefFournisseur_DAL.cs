@@ -9,8 +9,9 @@ namespace PushDansMaster.DAL
 {
     public class RefFournisseur_DAL
     {
-        private int id_fournisseur;
-        private int id_reference;
+        public int ID;
+        public int id_fournisseur;
+        public int id_reference;
         #region Getters / Setters 
         public int GetIDfournisseur
         {

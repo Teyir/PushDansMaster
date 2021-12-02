@@ -64,6 +64,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_fournisseur", prix.getIDFournisseur));
             command.Parameters.Add(new SqlParameter("@id_lignesglobal", prix.getIDLignesGlobal));
 
+            int ID = int.Parse(prix.getIDFournisseur.ToString() + prix.getIDLignesGlobal.ToString());
+
+            prix.ID = ID;
+
             closeConnection();
 
             return prix;

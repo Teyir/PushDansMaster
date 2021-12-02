@@ -19,13 +19,12 @@ namespace PushDansMaster
             var adh = new Adherent_DAL("fulllife", "fulllife@gmail.com", "Michel", "Robert", "3 rue des magnolia", dt, false);
             var dpadh = new AdherentDepot_DAL();
             dpadh.insert(adh);
-            //dpadh.getByID();
 
             var pG = new PanierGlobal_DAL(false, 27);
             var dppG = new PanierGlobalDepot_DAL();
             dppG.insert(pG);
 
-            var padh = new PanierAdherent_DAL(false, 27, adh.getID, pG.getID);
+            var padh = new PanierAdherent_DAL(false, 27, adh.ID, pG.ID);
             var dppadh = new PanierAdherentDepot_DAL();
             dppadh.insert(padh);
 
@@ -33,11 +32,11 @@ namespace PushDansMaster
             var dpreff = new ReferenceDepot_DAL();
             dpreff.insert(reff);
 
-            var ligneGlob = new LignesGlobal_DAL(1, reff.getQuantite, reff.getReference, reff.getID);
+            var ligneGlob = new LignesGlobal_DAL(1, reff.getQuantite, reff.getReference, reff.ID);
             var dplg = new LignesGlobalDepot_DAL();
             dplg.insert(ligneGlob);
 
-            var ligneAdh = new LignesAdherent_DAL(20, reff.getID, padh.getID);
+            var ligneAdh = new LignesAdherent_DAL(20, reff.ID, padh.ID);
             var dpla = new LignesAdherentDepot_DAL();
             dpla.insert(ligneAdh);
 

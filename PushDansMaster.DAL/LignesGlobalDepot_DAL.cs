@@ -69,11 +69,9 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@reference", ligne.getReference));
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getId_reference));
 
-            
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
-
-
-
+            ligne.ID = ID;
 
             closeConnection();
 
