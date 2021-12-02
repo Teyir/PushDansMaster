@@ -38,7 +38,7 @@ namespace PushDansMaster.DAL
             {
                 // Définir la connexion à utiliser
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO Prix(prix, id_fournisseur, id_lignesglobal) values (@prix, @id_fournisseur, @id_lignesglobal";
+                command.CommandText = "INSERT INTO prix(prix, id_fournisseur, id_lignesglobal) values (@prix, @id_fournisseur, @id_lignesglobal";
 
                 command.Parameters.Add(new SqlParameter("@prix", prix));
                 command.Parameters.Add(new SqlParameter("@id_fournisseur", idFournisseur));

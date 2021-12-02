@@ -8,9 +8,6 @@
 
         #region Getters / Setters
 
-        /// <summary>
-        /// Permet d'obtenir le prix d'un objet grâce à l'ID d'un fournisseur et l'ID de sa ligne
-        /// </summary>
         public int getPrix
         {
             get { return prix; }
