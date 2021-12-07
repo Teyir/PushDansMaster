@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PushDansMaster.WPF;
 
 namespace PushDansMaster.WPF
 {
@@ -61,7 +62,7 @@ namespace PushDansMaster.WPF
         private void rdAddPanier_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("Pages/AddPanierPage.xaml", UriKind.RelativeOrAbsolute));
-        } 
+        }
         private void rdSendPanier_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("Pages/SendPanierPage.xaml", UriKind.RelativeOrAbsolute));

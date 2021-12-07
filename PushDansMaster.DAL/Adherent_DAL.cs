@@ -3,7 +3,6 @@ using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
 { 
-
     public class Adherent_DAL
     {
         public int ID;

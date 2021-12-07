@@ -4,7 +4,7 @@ namespace PushDansMaster.DAL
 {
     public class Fournisseur_DAL
     {
-        private int idFournisseur;
+        public int idFournisseur;
         private string societeFournisseur;
         private bool civiliteFournisseur;
         private string nomFournisseur;

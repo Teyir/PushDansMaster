@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PushDansMaster.WPF.Pages
+namespace UIKitTutorials.Pages
 {
     /// <summary>
-    /// Lógica de interacción para HomePage.xaml
+    /// Lógica de interacción para NotesPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class NotesPage : Page
     {
-        public HomePage()
+        public NotesPage()
         {
             InitializeComponent();
         }
