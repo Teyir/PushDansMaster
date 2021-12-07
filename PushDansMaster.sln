@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushDansMaster.DAL", "PushD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushDansMaster.API", "PushDansMaster.API\PushDansMaster.API.csproj", "{0791AB25-27CC-48FC-9E33-DC48BF043932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushDansMaster.DTO", "PushDansMaster.DTO\PushDansMaster.DTO.csproj", "{97691A9E-260A-4966-A149-A0F74161D505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PushDansMaster.DTO", "PushDansMaster.DTO\PushDansMaster.DTO.csproj", "{97691A9E-260A-4966-A149-A0F74161D505}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PushDansMaster.WPF", "PushDansMaster.WPF\PushDansMaster.WPF.csproj", "{FA55D846-7651-49AF-8C2F-62209E58925B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{97691A9E-260A-4966-A149-A0F74161D505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97691A9E-260A-4966-A149-A0F74161D505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97691A9E-260A-4966-A149-A0F74161D505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA55D846-7651-49AF-8C2F-62209E58925B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA55D846-7651-49AF-8C2F-62209E58925B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA55D846-7651-49AF-8C2F-62209E58925B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA55D846-7651-49AF-8C2F-62209E58925B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
