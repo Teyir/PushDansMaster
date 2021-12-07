@@ -6,4 +6,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PushDansMaster.API\PushDansMaster.API.csproj" />
+    <ProjectReference Include="..\PushDansMaster.DAL\PushDansMaster.DAL.csproj" />
+    <ProjectReference Include="..\PushDansMaster.DTO\PushDansMaster.DTO.csproj" />
+    <ProjectReference Include="..\PushDansMaster\PushDansMaster.csproj" />
+  </ItemGroup>
+
 </Project>
