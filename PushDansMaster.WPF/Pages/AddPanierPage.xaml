@@ -6,9 +6,97 @@
       xmlns:local="clr-namespace:PushDansMaster.WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddPanierPage">
+      Title="AddPanierPage"
+      FontSize="15">
 
-    <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Label Content="Ajouter un Panier" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-    </Border>
+    <Grid Width="700">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            FontSize="30"
+            FontWeight="SemiBold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Entrer un panier"/>
+
+        <Separator
+            VerticalAlignment="Bottom"/>
+
+        <Grid
+            Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center">
+                <Grid>
+                    <Rectangle
+                    AllowDrop="True"
+                    Drop="Rectangle_Drop"
+                    Fill="WhiteSmoke"
+                    RadiusX="10"
+                    RadiusY="10"
+                    StrokeDashArray="10"
+                    StrokeThickness="2"
+                    StrokeDashCap="Round"
+                    Stroke="Silver"
+                    Height="300"
+                    Width="300"/>
+
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Path Data="M8,13H10.55V10H13.45V13H16L12,17L8,13M19.35,10.04C21.95,10.22 24,12.36 24,15A5,5 0 0,1 19,20H6A6,6 0 0,1 0,14C0,10.91 2.34,8.36 5.35,8.04C6.6,5.64 9.11,4 12,4C15.64,4 18.67,6.59 19.35,10.04M19,18A3,3 0 0,0 22,15C22,13.45 20.78,12.14 19.22,12.04L17.69,11.93L17.39,10.43C16.88,7.86 14.62,6 12,6C9.94,6 8.08,7.14 7.13,8.97L6.63,9.92L5.56,10.03C3.53,10.24 2,11.95 2,14A4,4 0 0,0 6,18H19Z"
+                          Fill="Gray"
+                          Stretch="Uniform"
+                          Height="50"/>
+                        <TextBlock
+                        Text="Déposez votre fichier CSV"
+                        FontSize="15"
+                        Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+
+                <Button
+                    Background="#FF80CD24"
+                    BorderThickness="0"
+                    Content="Choissisez votre fichier CSV"
+                    Foreground="White"
+                    FontSize="20"
+                    Height="50"
+                    Width="300"
+                    Margin="0,30,0,0"
+                    Click="Button_Click">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+
+            <ScrollViewer
+                Grid.Column="1"
+                Margin=".45"
+                HorizontalScrollBarVisibility="Disabled"
+                VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <ItemsControl
+                        x:Name="UploadingFilesList">
+                        <TextBlock Text="Uploading files"
+                                   FontSize="20"
+                                   Padding="0,10,0,20"
+                                   HorizontalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                    </ItemsControl>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+        </Grid>
 </Page>
