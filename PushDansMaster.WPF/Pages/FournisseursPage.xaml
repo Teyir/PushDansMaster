@@ -3,12 +3,20 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PushDansMaster.WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FournisseursPage">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid HorizontalAlignment="Center">
+            <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+            <Button Background="CornflowerBlue" FontSize="20" Content="Afficher Fournisseur" Click="Click_Btn_GetALL_FournisseurAsync" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+            <TextBlock Name="message" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,100,0,0">
+               Cliquez pour afficher les différents fournisseurs
+            </TextBlock>
+            <TextBox Background="White" Name="deleteInsertID" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,135"  TextWrapping="Wrap" Width="50"/>
+            <Button Background="CornflowerBlue" Margin="0,0,0,100" FontSize="20" Content="Delete Fournisseur" Click="Click_Btn_Delete_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Center"></Button>
+        </Grid>
     </Border>
 </Page>
+ 

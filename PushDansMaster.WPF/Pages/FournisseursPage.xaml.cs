@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,5 +22,52 @@ namespace PushDansMaster.WPF.Pages
         {
             InitializeComponent();
         }
+
+        private async void Click_Btn_ADD_FournisseurAsync(object sender,RoutedEventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://localhost:44304/api/Fournisseurs/insert");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    message.Text = await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    message.Text = $"Server error code {response.StatusCode}";
+                }
+
+            }
+        }
+
+        private async void Click_Btn_GetALL_FournisseurAsync(object sender, RoutedEventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://localhost:44304/api/Fournisseurs/getall");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    message.Text = await response.Content.ReadAsStringAsync();
+                }
+                else
+                {
+                    message.Text = $"Server error code {response.StatusCode}";
+                }
+
+            }
+        }
+
+        private void Click_Btn_Delete_Fournisseur(object sender, RoutedEventArgs e)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                 client.DeleteAsync("https://localhost:44304/api/Fournisseurs/delete/"+ deleteInsertID.Text);
+            }
+
+        }
+
+
     }
 }
