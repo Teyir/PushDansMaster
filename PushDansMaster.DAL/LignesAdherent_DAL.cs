@@ -4,7 +4,7 @@ namespace PushDansMaster.DAL
 {
     public class LignesAdherent_DAL
     {
-        private int ID;
+        public int ID;
         private int quantiteAdherent;
         private int idReference;
         private int idPanier;

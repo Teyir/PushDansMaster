@@ -31,6 +31,7 @@ namespace PushDansMaster.DAL
 
             command = new SqlCommand();
             command.Connection = connection;
+            
         }
 
         //Close the connection to the sql server
@@ -51,6 +52,8 @@ namespace PushDansMaster.DAL
         public abstract Type_DAL insert(Type_DAL item);
 
         public abstract Type_DAL update(Type_DAL item);
+
+        public abstract void deleteByID(int ID);
         #endregion
     }
 }

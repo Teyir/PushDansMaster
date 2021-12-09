@@ -82,7 +82,10 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
 
+
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            fournisseur.ID = ID;
 
 
             closeConnection();
@@ -133,6 +136,24 @@ namespace PushDansMaster.DAL
             if (linesAffected != 1)
             {
                 throw new Exception($"Impossible de supprimer le fournisseur {fournisseur.getIdFournisseur}");
+            }
+
+            closeConnection();
+
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE FROM fournisseur WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le fournisseur {ID}");
             }
 
             closeConnection();

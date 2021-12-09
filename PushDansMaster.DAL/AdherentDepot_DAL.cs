@@ -82,6 +82,8 @@ namespace PushDansMaster.DAL
             var ID = Convert.ToInt32((decimal)
                 command.ExecuteScalar());
 
+            adherent.ID = ID;
+
 
             closeConnection();
 
@@ -129,6 +131,24 @@ namespace PushDansMaster.DAL
             }
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM adherent WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer l'adherent {ID}");
+            }
+
+            closeConnection();
+
         }
 
     }

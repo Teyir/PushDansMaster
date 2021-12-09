@@ -5,7 +5,7 @@ namespace PushDansMaster.DAL
 {
     public class LignesGlobal_DAL
     {
-        private int ID;
+        public int ID;
         private int id_panier;
         private int quantite;
         private string reference;
