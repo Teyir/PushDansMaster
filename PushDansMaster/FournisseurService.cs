@@ -62,5 +62,10 @@ namespace PushDansMaster
             var fournisseur = new Fournisseur_DAL(f.getIdFournisseur, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur);
             depot.delete(fournisseur);
         }
+
+        public void deleteByID(int ID)
+        {
+            depot.deleteByID(ID);
+        }
     }
 }
