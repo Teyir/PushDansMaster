@@ -11,7 +11,7 @@ namespace PushDansMaster
         public List<Adherent> getAll()
         {
             var adherents = depot.getAll()
-                .Select(f => new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent,f.getStatus))
+                .Select(f => new Adherent(f.getIdAdherent,f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent,f.getStatus))
                 .ToList();
             return adherents;
         }
@@ -21,13 +21,13 @@ namespace PushDansMaster
             var f = depot.getByID(ID);
 
 
-            return new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatus);
+            return new Adherent(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatus);
 
         }
 
         public Adherent insert(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.getID, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
+            var adherent = new Adherent_DAL(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.insert(adherent);
 
 
@@ -36,7 +36,7 @@ namespace PushDansMaster
 
         public Adherent update(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.getID, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
+            var adherent = new Adherent_DAL(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.update(adherent);
 
             return f;
@@ -44,8 +44,13 @@ namespace PushDansMaster
 
         public void delete(Adherent f)
         {
-            var adherent = new Adherent_DAL(f.getID, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
+            var adherent = new Adherent_DAL(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.delete(adherent);
+        }
+
+        public void deleteByID(int ID)
+        {
+            depot.deleteByID(ID);
         }
 
     }
