@@ -21,53 +21,36 @@ namespace PushDansMaster.WPF.Pages
         public FournisseursPage()
         {
             InitializeComponent();
-        }
 
-        private async void Click_Btn_ADD_FournisseurAsync(object sender,RoutedEventArgs e)
+        }
+        private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetAsync("https://localhost:44304/api/Fournisseurs/insert");
-                response.EnsureSuccessStatusCode();
-                if (response.IsSuccessStatusCode)
-                {
-                    message.Text = await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                    message.Text = $"Server error code {response.StatusCode}";
-                }
-
-            }
+            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            var fournisseur = await clientApi.Getall2Async();
+            Liste.ItemsSource = fournisseur;
         }
 
-        private async void Click_Btn_GetALL_FournisseurAsync(object sender, RoutedEventArgs e)
+        private void Click_Btn_Go_Delete_Fournisseur(object sender, RoutedEventArgs e)
+        {           
+            NavigationService.Navigate(new Uri("Pages/DeleteFournisseurPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+        private void Click_Btn_Go_Insert_Fournisseur(object sender, RoutedEventArgs e)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                var response = await client.GetAsync("https://localhost:44304/api/Fournisseurs/getall");
-                response.EnsureSuccessStatusCode();
-                if (response.IsSuccessStatusCode)
-                {
-                    message.Text = await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                    message.Text = $"Server error code {response.StatusCode}";
-                }
-
-            }
+            NavigationService.Navigate(new Uri("Pages/InsertFournisseurPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
-        private void Click_Btn_Delete_Fournisseur(object sender, RoutedEventArgs e)
+        private void Click_Btn_Go_Update_Fournisseur(object sender, RoutedEventArgs e)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                 client.DeleteAsync("https://localhost:44304/api/Fournisseurs/delete/"+ deleteInsertID.Text);
-            }
-
+            NavigationService.Navigate(new Uri("Pages/UpdateFournisseurPage.xaml", UriKind.RelativeOrAbsolute));
         }
 
-
+        private async void Click_Btn_Actualiser(object sender, RoutedEventArgs e)
+        {
+            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            var fournisseur = await clientApi.Getall2Async();       
+            
+            Liste.ItemsSource = null;
+            Liste.ItemsSource = fournisseur;
+        }
     }
 }
