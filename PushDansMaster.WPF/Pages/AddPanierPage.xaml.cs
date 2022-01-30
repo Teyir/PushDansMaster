@@ -3,6 +3,7 @@ using PushDansMaster.DAL;
 using PushDansMaster.WPF.Pages.CustomControl;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -25,9 +26,27 @@ namespace PushDansMaster.WPF.Pages
     /// </summary>
     public partial class AddPanierPage : Page
     {
+        public ObservableCollection<ComboBoxItem> adh { get; set; }
+        public ComboBoxItem selectedAdh { get; set; }
+
         public AddPanierPage()
         {
             InitializeComponent();
+
+            DataContext = this;
+
+            adh = new ObservableCollection<ComboBoxItem>();
+            var cbItem = new ComboBoxItem { Content = "<--Select-->" };
+            selectedAdh = cbItem;
+            adh.Add(cbItem);
+
+            AdherentDepot_DAL dpadh = new AdherentDepot_DAL();
+            List<Adherent_DAL> listAdh = dpadh.getAll();
+
+            foreach (Adherent_DAL adhItem in listAdh)
+            {
+                adh.Add(new ComboBoxItem { Content = adhItem.getSocieteAdherent });
+            }
         }
 
         private void Rectangle_Drop(object sender, DragEventArgs e)
@@ -85,47 +104,6 @@ namespace PushDansMaster.WPF.Pages
                 {
                     MessageBox.Show("Veuillez déposer un fichier au format .csv", "Erreur");
                 }
-            }
-
-            List<PanierGlobal_DAL> panierGlobal_DALs = new();
-            panierGlobal_DALs = dppG.getAll();
-            PanierGlobal_DAL pG;
-
-            if (panierGlobal_DALs[panierGlobal_DALs.Count-1].getSemaine != week)
-            {
-                pG = new PanierGlobal_DAL(0, week);
-                dppG.insert(pG);
-            }
-            else
-            {
-                pG = panierGlobal_DALs[panierGlobal_DALs.Count-1];
-            }
-
-            var adh = dpadh.getByID(int.Parse(txtBxAdh.Text));
-
-            var padh = new PanierAdherent_DAL(false, week, adh.getID, pG.getID);
-            var dppadh = new PanierAdherentDepot_DAL();
-            dppadh.insert(padh);
-
-            List<Reference_DAL> allRef = new();
-            allRef = dpreff.getAll();
-            int refID = 0;
-
-            for (int i = 0; i < reference.Count; i++)
-            {
-                for (int y = 0; y < allRef.Count; y++)
-                {
-                    if (reference[i] == allRef[y].getReference)
-                    {
-                        refID = allRef[y].getID;
-                    }
-                    else
-                    {
-                        MessageBox.Show("La référence : " + reference[i] + " n'est pas répertoriée dans la BDD", "Erreur");
-                    }
-                }
-                var ligneAdh = new LignesAdherent_DAL(quantite[i], refID, padh.getID);
-                dpla.insert(ligneAdh);
             }
         }
 
