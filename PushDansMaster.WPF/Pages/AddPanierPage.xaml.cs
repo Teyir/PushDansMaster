@@ -28,6 +28,8 @@ namespace PushDansMaster.WPF.Pages
     {
         public ObservableCollection<ComboBoxItem> adh { get; set; }
         public ComboBoxItem selectedAdh { get; set; }
+        public string ComboBoxSelectedItem { get; set; }
+        public PanierGlobal_DAL PanierGlobal { get; set; }
 
         public AddPanierPage()
         {
@@ -51,20 +53,54 @@ namespace PushDansMaster.WPF.Pages
 
         private void Rectangle_Drop(object sender, DragEventArgs e)
         {
-            var reference = new List<string>();
-            var quantite = new List<int>();
+            var comboBox = sender as ComboBox;
+            ComboBoxItem typeItem = (ComboBoxItem)comboBox.SelectedItem;
+            string adhStr = typeItem.Content.ToString();
+
+            var references = new List<string>();
+            var quantites = new List<int>();
             var dt = DateTime.Now;
 
             var dppG = new PanierGlobalDepot_DAL();
+            var dppA = new PanierAdherentDepot_DAL();
             var dpadh = new AdherentDepot_DAL();
             var dpla = new LignesAdherentDepot_DAL();
-            var dpreff = new ReferenceDepot_DAL();
+            var dplg = new LignesGlobalDepot_DAL();
+            var dpref = new ReferenceDepot_DAL();
 
             CultureInfo cultureInfo = new CultureInfo("fr-EU");
             System.Globalization.Calendar calendar = cultureInfo.Calendar;
             CalendarWeekRule myCWR = cultureInfo.DateTimeFormat.CalendarWeekRule;
             DayOfWeek myFirstDOW = cultureInfo.DateTimeFormat.FirstDayOfWeek;
             int week = calendar.GetWeekOfYear(dt, myCWR, myFirstDOW) - 1;
+
+            List<PanierGlobal_DAL> panierGlobals = dppG.getAll();
+            bool panierFound = false;
+            foreach (PanierGlobal_DAL pg in panierGlobals)
+            {
+                if (pg.getSemaine == week)
+                {
+                    PanierGlobal = pg;
+                    panierFound = true;
+                }
+            }
+            if (!panierFound)
+            {
+                PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
+                PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
+                PanierGlobal = pGID;
+            }
+
+            int adhID = 0;
+            List<Adherent_DAL> adhs = dpadh.getAll();
+            foreach (Adherent_DAL item in adhs)
+            {
+                if (item.getSocieteAdherent == adhStr)
+                {
+                    adhID = item.getID;
+                    break;
+                }
+            }
 
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -81,11 +117,39 @@ namespace PushDansMaster.WPF.Pages
                         {
                             var splits = rd.ReadLine().Split(';');
                             if (splits[0] != "reference") { 
-                                reference.Add(splits[0]);
-                                quantite.Add(Int32.Parse(splits[1]));
+                                references.Add(splits[0]);
+                                quantites.Add(Int32.Parse(splits[1]));
                             }
                         }
                     }
+
+                    List<Reference_DAL> reference_DALs = dpref.getAll();
+
+                    bool exit = false;
+                    foreach (Reference_DAL reff in reference_DALs) {
+                        foreach (String refStr in references)
+                        {
+                            int i = 0;
+                            if (refStr != reff.getReference)
+                            {
+                                // Message d'erreur
+                                MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur");
+                                exit = true;
+                                break;
+                            }
+                            else
+                            {
+                                int refID = reff.getID;
+                                
+                                PanierAdherent panierAdherent = new PanierAdherent(true, week, adhID, pGID.getID);
+                                LignesAdherent lignesAdherent = new LignesAdherent(panierAdherent.getID, refID, quantites[i]);
+                            }
+                            i++;
+                        }
+                        if (exit == true) { break; }
+                    }
+
+
 
                     for (int i = 0; i < files.Length; i++)
                     {
