@@ -87,7 +87,7 @@ namespace PushDansMaster.API.Controllers
 
         // DELETE: api/Fournisseurs/delete/5 → Delete a fournisseur
         [HttpDelete("delete/{id}")]
-        public void Delete(int id) //todo terminer delete ( utiliser le deleteById() )
+        public void Delete(int id) 
         {
             var f = service.getByID(id);
 
