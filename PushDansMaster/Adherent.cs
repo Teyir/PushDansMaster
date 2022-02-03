@@ -13,6 +13,7 @@ namespace PushDansMaster
         private DateTime dateAdhesionAdherent;
         private int statusAdherent;
 
+
         #region Getters / Setters
         public int getIdAdherent
         {
@@ -78,6 +79,18 @@ namespace PushDansMaster
         : this(societe, email, nom, prenom, adresse, status)
         {
             this.idAdherent = id;
+
+        }
+
+        public Adherent(int idAdherent, string societeAdherent, string emailAdherent, string nomAdherent, string prenomAdherent, string adresseAdherent, bool statusAdherent)
+        {
+            this.idAdherent = idAdherent;
+            this.societeAdherent = societeAdherent;
+            this.emailAdherent = emailAdherent;
+            this.nomAdherent = nomAdherent;
+            this.prenomAdherent = prenomAdherent;
+            this.adresseAdherent = adresseAdherent;
+            this.statusAdherent = statusAdherent;
         }
 
         public Adherent(string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, int status)

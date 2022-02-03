@@ -15,7 +15,7 @@ namespace PushDansMaster.API.Controllers
     public class AdherentController : ControllerBase
     {
         private IAdherentService service;
-        
+
         public AdherentController(IAdherentService srv)
         {
             service = srv;
@@ -78,7 +78,9 @@ namespace PushDansMaster.API.Controllers
 
         // UPDATE: api/Adherent/update/5 → Update an adherent
         [HttpPut("update/{id}")]
+
         public ActionResult<Adherent_DTO> Update(Adherent_DTO f, int id)
+
         {
             f.idAdherent = id;
 

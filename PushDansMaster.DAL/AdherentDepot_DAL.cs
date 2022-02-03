@@ -122,7 +122,9 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "DELETE FROM adherent WHERE id=@id";
-            command.Parameters.Add(new SqlParameter("@id", adherent.getIdAdherent));
+
+            command.Parameters.Add(new SqlParameter("@id", adherent.getID));
+            
             var nombreDeLignesAffectees = (int)
                 command.ExecuteNonQuery();
 

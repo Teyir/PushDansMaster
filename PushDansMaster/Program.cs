@@ -11,7 +11,12 @@ namespace PushDansMaster
         {
             Console.WriteLine("Push dans master...");
 
+
             var four = new Fournisseur_DAL("test", false, "bodin", "axe", "bodin.axe@cool.com", "3 rue des fleurs", 1);
+
+            /*
+            var four = new Fournisseur_DAL("test", false, "bodin", "axe", "bodin.axe@cool.com", "3 rue des fleurs");
+
             var dpf = new FournisseurDepot_DAL();
             dpf.insert(four);
 
@@ -41,6 +46,7 @@ namespace PushDansMaster
             dpla.insert(ligneAdh);
 
             Console.WriteLine("Test effectué :)");
+            */
         }
     }
 }
