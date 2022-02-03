@@ -11,7 +11,8 @@ namespace PushDansMaster
         public List<Adherent> getAll()
         {
             var adherents = depot.getAll()
-                .Select(f => new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent,f.getStatus))
+                .Select(f => new Adherent(f.getIdAdherent,f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent,f.getStatus))
+
                 .ToList();
             return adherents;
         }
@@ -21,7 +22,7 @@ namespace PushDansMaster
             var f = depot.getByID(ID);
 
 
-            return new Adherent(f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatus);
+            return new Adherent(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatus);
 
         }
 
@@ -46,6 +47,11 @@ namespace PushDansMaster
         {
             var adherent = new Adherent_DAL(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getDateAdhesionAdherent, f.getStatusAdherent);
             depot.delete(adherent);
+        }
+
+        public void deleteByID(int ID)
+        {
+            depot.deleteByID(ID);
         }
 
     }

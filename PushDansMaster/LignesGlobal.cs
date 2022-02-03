@@ -14,6 +14,7 @@
             get { return ID; }
             private set { ID = value; }
         }
+
         /// <summary>
         /// Permet d'obtenir l'id panier
         /// </summary>

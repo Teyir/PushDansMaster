@@ -11,5 +11,7 @@ namespace PushDansMaster.DTO
         public string prenomFournisseur { get; set; }
         public string emailFournisseur { get; set; }
         public string adresseFournisseur { get; set; }
+
+        public int statusFournisseur { get; set; }
     }
 }
