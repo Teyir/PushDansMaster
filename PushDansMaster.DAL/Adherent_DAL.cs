@@ -5,21 +5,22 @@ namespace PushDansMaster.DAL
 { 
     public class Adherent_DAL
     {
-        public int ID;
+
+        public int idAdherent;
         private string societeAdherent;
         private string emailAdherent;
         private string nomAdherent;
         private string prenomAdherent;
         private string adresseAdherent;
         private DateTime dateAdhesionAdherent;
-        private bool statusAdherent;
+        private int statusAdherent;
 
         #region Getters / Setters
 
-        public int getID
+        public int getIdAdherent
         {
-            get { return ID; }
-            private set { ID = value; }
+            get { return idAdherent; }
+            private set { idAdherent = value; }
         }
 
         public string getSocieteAdherent
@@ -52,7 +53,7 @@ namespace PushDansMaster.DAL
             get { return dateAdhesionAdherent; }
             private set { dateAdhesionAdherent = value; }
         }
-        public bool getStatus
+        public int getStatus
         {
             get { return statusAdherent; }
             private set { statusAdherent = value; }
@@ -61,15 +62,16 @@ namespace PushDansMaster.DAL
         #endregion
 
         #region Constructeurs
-        public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
+        public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
         => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (societe, email, nom, prenom, adresse, dateAdhesion, status);
 
-        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
-        => (ID, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
+        => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
         #endregion
+
 
         #region Methodes
         internal void Insert(SqlConnection connection)
