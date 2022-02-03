@@ -2,13 +2,36 @@
 
 namespace PushDansMaster.DAL
 {
-    class Prix_DAL
+    public class Prix_DAL
     {
-        public int prix { get; private set; }
-        public int idFournisseur { get; private set; }
-        public int idLignesGlobal { get; private set; }
-        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal) => (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        private int prix;
+        public int ID;
+        public int idFournisseur;
+        public int idLignesGlobal;
 
+        #region Getters / Setters
+        public int getPrix
+        {
+            get { return prix; }
+            private set { prix = value; }
+        }
+        public int getIDFournisseur
+        {
+            get { return idFournisseur; }
+            private set { idFournisseur = value; }
+        }
+        public int getIDLignesGlobal
+        {
+            get { return idLignesGlobal; }
+            private set { idLignesGlobal = value; }
+        }
+        #endregion
+
+        #region Constructeur
+        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal) => (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        #endregion
+
+        #region Methodes
         internal void insert(SqlConnection connection)
         {
             // On insert un point dans la BDD
@@ -16,7 +39,7 @@ namespace PushDansMaster.DAL
             {
                 // Définir la connexion à utiliser
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO Prix(prix, id_fournisseur, id_lignesglobal) values (@prix, @id_fournisseur, @id_lignesglobal";
+                command.CommandText = "INSERT INTO prix(prix, id_fournisseur, id_lignesglobal) values (@prix, @id_fournisseur, @id_lignesglobal";
 
                 command.Parameters.Add(new SqlParameter("@prix", prix));
                 command.Parameters.Add(new SqlParameter("@id_fournisseur", idFournisseur));
@@ -25,5 +48,6 @@ namespace PushDansMaster.DAL
                 command.ExecuteNonQuery();
             }
         }
+        #endregion
     }
 }

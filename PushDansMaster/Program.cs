@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PushDansMaster.DAL;
+using System;
 using System.Collections.Generic;
 
 
@@ -8,33 +9,38 @@ namespace PushDansMaster
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Push dans master...");
 
-            
-            /// TEST AJOUT D'UN FOURNISSEUR
+            var four = new Fournisseur_DAL("test", false, "bodin", "axe", "bodin.axe@cool.com", "3 rue des fleurs", 1);
+            var dpf = new FournisseurDepot_DAL();
+            dpf.insert(four);
 
-            Console.WriteLine("Merci d'entrer le nom de la societe");
-            string societe = Console.ReadLine();
+            DateTime dt = DateTime.Now;
+            var adh = new Adherent_DAL("fulllife", "fulllife@gmail.com", "Michel", "Robert", "3 rue des magnolia", dt, 1);
+            var dpadh = new AdherentDepot_DAL();
+            dpadh.insert(adh);
 
-           // Console.WriteLine("Merci d'entrer votre civilite");
-            bool civilite = true;
+            var pG = new PanierGlobal_DAL(false, 27);
+            var dppG = new PanierGlobalDepot_DAL();
+            dppG.insert(pG);
 
+            var padh = new PanierAdherent_DAL(false, 27, adh.getIdAdherent, pG.getID);
+            var dppadh = new PanierAdherentDepot_DAL();
+            dppadh.insert(padh);
 
-            Console.WriteLine("Merci d'entrer votre nom");
-            string nom = Console.ReadLine();
+            var reff = new Reference_DAL("PC STYLAX", "HJCQJCQH97", "DELL", 20);
+            var dpreff = new ReferenceDepot_DAL();
+            dpreff.insert(reff);
 
-            Console.WriteLine("Merci d'entrer votre prenom");
-            string prenom = Console.ReadLine();
+            var ligneGlob = new LignesGlobal_DAL(1, reff.getQuantite, reff.getReference, reff.ID);
+            var dplg = new LignesGlobalDepot_DAL();
+            dplg.insert(ligneGlob);
 
-            Console.WriteLine("Merci d'entrer votre email");
-            string email = Console.ReadLine();
+            var ligneAdh = new LignesAdherent_DAL(20, reff.ID, padh.ID);
+            var dpla = new LignesAdherentDepot_DAL();
+            dpla.insert(ligneAdh);
 
-            Console.WriteLine("Merci d'entrer votre adresse");
-            string adresse =  Console.ReadLine();
-
-            var ezez = new Fournisseur(societe, civilite, nom, prenom, email, adresse);
-
-            Console.WriteLine(ezez.societeFournisseur, ezez.civiliteFournisseur, ezez.nomFournisseur, ezez.prenomFournisseur, ezez.emailFournisseur, ezez.adresseFournisseur);
+            Console.WriteLine("Test effectué :)");
         }
     }
 }

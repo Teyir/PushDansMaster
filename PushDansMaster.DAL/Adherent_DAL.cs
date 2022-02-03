@@ -1,43 +1,85 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PushDansMaster.DAL
 { 
 
     public class Adherent_DAL
     {
-    public int ID { get; set; }
+        public int idAdherent;
+        private string societeAdherent;
+        private string emailAdherent;
+        private string nomAdherent;
+        private string prenomAdherent;
+        private string adresseAdherent;
+        private DateTime dateAdhesionAdherent;
+        private int statusAdherent;
 
-    public string societeAdherent { get;  private set; }
+        #region Getters / Setters
 
-    public string emailAdherent { get ; private set; }
-
-    public string nomAdherent { get; private set; }
-
-    public string prenomAdherent { get; private set; }
-
-    public string adresseAdherent { get; private set; }
-
-    public DateTime dateAdhesionAdherent { get;  private set; }
-
-    public bool statusAdherent { get; private set; }
-
-
-    public Adherent_DAL(int id, string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
-        => (ID, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
-        = (id, societe, email, nom, prenom, adresse, DateTime.Now, status);
-
-    internal void Insert(SqlConnection connection)
-    {
-        using (var command = new SqlCommand())
+        public int getIdAdherent
         {
+            get { return idAdherent; }
+            private set { idAdherent = value; }
+        }
+
+        public string getSocieteAdherent
+        {
+            get { return societeAdherent; }
+            private set { societeAdherent = value; }
+        }
+        public string getEmailAdherent
+        {
+            get { return emailAdherent; }
+            private set { emailAdherent = value; }
+        }
+        public string getNomAdherent
+        {
+            get { return nomAdherent; }
+            private set { nomAdherent = value; }
+        }
+        public string getPrenomAdherent
+        {
+            get { return prenomAdherent; }
+            private set { prenomAdherent = value; }
+        }
+        public string getAdresseAdherent
+        {
+            get { return adresseAdherent; }
+            private set { adresseAdherent = value; }
+        }
+        public DateTime getDateAdhesionAdherent
+        {
+            get { return dateAdhesionAdherent; }
+            private set { dateAdhesionAdherent = value; }
+        }
+        public int getStatus
+        {
+            get { return statusAdherent; }
+            private set { statusAdherent = value; }
+        }
+
+        #endregion
+
+        #region Constructeurs
+        public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
+        => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+        = (societe, email, nom, prenom, adresse, dateAdhesion, status);
+
+        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
+        => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+        = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
+
+        #endregion
+
+        #region Methodes
+        internal void Insert(SqlConnection connection)
+        {
+            using (var command = new SqlCommand())
+            {
             command.Connection = connection;
-                    command.CommandText = "insert into adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
-                            + " values (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
+                    command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
+                            + " VALUES (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
                 command.Parameters.Add(new SqlParameter("@societe", societeAdherent));
                 command.Parameters.Add(new SqlParameter("@email", emailAdherent));
                 command.Parameters.Add(new SqlParameter("@nom", nomAdherent));
@@ -52,5 +94,6 @@ namespace PushDansMaster.DAL
 
             }
         }
- }
+        #endregion
+    }
 }

@@ -16,5 +16,7 @@ namespace PushDansMaster.DAL
         public Type_DAL update(Type_DAL item);
 
         public void delete(Type_DAL item);
+
+        public void deleteByID(int ID);
     }
 }

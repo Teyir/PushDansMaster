@@ -4,21 +4,22 @@ using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
 {
-    class PanierGlobalDepot_DAL : Depot_DAL<PanierGlobal_DAL>
+    public class PanierGlobalDepot_DAL : Depot_DAL<PanierGlobal_DAL>
     {
         public override List<PanierGlobal_DAL> getAll()
         {
-            createConnection();
+            createConnection(); 
 
-            command.CommandText = "select id, status, semaine from panier_global";
+            command.CommandText = "SELECT id, status, semaine FROM panier_global";
             var reader = command.ExecuteReader();
 
             var listeDePaniers = new List<PanierGlobal_DAL>();
 
             while (reader.Read())
             {
-                var p = new PanierGlobal_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(0));
+                var p = new PanierGlobal_DAL(reader.GetInt32(0),
+                                        reader.GetBoolean(1),
+                                        reader.GetInt32(2));
 
                 listeDePaniers.Add(p);
             }
@@ -32,20 +33,21 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "select status, semaine from panier_global where id=@ID";
+            command.CommandText = "SELECT id, status, semaine FROM panier_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = command.ExecuteReader();
 
-            var listeDePoints = new List<PanierGlobal_DAL>();
+            var listeDePanier = new List<PanierGlobal_DAL>();
 
             PanierGlobal_DAL p;
             if (reader.Read())
             {
-                p = new PanierGlobal_DAL(reader.GetBoolean(0),
-                                        reader.GetInt32(0));
+                p = new PanierGlobal_DAL(reader.GetInt32(0),
+                                        reader.GetBoolean(1),
+                                        reader.GetInt32(2));
             }
             else
-                throw new Exception($"Pas de prix dans la BDD avec l'ID {ID}");
+                throw new Exception($"Pas de PanierGlobal dans la BDD avec l'ID {ID}");
 
             closeConnection();
 
@@ -56,10 +58,14 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "insert into panier_global(status, semaine)"
-                                    + " values (@status, @semaine); select scope_identity()";
-            command.Parameters.Add(new SqlParameter("@status", panier.status));
-            command.Parameters.Add(new SqlParameter("@semaine", panier.semaine));
+            command.CommandText = "INSERT INTO panier_global(status, semaine)"
+                                    + " VALUES (@status, @semaine); SELECT scope_identity()";
+            command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
+            command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
+
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+
+            panier.ID = ID;
 
             closeConnection();
 
@@ -70,14 +76,15 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "update panier_global set status=@status, semaine=@semaine"
-                                   + " where id = @ID";
-            command.Parameters.Add(new SqlParameter("@status", panier.status));
-            command.Parameters.Add(new SqlParameter("@semaine", panier.semaine));
+            command.CommandText = "UPDATE panier_global SET status=@status, semaine=@semaine"
+                                   + " WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", panier.getID));
+            command.Parameters.Add(new SqlParameter("@status", panier.getStatus));
+            command.Parameters.Add(new SqlParameter("@semaine", panier.getSemaine));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de mettre à jour le prix d'ID : {panier.ID}");
+                throw new Exception($"Impossible de mettre à jour le PanierGlobal d'ID : {panier.getID}");
 
             closeConnection();
 
@@ -88,14 +95,32 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "delete from panier where id = @ID";
-            command.Parameters.Add(new SqlParameter("@ID", panier.ID));
+            command.CommandText = "DELETE * FROM panier_global WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", panier.getID));
             var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
-                throw new Exception($"Impossible de supprimer le prix d'ID {panier.ID}");
+                throw new Exception($"Impossible de supprimer le PanierGlobal d'ID {panier.getID}");
 
             closeConnection();
+        }
+
+        public override void deleteByID(int ID)
+        {
+            createConnection();
+
+            command.CommandText = "DELETE * FROM panier_global WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer le panier_global {ID}");
+            }
+
+            closeConnection();
+
         }
     }
 }
