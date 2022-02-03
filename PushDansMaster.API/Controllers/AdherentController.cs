@@ -78,7 +78,9 @@ namespace PushDansMaster.API.Controllers
 
         // UPDATE: api/Adherent/update/5 → Update an adherent
         [HttpPut("update/{id}")]
-        public ActionResult<Adherent_DTO> Update(int id, Adherent_DTO f)
+
+        public ActionResult<Adherent_DTO> Update(Adherent_DTO f, int id)
+
         {
             f.idAdherent = id;
 
@@ -91,9 +93,7 @@ namespace PushDansMaster.API.Controllers
         [HttpDelete("delete/{id}")]
         public void Delete(int id)
         {
-            var f = service.getByID(id);
-
-            service.delete(new Adherent(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getStatusAdherent));
+            service.deleteByID(id);
         }
 
     }
