@@ -11,17 +11,13 @@ namespace PushDansMaster
         {
             Console.WriteLine("Push dans master...");
 
-
-            var four = new Fournisseur_DAL("test", false, "bodin", "axe", "bodin.axe@cool.com", "3 rue des fleurs", 1);
-
             /*
             var four = new Fournisseur_DAL("test", false, "bodin", "axe", "bodin.axe@cool.com", "3 rue des fleurs");
-
             var dpf = new FournisseurDepot_DAL();
             dpf.insert(four);
 
             DateTime dt = DateTime.Now;
-            var adh = new Adherent_DAL("fulllife", "fulllife@gmail.com", "Michel", "Robert", "3 rue des magnolia", dt, 1);
+            var adh = new Adherent_DAL("fulllife", "fulllife@gmail.com", "Michel", "Robert", "3 rue des magnolia", dt, false);
             var dpadh = new AdherentDepot_DAL();
             dpadh.insert(adh);
 
@@ -29,7 +25,7 @@ namespace PushDansMaster
             var dppG = new PanierGlobalDepot_DAL();
             dppG.insert(pG);
 
-            var padh = new PanierAdherent_DAL(false, 27, adh.getIdAdherent, pG.getID);
+            var padh = new PanierAdherent_DAL(false, 27, adh.ID, pG.ID);
             var dppadh = new PanierAdherentDepot_DAL();
             dppadh.insert(padh);
 

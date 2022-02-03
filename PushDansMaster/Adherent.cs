@@ -11,8 +11,8 @@ namespace PushDansMaster
         private string prenomAdherent;
         private string adresseAdherent;
         private DateTime dateAdhesionAdherent;
-        private int statusAdherent;
-
+        private bool statusAdherent;
+        
 
         #region Getters / Setters
         public int getIdAdherent
@@ -50,7 +50,7 @@ namespace PushDansMaster
             get { return dateAdhesionAdherent; }
             private set { dateAdhesionAdherent = value; }
         }
-        public int getStatusAdherent
+        public bool getStatusAdherent
         {
             get { return statusAdherent; }
             private set { statusAdherent = value; }
@@ -59,27 +59,21 @@ namespace PushDansMaster
         #endregion
 
         #region Constructeurs
-        public Adherent(string societe, string email, string nom, string prenom, string adresse, int status)
+        public Adherent(string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
         {
             this.societeAdherent = societe;
             this.emailAdherent = email;
             this.nomAdherent = nom;
             this.prenomAdherent = prenom;
             this.adresseAdherent = adresse;
-            this.statusAdherent = status;
+            this.dateAdhesionAdherent = DateTime.Now;
+            this.statusAdherent = status; 
         }
 
-        public Adherent(int id, string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, int status)
-        : this(societe, email, nom, prenom, adresse, date_adhesion, status)
+        public Adherent(int id,string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, bool status)
+            : this(societe, email, nom, prenom, adresse, date_adhesion, status)
         {
             this.idAdherent = id;
-        }
-
-        public Adherent(int id, string societe, string email, string nom, string prenom, string adresse, int status)
-        : this(societe, email, nom, prenom, adresse, status)
-        {
-            this.idAdherent = id;
-
         }
 
         public Adherent(int idAdherent, string societeAdherent, string emailAdherent, string nomAdherent, string prenomAdherent, string adresseAdherent, bool statusAdherent)
@@ -92,15 +86,6 @@ namespace PushDansMaster
             this.adresseAdherent = adresseAdherent;
             this.statusAdherent = statusAdherent;
         }
-
-        public Adherent(string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, int status)
-        : this(societe, email, nom, prenom, adresse, status)
-        {
-            this.dateAdhesionAdherent = DateTime.Now;
-        }
-
-
-
         #endregion
     }
 }

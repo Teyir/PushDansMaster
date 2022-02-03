@@ -5,21 +5,21 @@ namespace PushDansMaster.DAL
 { 
     public class Adherent_DAL
     {
-        public int idAdherent;
+        public int ID;
         private string societeAdherent;
         private string emailAdherent;
         private string nomAdherent;
         private string prenomAdherent;
         private string adresseAdherent;
         private DateTime dateAdhesionAdherent;
-        private int statusAdherent;
+        private bool statusAdherent;
 
         #region Getters / Setters
 
-        public int getIdAdherent
+        public int getID
         {
-            get { return idAdherent; }
-            private set { idAdherent = value; }
+            get { return ID; }
+            private set { ID = value; }
         }
 
         public string getSocieteAdherent
@@ -52,7 +52,7 @@ namespace PushDansMaster.DAL
             get { return dateAdhesionAdherent; }
             private set { dateAdhesionAdherent = value; }
         }
-        public int getStatus
+        public bool getStatus
         {
             get { return statusAdherent; }
             private set { statusAdherent = value; }
@@ -61,12 +61,12 @@ namespace PushDansMaster.DAL
         #endregion
 
         #region Constructeurs
-        public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
+        public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
         => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (societe, email, nom, prenom, adresse, dateAdhesion, status);
 
-        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
-        => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, bool status)
+        => (ID, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
         #endregion
