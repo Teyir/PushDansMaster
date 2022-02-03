@@ -9,7 +9,7 @@ namespace PushDansMaster
     public class PanierGlobal
     {
         private int ID;
-        private bool status;
+        private int status;
         private int semaine;
 
         #region Getters / Setters

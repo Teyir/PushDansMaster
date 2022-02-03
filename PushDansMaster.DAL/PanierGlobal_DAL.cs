@@ -32,6 +32,7 @@ namespace PushDansMaster.DAL
         public PanierGlobal_DAL(int id, bool status, int semaine) => (this.ID, this.status, this.semaine) = (id, status, semaine);
         #endregion
 
+
         #region Methodes
         internal void insert(SqlConnection connection)
         {

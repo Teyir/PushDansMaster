@@ -15,5 +15,6 @@ namespace PushDansMaster
         public void delete(Adherent f);
 
         public void deleteByID(int ID);
+
     }
 }

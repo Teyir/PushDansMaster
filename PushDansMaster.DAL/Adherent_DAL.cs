@@ -3,9 +3,9 @@ using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
 { 
-
     public class Adherent_DAL
     {
+
         public int idAdherent;
         private string societeAdherent;
         private string emailAdherent;
@@ -71,6 +71,7 @@ namespace PushDansMaster.DAL
         = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
         #endregion
+
 
         #region Methodes
         internal void Insert(SqlConnection connection)
