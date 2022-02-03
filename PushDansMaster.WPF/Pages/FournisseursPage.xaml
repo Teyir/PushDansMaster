@@ -3,12 +3,25 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PushDansMaster.WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="FournisseursPage">
+      Title="FournisseursPage" Loaded="WindowIsOpen">
 
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
-        <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+        <Grid>
+            <Button Background="CornflowerBlue" Margin="20,20,0,0" Content="Actualiser" Click="Click_Btn_Actualiser" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+            <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+
+            <Border CornerRadius="5">
+                <DataGrid  HorizontalAlignment="Center" VerticalAlignment="Center" Name="Liste" Foreground="Blue" Padding="30" Width="750" Height="300">
+                </DataGrid>
+            </Border>
+
+            <Button Background="CornflowerBlue" Margin="0,0,10,10" FontSize="20" Content="Delete Fournisseur" Click="Click_Btn_Go_Delete_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
+            <Button Background="CornflowerBlue" Margin="0,0,197,10" FontSize="20" Content="Insert Fournisseur" Click="Click_Btn_Go_Insert_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
+            <Button Background="CornflowerBlue" Margin="0,0,377,10" FontSize="20" Content="Update Fournisseur" Click="Click_Btn_Go_Update_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
+        </Grid>
     </Border>
 </Page>
+ 

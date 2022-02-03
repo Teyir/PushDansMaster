@@ -15,7 +15,7 @@ namespace PushDansMaster.API.Controllers
     public class AdherentController : ControllerBase
     {
         private IAdherentService service;
-        
+
         public AdherentController(IAdherentService srv)
         {
             service = srv;
@@ -27,7 +27,7 @@ namespace PushDansMaster.API.Controllers
         {
             return service.getAll().Select(f => new Adherent_DTO()
             {
-                idAdherent = f.getID,
+                idAdherent = f.getIdAdherent,
                 societeAdherent = f.getSocieteAdherent,
                 emailAdherent = f.getEmailAdherent,
                 nomAdherent = f.getNomAdherent,
@@ -36,6 +36,64 @@ namespace PushDansMaster.API.Controllers
                 dateAdhesionAdherent = f.getDateAdhesionAdherent,
                 statusAdherent = f.getStatusAdherent
             });
+        }
+
+        // GET: api/Adherents/get/5 → get an adherent
+        [HttpGet("get/{id}")]
+        public ActionResult<Adherent_DTO> GetAdherent(int id)
+        {
+            var f = service.getByID(id);
+
+            if (f == null)
+            {
+                //Error 404 (not found)
+                return NotFound();
+            }
+
+            return new Adherent_DTO()
+            {
+
+                idAdherent = f.getIdAdherent,
+                societeAdherent = f.getSocieteAdherent,
+                emailAdherent = f.getEmailAdherent,
+                nomAdherent = f.getNomAdherent,
+                prenomAdherent = f.getPrenomAdherent,
+                adresseAdherent = f.getAdresseAdherent,
+                dateAdhesionAdherent = f.getDateAdhesionAdherent,
+                statusAdherent = f.getStatusAdherent
+
+            };
+        }
+
+        // POST: api/Adherents/insert → Insert a new adherent
+        [HttpPost("insert/")]
+        public ActionResult<Adherent_DTO> Insert(Adherent_DTO f)
+        {
+            var f_work = service.insert(new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, DateTime.Now, f.statusAdherent));
+            //Je récupère l'id adherent
+            f.idAdherent = f_work.getIdAdherent;
+            //je renvoie l'objet DTO
+            return f;
+        }
+
+        // UPDATE: api/Adherent/update/5 → Update an adherent
+        [HttpPut("update/{id}")]
+        public ActionResult<Adherent_DTO> Update(int id, Adherent_DTO f)
+        {
+            f.idAdherent = id;
+
+            var f_work = service.update(new Adherent(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.statusAdherent));
+
+            return f;
+        }
+
+        // DELETE: api/Adherent/delete/5 → Delete an adherent
+        [HttpDelete("delete/{id}")]
+        public void Delete(int id)
+        {
+            var f = service.getByID(id);
+
+            service.delete(new Adherent(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getStatusAdherent));
         }
 
     }

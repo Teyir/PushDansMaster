@@ -15,14 +15,12 @@ using System.Windows.Shapes;
 
 namespace PushDansMaster.WPF
 {
-    /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+            PagesNavigation.Navigate(new Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
