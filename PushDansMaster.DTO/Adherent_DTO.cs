@@ -15,7 +15,7 @@ namespace PushDansMaster.DTO
         public string prenomAdherent { get; set; }
         public string adresseAdherent { get; set; }
         public DateTime dateAdhesionAdherent { get; set; }
-        public int statusAdherent { get; set; }
+        public bool statusAdherent { get; set; }
 
     }
 }

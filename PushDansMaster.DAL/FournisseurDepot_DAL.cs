@@ -15,7 +15,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur";
+            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse FROM fournisseur";
             var reader = command.ExecuteReader();
 
             var listFournisseur = new List<Fournisseur_DAL>();
@@ -28,8 +28,7 @@ namespace PushDansMaster.DAL
                                                 reader.GetString(3),
                                                 reader.GetString(4),
                                                 reader.GetString(5),
-                                                reader.GetString(6),
-                                                reader.GetInt32(7));
+                                                reader.GetString(6));
                 listFournisseur.Add(f);
             }
 
@@ -43,7 +42,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur WHERE id=@id";
+            command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse FROM fournisseur WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", ID));
             var reader = command.ExecuteReader();
 
@@ -58,8 +57,7 @@ namespace PushDansMaster.DAL
                                                 reader.GetString(3),
                                                 reader.GetString(4),
                                                 reader.GetString(5),
-                                                reader.GetString(6),
-                                                reader.GetInt32(7));
+                                                reader.GetString(6));
             }
             else
                 throw new Exception($"Pas de fournisseur avec l'ID {ID}");
@@ -74,8 +72,8 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse, status)"
-                                    + " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse, @status); select scope_identity()";
+            command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse)"
+                                    + " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse); select scope_identity()";
 
             command.Parameters.Add(new SqlParameter("@societe", fournisseur.getSocieteFournisseur));
             command.Parameters.Add(new SqlParameter("@civilite", fournisseur.getCiviliteFournisseur));
@@ -83,7 +81,6 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@prenom", fournisseur.getPrenomFournisseur));
             command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
-            command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
 
 
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
@@ -101,7 +98,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse, status=@status"                     
+            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse"                     
                                     +  " WHERE id=@ID";
 
             command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
@@ -111,7 +108,6 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@prenom", fournisseur.getPrenomFournisseur));
             command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
-            command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
 
             var linesAffected = (int)command.ExecuteNonQuery();
 

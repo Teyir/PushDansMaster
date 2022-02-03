@@ -33,8 +33,7 @@ namespace PushDansMaster.API.Controllers
                 nomFournisseur = f.getNomFournisseur,
                 prenomFournisseur = f.getPrenomFournisseur,
                 emailFournisseur = f.getEmailFournisseur,
-                adresseFournisseur = f.getAdresseFournisseur,
-                statusFournisseur = f.getStatusFournisseur
+                adresseFournisseur = f.getAdresseFournisseur
             });
         }
 
@@ -59,8 +58,7 @@ namespace PushDansMaster.API.Controllers
                 nomFournisseur = f.getNomFournisseur,
                 prenomFournisseur = f.getPrenomFournisseur,
                 emailFournisseur = f.getEmailFournisseur,
-                adresseFournisseur = f.getAdresseFournisseur,
-                statusFournisseur = f.getStatusFournisseur
+                adresseFournisseur = f.getAdresseFournisseur
 
             };
         }
@@ -69,7 +67,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<Fournisseurs_DTO> Insert(Fournisseurs_DTO f)
         {
-            var f_work = service.insert(new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur, f.statusFournisseur));
+            var f_work = service.insert(new Fournisseur(f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur));
             //Je récupère l'id fournisseur
             f.idFournisseur = f_work.getIdFournisseur;
             //je renvoie l'objet DTO
@@ -82,7 +80,7 @@ namespace PushDansMaster.API.Controllers
         {
             f.idFournisseur = id;
 
-            var f_work = service.update(new Fournisseur(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur, f.statusFournisseur));
+            var f_work = service.update(new Fournisseur(f.idFournisseur, f.societeFournisseur, f.civiliteFournisseur, f.nomFournisseur, f.prenomFournisseur, f.emailFournisseur, f.adresseFournisseur));
 
             return f;
         }
@@ -91,7 +89,9 @@ namespace PushDansMaster.API.Controllers
         [HttpDelete("delete/{id}")]
         public void Delete(int id) 
         {
-            service.deleteByID(id);            
+            var f = service.getByID(id);
+
+            service.delete(new Fournisseur(f.getIdFournisseur, f.getSocieteFournisseur, f.getCiviliteFournisseur, f.getNomFournisseur, f.getPrenomFournisseur, f.getEmailFournisseur, f.getAdresseFournisseur));            
         }
     }
 }
