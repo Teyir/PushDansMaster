@@ -105,7 +105,7 @@ namespace PushDansMaster.WPF.Pages
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                string fileName = System.IO.Path.GetFileName(files[0]);
+                string fileName = System.IO.Path.GetFileName(files[0]); 
                 string fileExt = System.IO.Path.GetExtension(files[0]);
                 string filePath = System.IO.Path.GetFullPath(files[0]);
 
