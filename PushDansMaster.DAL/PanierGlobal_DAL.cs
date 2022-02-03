@@ -5,7 +5,7 @@ namespace PushDansMaster.DAL
     public class PanierGlobal_DAL
     {
         public int ID;
-        private bool status;
+        private int status;
         private int semaine;
 
         #region Getters / Setters
@@ -19,7 +19,7 @@ namespace PushDansMaster.DAL
             get { return semaine; }
             private set { semaine = value; }
         }
-        public bool getStatus
+        public int getStatus
         {
             get { return status; }
             private set { status = value; }
@@ -28,8 +28,8 @@ namespace PushDansMaster.DAL
         #endregion
 
         #region Constructeurs
-        public PanierGlobal_DAL(bool status, int semaine) => (this.status, this.semaine) = (status, semaine);
-        public PanierGlobal_DAL(int id, bool status, int semaine) => (this.ID, this.status, this.semaine) = (id, status, semaine);
+        public PanierGlobal_DAL(int status, int semaine) => (this.status, this.semaine) = (status, semaine);
+        public PanierGlobal_DAL(int id, int status, int semaine) => (this.ID, this.status, this.semaine) = (id, status, semaine);
         #endregion
 
         #region Methodes

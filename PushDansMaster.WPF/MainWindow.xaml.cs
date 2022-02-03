@@ -20,7 +20,7 @@ namespace PushDansMaster.WPF
         public MainWindow()
         {
             InitializeComponent();
-            PagesNavigation.Navigate(new Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
