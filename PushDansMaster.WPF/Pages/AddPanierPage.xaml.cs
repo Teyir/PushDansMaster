@@ -97,7 +97,7 @@ namespace PushDansMaster.WPF.Pages
             {
                 if (item.getSocieteAdherent == adhStr)
                 {
-                    adhID = item.getID;
+                    adhID = item.getIdAdherent;
                     break;
                 }
             }

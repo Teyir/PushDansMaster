@@ -17,7 +17,7 @@ namespace PushDansMaster
         /// <summary>
         /// Permet d'obtenir le status
         /// </summary>
-        public bool getStatus
+        public int getStatus
         {
             get { return status; }
             private set { status = value; }
@@ -38,7 +38,7 @@ namespace PushDansMaster
 
         #region Constructeurs
 
-        public PanierGlobal(bool status, int semaine)
+        public PanierGlobal(int status, int semaine)
         {
             this.status = status;
             this.semaine = semaine;
