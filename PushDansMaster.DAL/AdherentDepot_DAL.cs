@@ -157,5 +157,21 @@ namespace PushDansMaster.DAL
             closeConnection();
 
         }
+            createConnection();
+
+            command.CommandText = "DELETE * FROM adherent WHERE id=@ID";
+            command.Parameters.Add(new SqlParameter("@ID", ID));
+
+            var linesAffected = (int)command.ExecuteNonQuery();
+
+            if (linesAffected != 1)
+            {
+                throw new Exception($"Impossible de supprimer l'adherent {ID}");
+            }
+
+            closeConnection();
+
+        }
+
     }
 }
