@@ -97,7 +97,7 @@ namespace PushDansMaster.WPF.Pages
                     }
                     if (!panierFound)
                     {
-                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
+                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week); 
                         PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
                         PanierGlobal = pGID;
                     }
