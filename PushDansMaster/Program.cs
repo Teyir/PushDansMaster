@@ -20,7 +20,7 @@ namespace PushDansMaster
             var dpadh = new AdherentDepot_DAL();
             dpadh.insert(adh);
 
-            var pG = new PanierGlobal_DAL(false, 27);
+            var pG = new PanierGlobal_DAL(0, 27);
             var dppG = new PanierGlobalDepot_DAL();
             dppG.insert(pG);
 

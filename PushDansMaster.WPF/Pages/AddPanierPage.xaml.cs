@@ -111,7 +111,7 @@ namespace PushDansMaster.WPF.Pages
                         {
                             if (item.getSocieteAdherent == adhStr)
                             {
-                                adhID = item.getID;
+                                adhID = item.getIdAdherent;
                                 AdhSelected = item;
                                 break;
                             }
@@ -134,7 +134,7 @@ namespace PushDansMaster.WPF.Pages
                     }
                     else
                     {
-                        adhID = AdhSelected.getID;
+                        adhID = AdhSelected.getIdAdherent;
                     }
 
                     using (var rd = new StreamReader(filePath))
