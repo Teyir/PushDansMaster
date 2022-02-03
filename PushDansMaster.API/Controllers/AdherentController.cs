@@ -27,7 +27,7 @@ namespace PushDansMaster.API.Controllers
         {
             return service.getAll().Select(f => new Adherent_DTO()
             {
-                idAdherent = f.getID,
+                idAdherent = f.getIdAdherent,
                 societeAdherent = f.getSocieteAdherent,
                 emailAdherent = f.getEmailAdherent,
                 nomAdherent = f.getNomAdherent,
@@ -53,7 +53,7 @@ namespace PushDansMaster.API.Controllers
             return new Adherent_DTO()
             {
 
-                idAdherent = f.getID,
+                idAdherent = f.getIdAdherent,
                 societeAdherent = f.getSocieteAdherent,
                 emailAdherent = f.getEmailAdherent,
                 nomAdherent = f.getNomAdherent,
@@ -71,7 +71,7 @@ namespace PushDansMaster.API.Controllers
         {
             var f_work = service.insert(new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, DateTime.Now, f.statusAdherent));
             //Je récupère l'id adherent
-            f.idAdherent = f_work.getID;
+            f.idAdherent = f_work.getIdAdherent;
             //je renvoie l'objet DTO
             return f;
         }
@@ -93,7 +93,7 @@ namespace PushDansMaster.API.Controllers
         {
             var f = service.getByID(id);
 
-            service.delete(new Adherent(f.getID, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getStatusAdherent));
+            service.delete(new Adherent(f.getIdAdherent, f.getSocieteAdherent, f.getEmailAdherent, f.getNomAdherent, f.getPrenomAdherent, f.getAdresseAdherent, f.getStatusAdherent));
         }
 
     }
