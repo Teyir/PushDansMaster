@@ -30,6 +30,8 @@ namespace PushDansMaster.WPF.Pages
         public ComboBoxItem selectedAdh { get; set; }
         public string ComboBoxSelectedItem { get; set; }
         public PanierGlobal_DAL PanierGlobal { get; set; }
+        public Adherent_DAL AdhSelected { get; set; }
+        private PanierAdherent_DAL PanierAdherent { get; set; }
 
         public AddPanierPage()
         {
@@ -53,64 +55,88 @@ namespace PushDansMaster.WPF.Pages
 
         private void Rectangle_Drop(object sender, DragEventArgs e)
         {
-            var comboBox = sender as ComboBox;
-            ComboBoxItem typeItem = (ComboBoxItem)comboBox.SelectedItem;
-            string adhStr = typeItem.Content.ToString();
-
-            var references = new List<string>();
-            var quantites = new List<int>();
-            var dt = DateTime.Now;
-
-            var dppG = new PanierGlobalDepot_DAL();
-            var dppA = new PanierAdherentDepot_DAL();
-            var dpadh = new AdherentDepot_DAL();
-            var dpla = new LignesAdherentDepot_DAL();
-            var dplg = new LignesGlobalDepot_DAL();
-            var dpref = new ReferenceDepot_DAL();
-
-            CultureInfo cultureInfo = new CultureInfo("fr-EU");
-            System.Globalization.Calendar calendar = cultureInfo.Calendar;
-            CalendarWeekRule myCWR = cultureInfo.DateTimeFormat.CalendarWeekRule;
-            DayOfWeek myFirstDOW = cultureInfo.DateTimeFormat.FirstDayOfWeek;
-            int week = calendar.GetWeekOfYear(dt, myCWR, myFirstDOW) - 1;
-
-            List<PanierGlobal_DAL> panierGlobals = dppG.getAll();
-            bool panierFound = false;
-            foreach (PanierGlobal_DAL pg in panierGlobals)
-            {
-                if (pg.getSemaine == week)
-                {
-                    PanierGlobal = pg;
-                    panierFound = true;
-                }
-            }
-            if (!panierFound)
-            {
-                PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
-                PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
-                PanierGlobal = pGID;
-            }
-
-            int adhID = 0;
-            List<Adherent_DAL> adhs = dpadh.getAll();
-            foreach (Adherent_DAL item in adhs)
-            {
-                if (item.getSocieteAdherent == adhStr)
-                {
-                    adhID = item.getID;
-                    break;
-                }
-            }
-
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                string fileName = System.IO.Path.GetFileName(files[0]);
+                string fileName = System.IO.Path.GetFileName(files[0]); 
                 string fileExt = System.IO.Path.GetExtension(files[0]);
                 string filePath = System.IO.Path.GetFullPath(files[0]);
 
                 if (fileExt == ".csv")
                 {
+                    var comboBox = sender as ComboBox;
+                    ComboBoxItem typeItem = (ComboBoxItem)comboBox.SelectedItem; // Exception pas encore gérée
+                    string adhStr = typeItem.Content.ToString();
+
+                    var references = new List<string>();
+                    var quantites = new List<int>();
+                    var dt = DateTime.Now;
+
+                    var dppG = new PanierGlobalDepot_DAL();
+                    var dppA = new PanierAdherentDepot_DAL();
+                    var dpadh = new AdherentDepot_DAL();
+                    var dpla = new LignesAdherentDepot_DAL();
+                    var dplg = new LignesGlobalDepot_DAL();
+                    var dpref = new ReferenceDepot_DAL();
+
+                    CultureInfo cultureInfo = new CultureInfo("fr-EU");
+                    System.Globalization.Calendar calendar = cultureInfo.Calendar;
+                    CalendarWeekRule myCWR = cultureInfo.DateTimeFormat.CalendarWeekRule;
+                    DayOfWeek myFirstDOW = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+                    int week = calendar.GetWeekOfYear(dt, myCWR, myFirstDOW) - 1;
+
+                    List<PanierGlobal_DAL> panierGlobals = dppG.getAll();
+                    bool panierFound = false;
+                    foreach (PanierGlobal_DAL pg in panierGlobals)
+                    {
+                        if (pg.getSemaine == week)
+                        {
+                            PanierGlobal = pg;
+                            panierFound = true;
+                        }
+                    }
+                    if (!panierFound)
+                    {
+                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
+                        PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
+                        PanierGlobal = pGID;
+                    }
+
+                    int adhID = 0;
+                    List<PanierAdherent_DAL> panierAdherents = dppA.getAll();
+                    if (AdhSelected.getSocieteAdherent != adhStr)
+                    {
+                        List<Adherent_DAL> adhs = dpadh.getAll();
+                        foreach (Adherent_DAL item in adhs)
+                        {
+                            if (item.getSocieteAdherent == adhStr)
+                            {
+                                adhID = item.getID;
+                                AdhSelected = item;
+                                break;
+                            }
+                        }
+                        bool foundPanierAdh = false;
+                        foreach (PanierAdherent_DAL padhd in panierAdherents)
+                        {
+                            if (padhd.getId_adherent == adhID)
+                            {
+                                PanierAdherent = padhd;
+                                foundPanierAdh = true;
+                                break;
+                            }
+                        }
+                        if (!foundPanierAdh)
+                        {
+                            PanierAdherent = new PanierAdherent_DAL(true, week, adhID, PanierGlobal.getID);
+                            dppA.insert(PanierAdherent);
+                        }
+                    }
+                    else
+                    {
+                        adhID = AdhSelected.getID;
+                    }
+
                     using (var rd = new StreamReader(filePath))
                     {
                         while (!rd.EndOfStream)
@@ -140,16 +166,15 @@ namespace PushDansMaster.WPF.Pages
                             else
                             {
                                 int refID = reff.getID;
-                                
-                                PanierAdherent panierAdherent = new PanierAdherent(true, week, adhID, pGID.getID);
-                                LignesAdherent lignesAdherent = new LignesAdherent(panierAdherent.getID, refID, quantites[i]);
+                                LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(PanierAdherent.getID, refID, quantites[i]);
+                                LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(PanierGlobal.getID, quantites[i], reff.getReference, refID);
+                                dpla.insert(lignesAdherent);
+                                dplg.insert(lignesGlobal);
                             }
                             i++;
                         }
                         if (exit == true) { break; }
                     }
-
-
 
                     for (int i = 0; i < files.Length; i++)
                     {
