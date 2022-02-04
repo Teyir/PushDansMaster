@@ -49,7 +49,7 @@ namespace PushDansMaster.WPF.Pages
             else {
                if (MessageBox.Show("êtes vous sur de vouloir supprimer le fournisseur " + four.NomFournisseur + "?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    await clientApi.DeleteAsync(four.IdFournisseur);
+                    await clientApi.Delete2Async(four.IdFournisseur);
 
                     var fournisseurs = await clientApi.Getall2Async();
                     Liste.ItemsSource = null;

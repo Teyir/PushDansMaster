@@ -41,8 +41,9 @@ namespace PushDansMaster.WPF.Pages
             fournisseur.PrenomFournisseur = PrenomInsert.Text;
             fournisseur.EmailFournisseur = EmailInsert.Text;
             fournisseur.AdresseFournisseur = AdresseInsert.Text;
+            fournisseur.StatusFournisseur = int.Parse(StatusInsert.Text);
 
-            clientApi.InsertAsync(fournisseur);
+            clientApi.Insert2Async(fournisseur);
 
             NavigationService.GoBack();
 
