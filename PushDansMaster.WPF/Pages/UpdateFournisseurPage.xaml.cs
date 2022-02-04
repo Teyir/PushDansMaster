@@ -33,7 +33,10 @@ namespace PushDansMaster.WPF.Pages
         private void Click_Btn_Valider_Fournisseur(object sender, RoutedEventArgs e)
         {
             var fournisseur = new Fournisseurs_DTO();
+            var fourSelected = ((Liste as DataGrid).SelectedItem as Fournisseurs_DTO);
             var clientApi = new Client("https://localhost:44304/", new HttpClient());
+
+
 
             fournisseur.SocieteFournisseur = SocieteUpdate.Text;
             if ((bool)radio1.IsChecked)
@@ -49,8 +52,7 @@ namespace PushDansMaster.WPF.Pages
             fournisseur.EmailFournisseur = EmailUpdate.Text;
             fournisseur.AdresseFournisseur = AdresseUpdate.Text;
 
-            int id = Int32.Parse(IdSelect.Text);
-            clientApi.UpdateAsync(id, fournisseur);
+            clientApi.UpdateAsync(fourSelected.IdFournisseur, fournisseur);
 
             NavigationService.GoBack();
 

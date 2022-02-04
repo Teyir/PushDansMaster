@@ -23,7 +23,16 @@ namespace PushDansMaster.WPF.Pages
             InitializeComponent();
 
         }
+
+
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
+        {
+            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            var fournisseur = await clientApi.Getall2Async();
+            Liste.ItemsSource = fournisseur;
+        }
+
+        private async void OnPageLoad(object sender, RoutedEventArgs e)
         {
             var clientApi = new Client("https://localhost:44304/", new HttpClient());
             var fournisseur = await clientApi.Getall2Async();
