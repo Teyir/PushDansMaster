@@ -3,7 +3,7 @@
     public class PanierAdherent
     {
         private int ID;
-        private bool status;
+        private int status;
         private int semaine;
         private int id_adherent;
         private int id_panierGlobal;
@@ -13,7 +13,7 @@
         /// <summary>
         /// Permet d'obtenir le status
         /// </summary>
-        public bool getStatus
+        public int getStatus
         {
             get { return status; }
             private set { status = value; }
@@ -46,7 +46,7 @@
 
         #region Constructeurs
 
-        public PanierAdherent(bool status, int semaine, int id_adherent, int id_panierGlobal)
+        public PanierAdherent(int status, int semaine, int id_adherent, int id_panierGlobal)
         {
             this.status = status;
             this.semaine = semaine;

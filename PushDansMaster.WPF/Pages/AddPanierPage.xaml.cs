@@ -39,6 +39,8 @@ namespace PushDansMaster.WPF.Pages
 
             DataContext = this;
 
+            AdhSelected = null;
+
             adh = new ObservableCollection<ComboBoxItem>();
             var cbItem = new ComboBoxItem { Content = "<--Select-->" };
             selectedAdh = cbItem;
@@ -65,8 +67,7 @@ namespace PushDansMaster.WPF.Pages
                 if (fileExt == ".csv")
                 {
                     var comboBox = sender as ComboBox;
-                    ComboBoxItem typeItem = (ComboBoxItem)comboBox.SelectedItem; // Exception pas encore gérée
-                    string adhStr = typeItem.Content.ToString();
+                    string adhStr = (string)(cbAdh.SelectedItem as ComboBoxItem).Content;
 
                     var references = new List<string>();
                     var quantites = new List<int>();
@@ -104,7 +105,7 @@ namespace PushDansMaster.WPF.Pages
 
                     int adhID = 0;
                     List<PanierAdherent_DAL> panierAdherents = dppA.getAll();
-                    if (AdhSelected.getSocieteAdherent != adhStr)
+                    if (adhStr != AdhSelected.getSocieteAdherent || AdhSelected.getSocieteAdherent == null) // Erreur ici quand on dépose
                     {
                         List<Adherent_DAL> adhs = dpadh.getAll();
                         foreach (Adherent_DAL item in adhs)
@@ -128,7 +129,7 @@ namespace PushDansMaster.WPF.Pages
                         }
                         if (!foundPanierAdh)
                         {
-                            PanierAdherent = new PanierAdherent_DAL(true, week, adhID, PanierGlobal.getID);
+                            PanierAdherent = new PanierAdherent_DAL(0, week, adhID, PanierGlobal.getID);
                             dppA.insert(PanierAdherent);
                         }
                     }
