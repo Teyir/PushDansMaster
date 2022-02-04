@@ -30,10 +30,26 @@ namespace PushDansMaster.WPF.Pages
             Liste.ItemsSource = fournisseur;
         }
 
-        private void Click_Btn_Go_Delete_Fournisseur(object sender, RoutedEventArgs e)
+        private async void Click_Btn_Go_Delete_Fournisseur(object sender, RoutedEventArgs e)
         {           
-            NavigationService.Navigate(new Uri("Pages/DeleteFournisseurPage.xaml", UriKind.RelativeOrAbsolute));
+            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            var four = ((Liste as DataGrid).SelectedItem as Fournisseurs_DTO);
+
+            if (four is null)
+                MessageBox.Show("Selectionner un fournisseur");
+            else {
+               if (MessageBox.Show("êtes vous sur de vouloir supprimer le fournisseur " + four.NomFournisseur + "?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    await clientApi.DeleteAsync(four.IdFournisseur);
+
+                    var fournisseurs = await clientApi.Getall2Async();
+                    Liste.ItemsSource = null;
+                    Liste.ItemsSource = fournisseurs;
+                }
+            }
         }
+
+
         private void Click_Btn_Go_Insert_Fournisseur(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("Pages/InsertFournisseurPage.xaml", UriKind.RelativeOrAbsolute));
@@ -48,7 +64,6 @@ namespace PushDansMaster.WPF.Pages
         {
             var clientApi = new Client("https://localhost:44304/", new HttpClient());
             var fournisseur = await clientApi.Getall2Async();       
-            
             Liste.ItemsSource = null;
             Liste.ItemsSource = fournisseur;
         }
