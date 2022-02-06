@@ -33,26 +33,33 @@ namespace PushDansMaster.WPF.Pages
         private void Click_Btn_Valider_Fournisseur(object sender, RoutedEventArgs e)
         {
             var fournisseur = new Fournisseurs_DTO();
+            var fourSelected = ((Liste as DataGrid).SelectedItem as Fournisseurs_DTO);
             var clientApi = new Client("https://localhost:44304/", new HttpClient());
-
-            fournisseur.SocieteFournisseur = SocieteUpdate.Text;
-            if ((bool)radio1.IsChecked)
+            if (fourSelected is null)
             {
-                fournisseur.CiviliteFournisseur = true;
+                MessageBox.Show("Selectionner un fournisseur");
             }
-            else if ((bool)radio2.IsChecked)
+            else
             {
-                fournisseur.CiviliteFournisseur = false;
-            }
-            fournisseur.NomFournisseur = NomUpdate.Text;
-            fournisseur.PrenomFournisseur = PrenomUpdate.Text;
-            fournisseur.EmailFournisseur = EmailUpdate.Text;
-            fournisseur.AdresseFournisseur = AdresseUpdate.Text;
+                fournisseur.SocieteFournisseur = SocieteUpdate.Text;
+                if ((bool)radio1.IsChecked)
+                {
+                    fournisseur.CiviliteFournisseur = true;
+                }
+                else if ((bool)radio2.IsChecked)
+                {
+                    fournisseur.CiviliteFournisseur = false;
+                }
+                fournisseur.NomFournisseur = NomUpdate.Text;
+                fournisseur.PrenomFournisseur = PrenomUpdate.Text;
+                fournisseur.EmailFournisseur = EmailUpdate.Text;
+                fournisseur.AdresseFournisseur = AdresseUpdate.Text;
+                fournisseur.StatusFournisseur = int.Parse(StatusUpdate.Text);
 
-            int id = Int32.Parse(IdSelect.Text);
-            clientApi.UpdateAsync(id, fournisseur);
+                clientApi.Update2Async(fourSelected.IdFournisseur, fournisseur);
 
-            NavigationService.GoBack();
+                NavigationService.GoBack();
+            }   
 
         }
     }

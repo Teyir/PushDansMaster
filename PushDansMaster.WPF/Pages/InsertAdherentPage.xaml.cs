@@ -16,26 +16,31 @@ using System.Windows.Shapes;
 
 namespace PushDansMaster.WPF.Pages
 {
-    public partial class DeleteFournisseurPage : Page
+    public partial class InsertAdherentPage : Page
     {
-        public DeleteFournisseurPage()
+        public InsertAdherentPage()
         {
             InitializeComponent();
         }
 
-        private async void WindowIsOpen(object sender, RoutedEventArgs e)
+        private void Click_Btn_Valider_Adherent(object sender, RoutedEventArgs e)
         {
+            var adherent = new Adherent_DTO();
             var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var fournisseur = await clientApi.Getall2Async();
-            Liste.ItemsSource = fournisseur;
+
+            adherent.SocieteAdherent = SocieteInsertAdherent.Text;
+
+            adherent.NomAdherent = NomInsertAdherent.Text;
+            adherent.PrenomAdherent = PrenomInsertAdherent.Text;
+            adherent.EmailAdherent = EmailInsertAdherent.Text;
+            adherent.AdresseAdherent = AdresseInsertAdherent.Text;
+            adherent.StatusAdherent = int.Parse(StatusInsertAdherent.Text);
+
+            clientApi.InsertAsync(adherent);
+
+            NavigationService.GoBack();
+
         }
 
-        private void Click_Btn_Delete_Fournisseur(object sender, RoutedEventArgs e)
-        {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            int id = Int32.Parse(deleteInsertID.Text);
-            clientApi.DeleteAsync(id);
-            NavigationService.GoBack();
-        }
     }
 }
