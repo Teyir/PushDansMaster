@@ -10,7 +10,13 @@
     <Border CornerRadius="5" Background="{DynamicResource SecundaryBackgroundColor}">
 
         <Grid>
-            <Button Background="CornflowerBlue" Margin="20,20,0,0" Content="Actualiser" Click="Click_Btn_Actualiser" VerticalAlignment="Top" HorizontalAlignment="Left"></Button>
+            <Button Background="CornflowerBlue" Margin="20,20,0,0" Content="Actualiser" Click="Click_Btn_Actualiser" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
             <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
 
             <Border CornerRadius="5">
@@ -18,9 +24,27 @@
                 </DataGrid>
             </Border>
 
-            <Button Background="CornflowerBlue" Margin="0,0,10,10" FontSize="20" Content="Delete Fournisseur" Click="Click_Btn_Go_Delete_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
-            <Button Background="CornflowerBlue" Margin="0,0,197,10" FontSize="20" Content="Insert Fournisseur" Click="Click_Btn_Go_Insert_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
-            <Button Background="CornflowerBlue" Margin="0,0,377,10" FontSize="20" Content="Update Fournisseur" Click="Click_Btn_Go_Update_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
+            <Button Background="CornflowerBlue" Margin="0,0,10,10" FontSize="20" Content="Delete Fournisseur" Click="Click_Btn_Go_Delete_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Background="CornflowerBlue" Margin="0,0,197,10" FontSize="20" Content="Insert Fournisseur" Click="Click_Btn_Go_Insert_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Background="CornflowerBlue" Margin="0,0,377,10" FontSize="20" Content="Update Fournisseur" Click="Click_Btn_Go_Update_Fournisseur" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
     </Border>
 </Page>
