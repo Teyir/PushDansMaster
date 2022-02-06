@@ -60,15 +60,32 @@ namespace PushDansMaster.WPF.Pages
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                string fileName = System.IO.Path.GetFileName(files[0]); 
-                string fileExt = System.IO.Path.GetExtension(files[0]);
-                string filePath = System.IO.Path.GetFullPath(files[0]);
+                Processing(sender, e, files);
+            }
+        }
 
-                if (fileExt == ".csv")
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Multiselect = true };
+            bool? response = openFileDialog.ShowDialog();
+            if (response == true)
+            {
+                string[] files = openFileDialog.FileNames;
+                Processing(sender, e, files);
+            }
+        }
+
+        private void Processing(object sender, RoutedEventArgs e, string[] files)
+        {
+            string fileExt = System.IO.Path.GetExtension(files[0]);
+            string filePath = System.IO.Path.GetFullPath(files[0]);
+            if (fileExt == ".csv")
+            {
+                var comboBox = sender as ComboBox;
+                string adhStr = (string)(cbAdh.SelectedItem as ComboBoxItem).Content;
+
+                if (adhStr != "<--Select-->")
                 {
-                    var comboBox = sender as ComboBox;
-                    string adhStr = (string)(cbAdh.SelectedItem as ComboBoxItem).Content;
-
                     var references = new List<string>();
                     var quantites = new List<int>();
                     var dt = DateTime.Now;
@@ -98,7 +115,7 @@ namespace PushDansMaster.WPF.Pages
                     }
                     if (!panierFound)
                     {
-                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week); 
+                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
                         PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
                         PanierGlobal = pGID;
                     }
@@ -143,7 +160,8 @@ namespace PushDansMaster.WPF.Pages
                         while (!rd.EndOfStream)
                         {
                             var splits = rd.ReadLine().Split(';');
-                            if (splits[0] != "reference") { 
+                            if (splits[0] != "reference")
+                            {
                                 references.Add(splits[0]);
                                 quantites.Add(Int32.Parse(splits[1]));
                             }
@@ -153,7 +171,7 @@ namespace PushDansMaster.WPF.Pages
                     List<Reference_DAL> reference_DALs = dpref.getAll();
                     if (reference_DALs.Count == 0)
                     {
-                        MessageBox.Show("Aucune référence dans la BDD", "Erreur");
+                        MessageBox.Show("Aucune référence dans la BDD", "Erreur référence");
                     }
                     else
                     {
@@ -166,7 +184,7 @@ namespace PushDansMaster.WPF.Pages
                                 if (refStr != reff.getReference)
                                 {
                                     // Message d'erreur
-                                    MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur");
+                                    MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur référence");
                                     exit = true;
                                     break;
                                 }
@@ -199,37 +217,12 @@ namespace PushDansMaster.WPF.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Veuillez déposer un fichier au format .csv", "Erreur");
+                    MessageBox.Show("Veuillez choisir un Adherent", "Erreur adherent");
                 }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Multiselect = true };
-            bool? response = openFileDialog.ShowDialog();
-            if (response == true)
+            else
             {
-                string[] files = openFileDialog.FileNames;
-                string fileExt = System.IO.Path.GetExtension(files[0]);
-                if (fileExt == ".csv")
-                {
-                    for (int i = 0; i < files.Length; i++)
-                    {
-                        string filename = System.IO.Path.GetFileName(files[i]);
-                        FileInfo fileInfo = new FileInfo(files[i]);
-                        UploadingFilesList.Items.Add(new fileDetail()
-                        {
-                            FileName = filename,
-                            FileSize = string.Format("{0} {1}", (fileInfo.Length / (1024 * 1024)).ToString("0.0"), "Mb"),
-                            UploadProgress = 100
-                        });
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Veuillez choisir un fichier au format .csv", "Erreur");
-                }
+                MessageBox.Show("Veuillez déposer un fichier au format .csv", "Erreur fichier");
             }
         }
     }
