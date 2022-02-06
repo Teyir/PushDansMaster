@@ -151,43 +151,50 @@ namespace PushDansMaster.WPF.Pages
                     }
 
                     List<Reference_DAL> reference_DALs = dpref.getAll();
-
-                    bool exit = false;
-                    foreach (Reference_DAL reff in reference_DALs) {
-                        foreach (String refStr in references)
-                        {
-                            int i = 0;
-                            if (refStr != reff.getReference)
-                            {
-                                // Message d'erreur
-                                MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur");
-                                exit = true;
-                                break;
-                            }
-                            else
-                            {
-                                int refID = reff.getID;
-                                LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(PanierAdherent.getID, refID, quantites[i]);
-                                LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(PanierGlobal.getID, quantites[i], reff.getReference, refID);
-                                dpla.insert(lignesAdherent);
-                                dplg.insert(lignesGlobal);
-                            }
-                            i++;
-                        }
-                        if (exit == true) { break; }
-                    }
-
-                    for (int i = 0; i < files.Length; i++)
+                    if (reference_DALs.Count == 0)
                     {
-                        string filename = System.IO.Path.GetFileName(files[i]);
-                        FileInfo fileInfo = new FileInfo(files[i]);
-                        UploadingFilesList.Items.Add(new fileDetail()
+                        MessageBox.Show("Aucune référence dans la BDD", "Erreur");
+                    }
+                    else
+                    {
+                        bool exit = false;
+                        foreach (Reference_DAL reff in reference_DALs)
                         {
-                            FileName = filename,
-                            // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
-                            FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
-                            UploadProgress = 100
-                        });
+                            foreach (String refStr in references)
+                            {
+                                int i = 0;
+                                if (refStr != reff.getReference)
+                                {
+                                    // Message d'erreur
+                                    MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur");
+                                    exit = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    int refID = reff.getID;
+                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(PanierAdherent.getID, refID, quantites[i]);
+                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(PanierGlobal.getID, quantites[i], reff.getReference, refID);
+                                    dpla.insert(lignesAdherent);
+                                    dplg.insert(lignesGlobal);
+                                }
+                                i++;
+                            }
+                            if (exit == true) { break; }
+                        }
+
+                        for (int i = 0; i < files.Length; i++)
+                        {
+                            string filename = System.IO.Path.GetFileName(files[i]);
+                            FileInfo fileInfo = new FileInfo(files[i]);
+                            UploadingFilesList.Items.Add(new fileDetail()
+                            {
+                                FileName = filename,
+                                // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
+                                FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
+                                UploadProgress = 100
+                            });
+                        }
                     }
                 }
                 else
