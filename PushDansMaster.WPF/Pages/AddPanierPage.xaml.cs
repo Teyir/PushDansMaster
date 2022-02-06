@@ -39,7 +39,7 @@ namespace PushDansMaster.WPF.Pages
 
             DataContext = this;
 
-            AdhSelected = null;
+            AdhSelected = new Adherent_DAL("", "", "", "", "", DateTime.Now, 0);
 
             adh = new ObservableCollection<ComboBoxItem>();
             var cbItem = new ComboBoxItem { Content = "<--Select-->" };
@@ -105,7 +105,7 @@ namespace PushDansMaster.WPF.Pages
 
                     int adhID = 0;
                     List<PanierAdherent_DAL> panierAdherents = dppA.getAll();
-                    if (adhStr != AdhSelected.getSocieteAdherent || AdhSelected.getSocieteAdherent == null) // Erreur ici quand on dépose
+                    if (adhStr != AdhSelected.getSocieteAdherent || AdhSelected.getSocieteAdherent == "")
                     {
                         List<Adherent_DAL> adhs = dpadh.getAll();
                         foreach (Adherent_DAL item in adhs)
