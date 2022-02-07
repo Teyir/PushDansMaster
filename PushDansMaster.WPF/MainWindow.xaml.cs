@@ -28,6 +28,12 @@ namespace PushDansMaster.WPF
             Close();
         }
 
+        private void DragWithHeader(object sender, MouseButtonEventArgs drag)
+        {
+            if (drag.ChangedButton == MouseButton.Left)
+                DragMove();
+        }
+
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
@@ -63,6 +69,11 @@ namespace PushDansMaster.WPF
         private void rdSendPanier_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("Pages/SendPanierPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void gridgrid_DragEnter(object sender, DragEventArgs e)
+        {
+
         }
     }
 }
