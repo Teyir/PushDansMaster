@@ -10,5 +10,7 @@ namespace PushDansMaster
     {
 
         public List<Reference> getAll();
+
+        public Reference insert(Reference f);
     }
 }
