@@ -37,5 +37,10 @@ namespace PushDansMaster
 
             return f;
         }
+
+        public void deleteByID(int ID)
+        {
+            depot.deleteByID(ID);
+        }
     }
 }

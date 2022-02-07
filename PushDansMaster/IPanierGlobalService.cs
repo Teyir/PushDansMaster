@@ -13,5 +13,7 @@ namespace PushDansMaster
         public PanierGlobal getByID(int ID);
 
         public PanierGlobal insert(PanierGlobal f);
+
+        public void deleteByID(int ID);
     }
 }

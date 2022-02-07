@@ -66,6 +66,13 @@ namespace PushDansMaster.API.Controllers
             return f;
         }
 
+        // DELETE: api/PanierGlobal/delete/5 → Delete a PanierGlobal
+        [HttpDelete("delete/{id}")]
+        public void Delete(int id)
+        {
+            service.deleteByID(id);
+        }
+
 
     }
 }

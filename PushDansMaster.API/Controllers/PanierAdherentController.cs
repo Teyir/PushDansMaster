@@ -70,6 +70,13 @@ namespace PushDansMaster.API.Controllers
             return f;
         }
 
+        // DELETE: api/PanierAdherent/delete/5 → Delete a PanierAdherent
+        [HttpDelete("delete/{id}")]
+        public void Delete(int id)
+        {
+            service.deleteByID(id);
+        }
+
 
     }
 }

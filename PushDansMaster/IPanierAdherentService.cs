@@ -11,5 +11,7 @@ namespace PushDansMaster
 
         public PanierAdherent insert(PanierAdherent f);
 
+        public void deleteByID(int ID);
+
     }
 }
