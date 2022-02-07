@@ -54,6 +54,18 @@
             this.id_panierGlobal = id_panierGlobal;
         }
 
+        public PanierAdherent(int id, int status, int semaine, int id_adherent, int id_panierGlobal)
+            :this(status, semaine, id_adherent, id_panierGlobal)
+        {
+            this.ID = id;
+        }
+
+
+
+        public PanierAdherent()
+        {
+        }
+
         #endregion
     }
 }

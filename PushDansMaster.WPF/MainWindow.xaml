@@ -7,7 +7,7 @@
         Title="MainWindow" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen" WindowStyle="None"
         Background="Transparent" AllowsTransparency="True"
-        ResizeMode="NoResize" WindowState="Normal">
+        ResizeMode="CanResize" WindowState="Normal">
     <Border CornerRadius="8" Background="{DynamicResource PrimaryBackgroundColor}">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!-- Start: GridColum Left-->
-            <Border CornerRadius="8 0 0 8" Background="{DynamicResource SecundaryBackgroundColor}">
+            <Border  CornerRadius="8 0 0 8" Background="{DynamicResource SecundaryBackgroundColor}">
                 <Grid x:Name="gridMenu" Width="60">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"/>
@@ -68,14 +68,14 @@
             <!-- End: GridColum Left-->
 
             <!-- Start: GridColumn Rigth -->
-            <Grid Grid.Column="1">
+            <Grid   Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <!-- Start: Button Close | Restore | Minimize -->
-                <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <StackPanel  Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0" Height="30" Orientation="Horizontal" FlowDirection="RightToLeft">
                     <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
                     <Button x:Name="btnRestore" Margin="5,0" Click="btnRestore_Click">
                         <Button.Style>
@@ -93,7 +93,7 @@
                 </StackPanel>
                 <!-- End: Button Close | Restore | Minimize -->
 
-                <Border Grid.Row="1" Margin="10">
+                <Border  MouseDown="DragWithHeader"  Grid.Row="1" Margin="10">
                     <Frame x:Name="PagesNavigation" NavigationUIVisibility="Hidden">
                         <!-- Page Content -->
                     </Frame>
