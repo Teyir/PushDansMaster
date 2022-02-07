@@ -201,17 +201,19 @@ namespace PushDansMaster.WPF.Pages
                             if (exit == true) { break; }
                         }
 
-                        for (int i = 0; i < files.Length; i++)
-                        {
-                            string filename = System.IO.Path.GetFileName(files[i]);
-                            FileInfo fileInfo = new FileInfo(files[i]);
-                            UploadingFilesList.Items.Add(new fileDetail()
+                        if (!exit) { 
+                            for (int i = 0; i < files.Length; i++)
                             {
-                                FileName = filename,
-                                // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
-                                FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
-                                UploadProgress = 100
-                            });
+                                string filename = System.IO.Path.GetFileName(files[i]);
+                                FileInfo fileInfo = new FileInfo(files[i]);
+                                UploadingFilesList.Items.Add(new fileDetail()
+                                {
+                                    FileName = filename,
+                                    // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
+                                    FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
+                                    UploadProgress = 100
+                                });
+                            }
                         }
                     }
                 }
