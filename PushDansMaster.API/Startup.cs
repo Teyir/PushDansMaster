@@ -37,7 +37,7 @@ namespace PushDansMaster.API
 
             services.AddSingleton(typeof(IFournisseurService), new FournisseurService());
             services.AddSingleton(typeof(IAdherentService), new AdherentService());
-            services.AddSingleton(typeof(IPanierAdherentService), new PanierAdherent());
+            services.AddSingleton(typeof(IPanierAdherentService), new PanierAdherentService());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
