@@ -19,5 +19,14 @@ namespace PushDansMaster
 
             return references;
         }
+
+        public Reference insert(Reference f)
+        {
+            var references = new Reference_DAL(f.getID, f.getLibelle, f.getReference, f.getMarque, f.getQuantite);
+            depot.insert(references);
+
+
+            return f;
+        }
     }
 }
