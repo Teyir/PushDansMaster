@@ -44,6 +44,17 @@ namespace PushDansMaster
             this.semaine = semaine;
         }
 
+        public PanierGlobal(int id, int status, int semaine)
+            :this(status, semaine)
+        {
+            this.ID = id;
+        }
+
+        public PanierGlobal()
+        {
+
+        }
+
         #endregion
     }
 }
