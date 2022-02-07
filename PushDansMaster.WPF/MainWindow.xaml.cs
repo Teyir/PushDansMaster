@@ -43,14 +43,17 @@ namespace PushDansMaster.WPF
 
         private void rdHome_Click(object sender, RoutedEventArgs e)
         {
-            // PagesNavigation.Navigate(new HomePage());
-
             PagesNavigation.Navigate(new System.Uri("Pages/HomePage.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void rdFournisseur_Click(object sender, RoutedEventArgs e)
         {
             PagesNavigation.Navigate(new System.Uri("Pages/FournisseursPage.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void rdReference_Click(object sender, RoutedEventArgs e)
+        {
+            PagesNavigation.Navigate(new System.Uri("Pages/AddReferencePage.xaml", UriKind.RelativeOrAbsolute));
         }
         private void rdAdherent_Click(object sender, RoutedEventArgs e)
         {
