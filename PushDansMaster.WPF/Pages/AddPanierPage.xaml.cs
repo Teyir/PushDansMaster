@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,29 +30,29 @@ namespace PushDansMaster.WPF.Pages
         public ObservableCollection<ComboBoxItem> adh { get; set; }
         public ComboBoxItem selectedAdh { get; set; }
         public string ComboBoxSelectedItem { get; set; }
-        public PanierGlobal_DAL PanierGlobal { get; set; }
-        public Adherent_DAL AdhSelected { get; set; }
-        private PanierAdherent_DAL PanierAdherent { get; set; }
+        public int IdPanierGlobal { get; set; }
+        public int IdPanierAdherent { get; set; }
 
         public AddPanierPage()
         {
             InitializeComponent();
+        }
 
+        private async void OnPageLoad(object sender, RoutedEventArgs e)
+        {
             DataContext = this;
-
-            AdhSelected = new Adherent_DAL("", "", "", "", "", DateTime.Now, 0);
 
             adh = new ObservableCollection<ComboBoxItem>();
             var cbItem = new ComboBoxItem { Content = "<--Select-->" };
             selectedAdh = cbItem;
             adh.Add(cbItem);
 
-            AdherentDepot_DAL dpadh = new AdherentDepot_DAL();
-            List<Adherent_DAL> listAdh = dpadh.getAll();
+            var clientApi = new Client("https://localhost:44304", new HttpClient());
+            var listAdh = await clientApi.GetallAsync();
 
-            foreach (Adherent_DAL adhItem in listAdh)
+            foreach (Adherent_DTO adhItem in listAdh)
             {
-                adh.Add(new ComboBoxItem { Content = adhItem.getSocieteAdherent });
+                adh.Add(new ComboBoxItem { Content = adhItem.SocieteAdherent });
             }
         }
 
@@ -75,8 +76,10 @@ namespace PushDansMaster.WPF.Pages
             }
         }
 
-        private void Processing(object sender, RoutedEventArgs e, string[] files)
+        private async void Processing(object sender, RoutedEventArgs e, string[] files)
         {
+            var clientApi = new Client("https://localhost:44304", new HttpClient());
+
             string fileExt = System.IO.Path.GetExtension(files[0]);
             string filePath = System.IO.Path.GetFullPath(files[0]);
             if (fileExt == ".csv")
@@ -92,10 +95,8 @@ namespace PushDansMaster.WPF.Pages
 
                     var dppG = new PanierGlobalDepot_DAL();
                     var dppA = new PanierAdherentDepot_DAL();
-                    var dpadh = new AdherentDepot_DAL();
                     var dpla = new LignesAdherentDepot_DAL();
                     var dplg = new LignesGlobalDepot_DAL();
-                    var dpref = new ReferenceDepot_DAL();
 
                     CultureInfo cultureInfo = new CultureInfo("fr-EU");
                     System.Globalization.Calendar calendar = cultureInfo.Calendar;
@@ -103,56 +104,61 @@ namespace PushDansMaster.WPF.Pages
                     DayOfWeek myFirstDOW = cultureInfo.DateTimeFormat.FirstDayOfWeek;
                     int week = calendar.GetWeekOfYear(dt, myCWR, myFirstDOW) - 1;
 
-                    List<PanierGlobal_DAL> panierGlobals = dppG.getAll();
+                    var panierGlobals = await clientApi.Getall4Async();
                     bool panierFound = false;
-                    foreach (PanierGlobal_DAL pg in panierGlobals)
+                    foreach (PanierGlobal_DTO pg in panierGlobals)
                     {
-                        if (pg.getSemaine == week)
+                        if (pg.Semaine == week)
                         {
-                            PanierGlobal = pg;
+                            IdPanierGlobal = pg.Id;
                             panierFound = true;
+                            break;
                         }
                     }
                     if (!panierFound)
                     {
                         PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
-                        PanierGlobal_DAL pGID = dppG.insert(panierGlobal);
-                        PanierGlobal = pGID;
+                        PanierGlobal_DAL insertedPG = dppG.insert(panierGlobal);
+                        IdPanierGlobal = insertedPG.getID;
                     }
 
                     int adhID = 0;
-                    List<PanierAdherent_DAL> panierAdherents = dppA.getAll();
-                    if (adhStr != AdhSelected.getSocieteAdherent || AdhSelected.getSocieteAdherent == "")
+                    var panierAdherents = await clientApi.Getall3Async();
+
+                    var AdhSelected = ((cbAdh as ComboBox).SelectedItem as Adherent_DTO);
+
+                    if (adhStr != AdhSelected.SocieteAdherent || AdhSelected.SocieteAdherent == "")
                     {
-                        List<Adherent_DAL> adhs = dpadh.getAll();
-                        foreach (Adherent_DAL item in adhs)
+                        var adhs = await clientApi.GetallAsync();
+                        foreach (Adherent_DTO item in adhs)
                         {
-                            if (item.getSocieteAdherent == adhStr)
+                            if (item.SocieteAdherent == adhStr)
                             {
-                                adhID = item.getIdAdherent;
+                                adhID = item.IdAdherent;
                                 AdhSelected = item;
                                 break;
                             }
                         }
                         bool foundPanierAdh = false;
-                        foreach (PanierAdherent_DAL padhd in panierAdherents)
+                        foreach (PanierAdherent_DTO padhd in panierAdherents)
                         {
-                            if (padhd.getId_adherent == adhID)
+                            if (padhd.Id_adherent == adhID)
                             {
-                                PanierAdherent = padhd;
                                 foundPanierAdh = true;
+                                IdPanierAdherent = padhd.Id;
                                 break;
                             }
                         }
                         if (!foundPanierAdh)
                         {
-                            PanierAdherent = new PanierAdherent_DAL(0, week, adhID, PanierGlobal.getID);
-                            dppA.insert(PanierAdherent);
+                            PanierAdherent_DAL PanierAdherent = new PanierAdherent_DAL(0, week, adhID, IdPanierGlobal);
+                            PanierAdherent_DAL panier = dppA.insert(PanierAdherent);
+                            IdPanierGlobal = panier.getID;
                         }
                     }
                     else
                     {
-                        adhID = AdhSelected.getIdAdherent;
+                        adhID = AdhSelected.IdAdherent;
                     }
 
                     using (var rd = new StreamReader(filePath))
@@ -168,20 +174,20 @@ namespace PushDansMaster.WPF.Pages
                         }
                     }
 
-                    List<Reference_DAL> reference_DALs = dpref.getAll();
-                    if (reference_DALs.Count == 0)
+                    var reference_DTOs = await clientApi.Getall5Async();
+                    if (reference_DTOs.Count == 0)
                     {
                         MessageBox.Show("Aucune référence dans la BDD", "Erreur référence");
                     }
                     else
                     {
                         bool exit = false;
-                        foreach (Reference_DAL reff in reference_DALs)
+                        foreach (Reference_DTO reff in reference_DTOs)
                         {
                             foreach (String refStr in references)
                             {
                                 int i = 0;
-                                if (refStr != reff.getReference)
+                                if (refStr != reff.Reference)
                                 {
                                     // Message d'erreur
                                     MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur référence");
@@ -190,9 +196,9 @@ namespace PushDansMaster.WPF.Pages
                                 }
                                 else
                                 {
-                                    int refID = reff.getID;
-                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(PanierAdherent.getID, refID, quantites[i]);
-                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(PanierGlobal.getID, quantites[i], reff.getReference, refID);
+                                    int refID = reff.ID;
+                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(IdPanierAdherent, refID, quantites[i]);
+                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(IdPanierGlobal, quantites[i], reff.Reference, refID);
                                     dpla.insert(lignesAdherent);
                                     dplg.insert(lignesGlobal);
                                 }
