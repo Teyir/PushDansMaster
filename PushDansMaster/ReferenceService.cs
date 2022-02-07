@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PushDansMaster
 {
-    public class ReferenceService
+    public class ReferenceService : IReferenceService
     {
 
         private ReferenceDepot_DAL depot = new ReferenceDepot_DAL();
