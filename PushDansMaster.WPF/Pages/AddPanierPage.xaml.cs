@@ -174,7 +174,7 @@ namespace PushDansMaster.WPF.Pages
                         }
                     }
 
-                    var reference_DTOs = await clientApi.Getall5Async();
+                    /*var reference_DTOs = await clientApi.Getall5Async();
                     if (reference_DTOs.Count == 0)
                     {
                         MessageBox.Show("Aucune référence dans la BDD", "Erreur référence");
@@ -221,7 +221,7 @@ namespace PushDansMaster.WPF.Pages
                                 });
                             }
                         }
-                    }
+                    }*/
                 }
                 else
                 {
