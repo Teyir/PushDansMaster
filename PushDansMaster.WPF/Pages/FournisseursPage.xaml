@@ -20,7 +20,7 @@
             <Label Content="Fournisseurs" Foreground="Black" FontSize="50" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
 
             <Border CornerRadius="5">
-                <DataGrid  HorizontalAlignment="Center" VerticalAlignment="Center" Name="Liste" Foreground="Blue" Padding="30" Width="750" Height="300">
+                <DataGrid HorizontalAlignment="Center" VerticalAlignment="Center" Name="Liste" Foreground="Blue" Padding="30" Width="750" Height="300">
                 </DataGrid>
             </Border>
 
