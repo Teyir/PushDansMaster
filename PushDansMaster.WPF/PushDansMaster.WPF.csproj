@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Pages\AddRefPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="Pages\InsertAdherentPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>

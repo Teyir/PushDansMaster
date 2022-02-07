@@ -127,40 +127,33 @@ namespace PushDansMaster.WPF.Pages
 
                     var AdhSelected = ((cbAdh as ComboBox).SelectedItem as Adherent_DTO);
 
-                    if (adhStr != AdhSelected.SocieteAdherent || AdhSelected.SocieteAdherent == "")
+                    var adhs = await clientApi.GetallAsync();
+                    foreach (Adherent_DTO item in adhs)
                     {
-                        var adhs = await clientApi.GetallAsync();
-                        foreach (Adherent_DTO item in adhs)
+                        if (item.SocieteAdherent == adhStr)
                         {
-                            if (item.SocieteAdherent == adhStr)
-                            {
-                                adhID = item.IdAdherent;
-                                AdhSelected = item;
-                                break;
-                            }
-                        }
-                        bool foundPanierAdh = false;
-                        foreach (PanierAdherent_DTO padhd in panierAdherents)
-                        {
-                            if (padhd.Id_adherent == adhID)
-                            {
-                                foundPanierAdh = true;
-                                IdPanierAdherent = padhd.Id;
-                                break;
-                            }
-                        }
-                        if (!foundPanierAdh)
-                        {
-                            PanierAdherent_DAL PanierAdherent = new PanierAdherent_DAL(0, week, adhID, IdPanierGlobal);
-                            PanierAdherent_DAL panier = dppA.insert(PanierAdherent);
-                            IdPanierGlobal = panier.getID;
+                            adhID = item.IdAdherent;
+                            AdhSelected = item;
+                            break;
                         }
                     }
-                    else
+                    bool foundPanierAdh = false;
+                    foreach (PanierAdherent_DTO padhd in panierAdherents)
                     {
-                        adhID = AdhSelected.IdAdherent;
+                        if (padhd.Id_adherent == adhID)
+                        {
+                            foundPanierAdh = true;
+                            IdPanierAdherent = padhd.Id;
+                            break;
+                        }
                     }
-
+                    if (!foundPanierAdh)
+                    {
+                        PanierAdherent_DAL PanierAdherent = new PanierAdherent_DAL(0, week, adhID, IdPanierGlobal);
+                        PanierAdherent_DAL panier = dppA.insert(PanierAdherent);
+                        IdPanierGlobal = panier.getID;
+                    }
+                        
                     using (var rd = new StreamReader(filePath))
                     {
                         while (!rd.EndOfStream)
@@ -174,7 +167,7 @@ namespace PushDansMaster.WPF.Pages
                         }
                     }
 
-                    /*var reference_DTOs = await clientApi.Getall5Async();
+                    var reference_DTOs = await clientApi.Getall5Async();
                     if (reference_DTOs.Count == 0)
                     {
                         MessageBox.Show("Aucune référence dans la BDD", "Erreur référence");
@@ -196,7 +189,7 @@ namespace PushDansMaster.WPF.Pages
                                 }
                                 else
                                 {
-                                    int refID = reff.ID;
+                                    int refID = reff.Id;
                                     LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(IdPanierAdherent, refID, quantites[i]);
                                     LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(IdPanierGlobal, quantites[i], reff.Reference, refID);
                                     dpla.insert(lignesAdherent);
@@ -221,7 +214,7 @@ namespace PushDansMaster.WPF.Pages
                                 });
                             }
                         }
-                    }*/
+                    }
                 }
                 else
                 {
