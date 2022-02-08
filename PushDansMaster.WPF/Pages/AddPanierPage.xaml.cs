@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using PushDansMaster.DAL;
 using PushDansMaster.WPF.Pages.CustomControl;
 using System;
 using System.Collections.Generic;
@@ -93,10 +92,10 @@ namespace PushDansMaster.WPF.Pages
                     var quantites = new List<int>();
                     var dt = DateTime.Now;
 
-                    var dppG = new PanierGlobalDepot_DAL();
-                    var dppA = new PanierAdherentDepot_DAL();
-                    var dpla = new LignesAdherentDepot_DAL();
-                    var dplg = new LignesGlobalDepot_DAL();
+                    var pG = new PanierGlobal_DTO();
+                    var pA = new PanierAdherent_DTO();
+                    var la = new LigneAdherent_DTO();
+                    var lg = new LigneGlobal_DTO();
 
                     CultureInfo cultureInfo = new CultureInfo("fr-EU");
                     System.Globalization.Calendar calendar = cultureInfo.Calendar;
@@ -116,11 +115,15 @@ namespace PushDansMaster.WPF.Pages
                         }
                     }
                     if (!panierFound)
-                    {
-                        PanierGlobal_DAL panierGlobal = new PanierGlobal_DAL(0, week);
-                        PanierGlobal_DAL insertedPG = dppG.insert(panierGlobal);
-                        IdPanierGlobal = insertedPG.getID;
+                    {                 
+                        pG.Status = 0;
+                        pG.Semaine = week;
+                        await clientApi.Insert6Async(pG);                     
                     }
+
+
+
+
 
                     int adhID = 0;
                     var panierAdherents = await clientApi.Getall3Async();
@@ -149,9 +152,21 @@ namespace PushDansMaster.WPF.Pages
                     }
                     if (!foundPanierAdh)
                     {
-                        PanierAdherent_DAL PanierAdherent = new PanierAdherent_DAL(0, week, adhID, IdPanierGlobal);
-                        PanierAdherent_DAL panier = dppA.insert(PanierAdherent);
-                        IdPanierGlobal = panier.getID;
+                        var listPanierglob = await clientApi.Getall4Async();
+                        var IDtmp = 0;
+                        foreach (var item in listPanierglob)
+                        {
+                            if (item.Semaine == week)
+                            {
+                                IDtmp = item.Id;
+                                break;
+                            }
+                        }
+                        pA.Semaine = week;
+                        pA.Status = 0;
+                        pA.Id_panierGlobal = IDtmp;                     
+                        pA.Id_adherent = AdhSelected.IdAdherent ;
+                        await clientApi.Insert5Async(pA);
                     }
                         
                     using (var rd = new StreamReader(filePath))
@@ -179,23 +194,32 @@ namespace PushDansMaster.WPF.Pages
                         foreach (Reference_DTO reff in reference_DTOs)
                         {
                             foreach (String refStr in references)
-                            {
-                               
+                            {                              
                                 if (refStr == reff.Reference && v < quantites.Count() )
                                 {
-                                    
                                     int refID = reff.Id;
-                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(quantites[v] , refID, IdPanierAdherent);
-                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(IdPanierGlobal, quantites[v], reff.Reference, refID);
-                                    dpla.insert(lignesAdherent);
-                                    dplg.insert(lignesGlobal);
+                                    var idpatmp= 0;
+                                    foreach (var item in panierAdherents)
+                                    {
+                                        if (item.Id_adherent == AdhSelected.IdAdherent)
+                                        {
+                                            idpatmp =  item.Id;
+                                        }
+                                    }                                  
+                                    la.Quantite = quantites[v];
+                                    la.Id_reference = refID;
+                                    la.Id_panier = idpatmp;                                   
+                                    lg.Id_panier = IdPanierGlobal;
+                                    lg.Quantite = quantites[v];
+                                    lg.Reference = reff.Reference;
+                                    lg.Id_reference = refID;
+                                    await clientApi.Insert3Async(la);
+                                    await clientApi.Insert4Async(lg);                                                                                                                                                       
                                     v++;
                                     break;
-                                }       
-                                                 
+                                }                                                   
                             }                           
-                        }
-                       
+                        }                    
                             for (int i = 0; i < files.Length; i++)
                             {
                                 string filename = System.IO.Path.GetFileName(files[i]);
@@ -207,8 +231,7 @@ namespace PushDansMaster.WPF.Pages
                                     FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
                                     UploadProgress = 100
                                 });
-                            }
-                        
+                            }                     
                     }
                 }
                 else
