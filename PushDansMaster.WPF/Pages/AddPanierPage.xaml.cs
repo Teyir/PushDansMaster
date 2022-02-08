@@ -195,7 +195,7 @@ namespace PushDansMaster.WPF.Pages
                         {
                             foreach (String refStr in references)
                             {                              
-                                if (refStr == reff.Reference && v < quantites.Count() )
+                                if (refStr == reff.Reference && v < quantites.Count )
                                 {
                                     int refID = reff.Id;
                                     var idpatmp= 0;

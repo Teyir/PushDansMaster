@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using PushDansMaster.DAL;
 using PushDansMaster.WPF.Pages.CustomControl;
 using System;
 using System.Collections.Generic;
@@ -72,7 +71,7 @@ namespace PushDansMaster.WPF.Pages
                         refDTO.Libelle = libelle[i];
                         refDTO.Marque = marque[i];
                         refDTO.Quantite = 9999999;
-                        await clientApi.Insert5Async(refDTO);
+                        await clientApi.Insert7Async(refDTO);
                         i++;
                     }
                     for (int j = 0; j < files.Length; j++)
