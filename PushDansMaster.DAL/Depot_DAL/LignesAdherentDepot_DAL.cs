@@ -68,7 +68,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getIdReference));
             command.Parameters.Add(new SqlParameter("@id_panier", ligne.getIdPanier));
 
-            int ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             ligne.ID = ID;
 
@@ -103,7 +103,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * from lignes_adherent where id = @ID";
+            command.CommandText = "DELETE from lignes_adherent where id = @ID";
             command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
             int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
@@ -119,7 +119,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * FROM lignes_adherent WHERE id=@ID";
+            command.CommandText = "DELETE FROM lignes_adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
             int linesAffected = command.ExecuteNonQuery();

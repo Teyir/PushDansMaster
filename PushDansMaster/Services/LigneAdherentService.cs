@@ -8,7 +8,7 @@ namespace PushDansMaster
 
         public LignesAdherent insert(LignesAdherent f)
         {
-            LignesAdherent_DAL line = new LignesAdherent_DAL(f.getID, f.getID_panier, f.getID_reference, f.getQuantite);
+            LignesAdherent_DAL line = new LignesAdherent_DAL(f.getID, f.getQuantite , f.getID_reference, f.getID_panier);
             depot.insert(line);
 
             return f;

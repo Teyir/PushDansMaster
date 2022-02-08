@@ -107,7 +107,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * from reference WHERE id=@ID";
+            command.CommandText = "DELETE from reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", item.getID));
             int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
@@ -123,7 +123,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * FROM reference WHERE id=@ID";
+            command.CommandText = "DELETE FROM reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
             int linesAffected = command.ExecuteNonQuery();

@@ -107,7 +107,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * FROM panier_adherent where id=@ID";
+            command.CommandText = "DELETE FROM panier_adherent where id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", panier.getID));
             int nombreDeLignesAffectees = command.ExecuteNonQuery();
 

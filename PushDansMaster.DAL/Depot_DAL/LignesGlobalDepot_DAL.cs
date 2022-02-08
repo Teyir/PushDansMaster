@@ -107,7 +107,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * from lignes_global WHERE id=@ID";
+            command.CommandText = "DELETE from lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
             int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
@@ -123,7 +123,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * FROM lignes_global WHERE id=@ID";
+            command.CommandText = "DELETE FROM lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
             int linesAffected = command.ExecuteNonQuery();
