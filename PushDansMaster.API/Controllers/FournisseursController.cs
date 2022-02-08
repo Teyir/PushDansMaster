@@ -1,12 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using PushDansMaster.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PushDansMaster.API;
 
 namespace PushDansMaster.API.Controllers
 {
@@ -91,7 +86,7 @@ namespace PushDansMaster.API.Controllers
         [HttpDelete("delete/{id}")]
         public void Delete(int id)
         {
-            service.deleteByID(id);            
+            service.deleteByID(id);
         }
     }
 }

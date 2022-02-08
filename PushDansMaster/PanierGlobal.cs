@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PushDansMaster
+﻿namespace PushDansMaster
 {
     public class PanierGlobal
     {
@@ -45,7 +39,7 @@ namespace PushDansMaster
         }
 
         public PanierGlobal(int id, int status, int semaine)
-            :this(status, semaine)
+            : this(status, semaine)
         {
             this.ID = id;
         }

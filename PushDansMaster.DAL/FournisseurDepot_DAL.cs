@@ -7,7 +7,7 @@ namespace PushDansMaster.DAL
     public class FournisseurDepot_DAL : Depot_DAL<Fournisseur_DAL>
     {
         public FournisseurDepot_DAL()
-            :base()
+            : base()
         {
 
         }
@@ -66,7 +66,7 @@ namespace PushDansMaster.DAL
             else
                 throw new Exception($"Pas de fournisseur avec l'ID {ID}");
 
-             closeConnection();
+            closeConnection();
 
             return f;
         }
@@ -102,9 +102,9 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse, status=@status"                     
+            command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse, status=@status"
 
-                                    +  " WHERE id=@ID";
+                                    + " WHERE id=@ID";
 
             command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
             command.Parameters.Add(new SqlParameter("@societe", fournisseur.getSocieteFournisseur));
@@ -118,7 +118,7 @@ namespace PushDansMaster.DAL
 
             var linesAffected = (int)command.ExecuteNonQuery();
 
-            if(linesAffected != 1)
+            if (linesAffected != 1)
             {
                 throw new Exception($"Impossible de mettre à jour le fournisseur {fournisseur.getIdFournisseur}");
             }

@@ -55,7 +55,7 @@
         }
 
         LignesGlobal(int id, int id_panier, int quantite, string reference, int id_reference)
-            :this(id_panier, quantite, reference, id_reference)
+            : this(id_panier, quantite, reference, id_reference)
         {
             this.ID = id;
         }

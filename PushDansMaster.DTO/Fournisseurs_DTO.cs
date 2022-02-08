@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PushDansMaster.DTO
+﻿namespace PushDansMaster.DTO
 {
     public class Fournisseurs_DTO
     {

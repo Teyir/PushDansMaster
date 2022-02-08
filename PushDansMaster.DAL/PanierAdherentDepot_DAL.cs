@@ -17,7 +17,7 @@ namespace PushDansMaster.DAL
 
             while (reader.Read())
             {
-                var p = new PanierAdherent_DAL(reader.GetInt32(0), 
+                var p = new PanierAdherent_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),
@@ -44,7 +44,7 @@ namespace PushDansMaster.DAL
             PanierAdherent_DAL p;
             if (reader.Read())
             {
-                p = new PanierAdherent_DAL(reader.GetInt32(0), 
+                p = new PanierAdherent_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),

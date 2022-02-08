@@ -6,7 +6,7 @@ namespace PushDansMaster.DAL
 {
     public class ReferenceDepot_DAL : Depot_DAL<Reference_DAL>
     {
-        
+
         public override List<Reference_DAL> getAll()
         {
             createConnection();
@@ -20,7 +20,7 @@ namespace PushDansMaster.DAL
                 var r = new Reference_DAL(reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
-                                        reader.GetString(3), 
+                                        reader.GetString(3),
                                         reader.GetInt32(4));
 
                 references.Add(r);

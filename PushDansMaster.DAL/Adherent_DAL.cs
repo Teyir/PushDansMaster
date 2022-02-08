@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
-{ 
+{
     public class Adherent_DAL
     {
 
@@ -66,7 +66,7 @@ namespace PushDansMaster.DAL
         => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (societe, email, nom, prenom, adresse, dateAdhesion, status);
 
-        public Adherent_DAL(int id,string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
+        public Adherent_DAL(int id, string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
         => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
         = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
 
@@ -78,9 +78,9 @@ namespace PushDansMaster.DAL
         {
             using (var command = new SqlCommand())
             {
-            command.Connection = connection;
-                    command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
-                            + " VALUES (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
+                command.Connection = connection;
+                command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status"
+                        + " VALUES (@societe, @email, @nom, @prenom, @adresse, @date_adhesion, @status)";
                 command.Parameters.Add(new SqlParameter("@societe", societeAdherent));
                 command.Parameters.Add(new SqlParameter("@email", emailAdherent));
                 command.Parameters.Add(new SqlParameter("@nom", nomAdherent));

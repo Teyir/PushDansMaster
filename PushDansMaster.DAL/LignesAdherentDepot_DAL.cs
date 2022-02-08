@@ -17,7 +17,7 @@ namespace PushDansMaster.DAL
 
             while (reader.Read())
             {
-                var l = new LignesAdherent_DAL(reader.GetInt32(0), 
+                var l = new LignesAdherent_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3));

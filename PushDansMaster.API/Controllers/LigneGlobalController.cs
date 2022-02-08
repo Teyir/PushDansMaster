@@ -1,12 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using PushDansMaster.DTO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PushDansMaster.API;
 
 namespace PushDansMaster.API.Controllers
 {
@@ -15,7 +8,7 @@ namespace PushDansMaster.API.Controllers
     public class LigneGlobalController : ControllerBase
     {
         private ILigneGlobalService service;
-        
+
         public LigneGlobalController(ILigneGlobalService srv)
         {
             service = srv;

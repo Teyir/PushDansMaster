@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using PushDansMaster.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PushDansMaster.API;
 
 namespace PushDansMaster.API.Controllers
 {
@@ -15,7 +11,7 @@ namespace PushDansMaster.API.Controllers
     public class AdherentController : ControllerBase
     {
         private IAdherentService service;
-        
+
         public AdherentController(IAdherentService srv)
         {
             service = srv;

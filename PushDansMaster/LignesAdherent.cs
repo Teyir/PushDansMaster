@@ -34,7 +34,7 @@
         #endregion
 
         #region Constructeurs
-        public LignesAdherent(int idP, int idR,  int qts)
+        public LignesAdherent(int idP, int idR, int qts)
         {
             this.id_panier = idP;
             this.id_reference = idR;
@@ -42,7 +42,7 @@
         }
 
         public LignesAdherent(int id, int idP, int idR, int qts)
-            :this(idP, idR, qts)
+            : this(idP, idR, qts)
         {
             this.ID = id;
         }
