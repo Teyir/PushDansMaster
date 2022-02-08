@@ -59,7 +59,7 @@ namespace PushDansMaster.WPF
 
         private void rdReference_Click(object sender, RoutedEventArgs e)
         {
-            PagesNavigation.Navigate(new System.Uri("Pages/AddReferencePage.xaml", UriKind.RelativeOrAbsolute));
+            PagesNavigation.Navigate(new System.Uri("Pages/AddRefPage.xaml", UriKind.RelativeOrAbsolute));
         }
         private void rdAdherent_Click(object sender, RoutedEventArgs e)
         {

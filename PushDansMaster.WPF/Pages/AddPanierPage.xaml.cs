@@ -174,33 +174,28 @@ namespace PushDansMaster.WPF.Pages
                     }
                     else
                     {
-                        bool exit = false;
+                        int v = 0;
+                       
                         foreach (Reference_DTO reff in reference_DTOs)
                         {
                             foreach (String refStr in references)
                             {
-                                int i = 0;
-                                if (refStr != reff.Reference)
+                               
+                                if (refStr == reff.Reference && v < quantites.Count() )
                                 {
-                                    // Message d'erreur
-                                    MessageBox.Show("Référence : " + refStr + " pas présente dans la BDD, veuillez réessayer", "Erreur référence");
-                                    exit = true;
-                                    break;
-                                }
-                                else
-                                {
+                                    
                                     int refID = reff.Id;
-                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(IdPanierAdherent, refID, quantites[i]);
-                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(IdPanierGlobal, quantites[i], reff.Reference, refID);
+                                    LignesAdherent_DAL lignesAdherent = new LignesAdherent_DAL(quantites[v] , refID, IdPanierAdherent);
+                                    LignesGlobal_DAL lignesGlobal = new LignesGlobal_DAL(IdPanierGlobal, quantites[v], reff.Reference, refID);
                                     dpla.insert(lignesAdherent);
                                     dplg.insert(lignesGlobal);
-                                }
-                                i++;
-                            }
-                            if (exit == true) { break; }
+                                    v++;
+                                    break;
+                                }       
+                                                 
+                            }                           
                         }
-
-                        if (!exit) { 
+                       
                             for (int i = 0; i < files.Length; i++)
                             {
                                 string filename = System.IO.Path.GetFileName(files[i]);
@@ -213,7 +208,7 @@ namespace PushDansMaster.WPF.Pages
                                     UploadProgress = 100
                                 });
                             }
-                        }
+                        
                     }
                 }
                 else

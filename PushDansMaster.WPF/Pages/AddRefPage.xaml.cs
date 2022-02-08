@@ -72,8 +72,20 @@ namespace PushDansMaster.WPF.Pages
                         refDTO.Libelle = libelle[i];
                         refDTO.Marque = marque[i];
                         refDTO.Quantite = 9999999;
-                        //await clientApi.Insert5Async(refDTO);
+                        await clientApi.Insert5Async(refDTO);
                         i++;
+                    }
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        string filename = System.IO.Path.GetFileName(files[j]);
+                        FileInfo fileInfo = new FileInfo(files[j]);
+                        UploadingFilesList.Items.Add(new fileDetail()
+                        {
+                            FileName = filename,
+                            // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
+                            FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
+                            UploadProgress = 100
+                        });
                     }
                 }
             }

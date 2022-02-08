@@ -7,8 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddPanierPage"
-      FontSize="15"
-      Loaded="OnPageLoad">
+      FontSize="15">
 
     <Grid Width="700">
         <Grid.RowDefinitions>
@@ -21,7 +20,7 @@
             FontWeight="SemiBold"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Text="Entrer un panier"/>
+            Text="Entrer une reference"/>
 
         <Separator
             VerticalAlignment="Bottom"/>
@@ -34,7 +33,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel VerticalAlignment="Center">
-                <ComboBox Name="cbAdh" Width="300" ItemsSource="{Binding adh}" SelectedItem="{Binding selectedAdh}"/>
+                
                 <Grid>
                     <Rectangle
                     Margin="0,20,0,0"
