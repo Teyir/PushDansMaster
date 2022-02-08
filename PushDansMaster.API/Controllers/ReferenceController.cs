@@ -1,12 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using PushDansMaster.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PushDansMaster.API;
 
 namespace PushDansMaster.API.Controllers
 {
@@ -15,7 +10,7 @@ namespace PushDansMaster.API.Controllers
     public class ReferenceController : ControllerBase
     {
         private IReferenceService service;
-        
+
         public ReferenceController(IReferenceService srv)
         {
             service = srv;
@@ -32,7 +27,7 @@ namespace PushDansMaster.API.Controllers
                 reference = f.getReference,
                 marque = f.getMarque,
                 quantite = f.getQuantite
-     
+
             });
         }
 

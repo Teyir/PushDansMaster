@@ -8,7 +8,7 @@ namespace PushDansMaster.DAL
     {
         public override List<PanierGlobal_DAL> getAll()
         {
-            createConnection(); 
+            createConnection();
 
             command.CommandText = "SELECT id, status, semaine FROM panier_global";
             var reader = command.ExecuteReader();

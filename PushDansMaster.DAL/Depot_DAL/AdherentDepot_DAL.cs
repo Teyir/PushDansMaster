@@ -14,7 +14,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "SELECT id, societe, email, nom, prenom, adresse, date_adhesion, status FROM adherent";
             var reader = command.ExecuteReader();
 
-            var listeAdherent = new List<Adherent_DAL>();      
+            var listeAdherent = new List<Adherent_DAL>();
             while (reader.Read())
             {
                 var tmp = new Adherent_DAL(reader.GetInt32(0),
