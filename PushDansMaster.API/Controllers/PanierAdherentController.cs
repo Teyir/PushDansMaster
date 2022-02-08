@@ -9,7 +9,7 @@ namespace PushDansMaster.API.Controllers
     [Route("api/[controller]")]
     public class PanierAdherentController : ControllerBase
     {
-        private IPanierAdherentService service;
+        private readonly IPanierAdherentService service;
 
         public PanierAdherentController(IPanierAdherentService srv)
         {
@@ -34,7 +34,7 @@ namespace PushDansMaster.API.Controllers
         [HttpGet("get/{id}")]
         public ActionResult<PanierAdherent_DTO> GetPanierAdherents(int id)
         {
-            var f = service.getByID(id);
+            PanierAdherent f = service.getByID(id);
 
             if (f == null)
             {
@@ -58,7 +58,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<PanierAdherent_DTO> Insert(PanierAdherent_DTO f)
         {
-            var f_work = service.insert(new PanierAdherent(f.status, f.semaine, f.id_adherent, f.id_panierGlobal));
+            PanierAdherent f_work = service.insert(new PanierAdherent(f.status, f.semaine, f.id_adherent, f.id_panierGlobal));
             //Je récupère l'id panierAdherent
             f.ID = f_work.getID;
             //je renvoie l'objet DTO

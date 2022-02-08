@@ -3,7 +3,7 @@
 namespace PushDansMaster.DAL
 {
     //Interface with getter / setters
-    interface IDepot_DAL<Type_DAL>
+    internal interface IDepot_DAL<Type_DAL>
     {
         public string connectionString { get; set; }
 

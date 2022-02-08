@@ -6,11 +6,11 @@ namespace PushDansMaster
 {
     public class PanierGlobalService : IPanierGlobalService
     {
-        private PanierGlobalDepot_DAL depot = new PanierGlobalDepot_DAL();
+        private readonly PanierGlobalDepot_DAL depot = new PanierGlobalDepot_DAL();
 
         public List<PanierGlobal> getAll()
         {
-            var panier = depot.getAll()
+            List<PanierGlobal> panier = depot.getAll()
                 .Select(f => new PanierGlobal(f.getID, f.getStatus, f.getSemaine))
 
                 .ToList();
@@ -19,7 +19,7 @@ namespace PushDansMaster
 
         public PanierGlobal getByID(int ID)
         {
-            var f = depot.getByID(ID);
+            PanierGlobal_DAL f = depot.getByID(ID);
 
 
             return new PanierGlobal(f.getID, f.getStatus, f.getSemaine);
@@ -28,7 +28,7 @@ namespace PushDansMaster
 
         public PanierGlobal insert(PanierGlobal f)
         {
-            var panier = new PanierGlobal_DAL(f.getID, f.getStatus, f.getSemaine);
+            PanierGlobal_DAL panier = new PanierGlobal_DAL(f.getID, f.getStatus, f.getSemaine);
             depot.insert(panier);
 
 

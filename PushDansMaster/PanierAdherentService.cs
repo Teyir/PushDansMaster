@@ -6,11 +6,11 @@ namespace PushDansMaster
 {
     public class PanierAdherentService : IPanierAdherentService
     {
-        private PanierAdherentDepot_DAL depot = new PanierAdherentDepot_DAL();
+        private readonly PanierAdherentDepot_DAL depot = new PanierAdherentDepot_DAL();
 
         public List<PanierAdherent> getAll()
         {
-            var panier = depot.getAll()
+            List<PanierAdherent> panier = depot.getAll()
                 .Select(f => new PanierAdherent(f.getID, f.getStatus, f.getSemaine, f.getId_adherent, f.getId_panierGlobal))
 
                 .ToList();
@@ -19,7 +19,7 @@ namespace PushDansMaster
 
         public PanierAdherent getByID(int ID)
         {
-            var f = depot.getByID(ID);
+            PanierAdherent_DAL f = depot.getByID(ID);
 
 
             return new PanierAdherent(f.getID, f.getStatus, f.getSemaine, f.getId_adherent, f.getId_panierGlobal);
@@ -28,7 +28,7 @@ namespace PushDansMaster
 
         public PanierAdherent insert(PanierAdherent f)
         {
-            var panier = new PanierAdherent_DAL(f.getID, f.getStatus, f.getSemaine, f.getID_adherent, f.getID_panierGlobal);
+            PanierAdherent_DAL panier = new PanierAdherent_DAL(f.getID, f.getStatus, f.getSemaine, f.getID_adherent, f.getID_panierGlobal);
             depot.insert(panier);
 
 

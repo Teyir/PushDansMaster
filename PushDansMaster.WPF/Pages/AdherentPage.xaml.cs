@@ -15,22 +15,22 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var adherent = await clientApi.GetallAsync();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
 
         private async void OnPageLoad(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var adherent = await clientApi.GetallAsync();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
 
         private async void Click_Btn_Actualiser(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var adherent = await clientApi.GetallAsync();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
 
             Liste.ItemsSource = null;
             Liste.ItemsSource = adherent;
@@ -39,18 +39,20 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Click_Btn_Go_Delete_Adherent(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var adh = ((Liste as DataGrid).SelectedItem as Adherent_DTO);
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Adherent_DTO adh = (Liste.SelectedItem as Adherent_DTO);
 
             if (adh is null)
+            {
                 MessageBox.Show("Selectionner un adhérent");
+            }
             else
             {
                 if (MessageBox.Show("êtes vous sur de vouloir supprimer l'adhérents " + adh.NomAdherent + " " + adh.PrenomAdherent + "?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     await clientApi.DeleteAsync(adh.IdAdherent);
 
-                    var adherents = await clientApi.GetallAsync();
+                    System.Collections.Generic.ICollection<Adherent_DTO> adherents = await clientApi.GetallAsync();
                     Liste.ItemsSource = null;
                     Liste.ItemsSource = adherents;
                 }

@@ -11,13 +11,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT prix, id_fournisseur, id_lignesglobal FROM prix";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDePrix = new List<Prix_DAL>();
+            List<Prix_DAL> listeDePrix = new List<Prix_DAL>();
 
             while (reader.Read())
             {
-                var p = new Prix_DAL(reader.GetInt32(0),
+                Prix_DAL p = new Prix_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2));
 
@@ -35,9 +35,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT prix, id_fournisseur, id_lignesglobal FROM prix WHERE CONCAT(id_fournisseur, id_lignesglobal)=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDePoints = new List<Prix_DAL>();
+            List<Prix_DAL> listeDePoints = new List<Prix_DAL>();
 
             Prix_DAL p;
             if (reader.Read())
@@ -47,7 +47,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(2));
             }
             else
+            {
                 throw new Exception($"Pas de prix dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -83,7 +85,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@IDfournisseur", prix.getIDFournisseur));
             command.Parameters.Add(new SqlParameter("@IDlignesglo", prix.getIDLignesGlobal));
 
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
@@ -104,7 +106,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@IDfournisseur", prix.getIDFournisseur));
             command.Parameters.Add(new SqlParameter("@IDlignesglo", prix.getIDLignesGlobal));
 
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
@@ -122,7 +124,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE * FROM prix WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

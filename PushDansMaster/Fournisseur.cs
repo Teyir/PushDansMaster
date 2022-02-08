@@ -14,62 +14,62 @@
         #region Getters / Setters
         public int getIdFournisseur
         {
-            get { return idFournisseur; }
-            private set { idFournisseur = value; }
+            get => idFournisseur;
+            private set => idFournisseur = value;
         }
         public string getSocieteFournisseur
         {
-            get { return societeFournisseur; }
-            private set { societeFournisseur = value; }
+            get => societeFournisseur;
+            private set => societeFournisseur = value;
         }
         public bool getCiviliteFournisseur
         {
-            get { return civiliteFournisseur; }
-            private set { civiliteFournisseur = value; }
+            get => civiliteFournisseur;
+            private set => civiliteFournisseur = value;
         }
         public string getNomFournisseur
         {
-            get { return nomFournisseur; }
-            private set { nomFournisseur = value; }
+            get => nomFournisseur;
+            private set => nomFournisseur = value;
         }
         public string getPrenomFournisseur
         {
-            get { return prenomFournisseur; }
-            private set { prenomFournisseur = value; }
+            get => prenomFournisseur;
+            private set => prenomFournisseur = value;
         }
         public string getEmailFournisseur
         {
-            get { return emailFournisseur; }
-            private set { emailFournisseur = value; }
+            get => emailFournisseur;
+            private set => emailFournisseur = value;
         }
         public string getAdresseFournisseur
         {
-            get { return adresseFournisseur; }
-            private set { adresseFournisseur = value; }
+            get => adresseFournisseur;
+            private set => adresseFournisseur = value;
         }
 
         public int getStatusFournisseur
         {
-            get { return statusFournisseur; }
-            private set { statusFournisseur = value; }
+            get => statusFournisseur;
+            private set => statusFournisseur = value;
         }
         #endregion
 
         #region Constructeur
         public Fournisseur(string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
         {
-            this.societeFournisseur = societe;
-            this.civiliteFournisseur = civilite;
-            this.nomFournisseur = nom;
-            this.prenomFournisseur = prenom;
-            this.emailFournisseur = email;
-            this.adresseFournisseur = adresse;
-            this.statusFournisseur = status;
+            societeFournisseur = societe;
+            civiliteFournisseur = civilite;
+            nomFournisseur = nom;
+            prenomFournisseur = prenom;
+            emailFournisseur = email;
+            adresseFournisseur = adresse;
+            statusFournisseur = status;
         }
         public Fournisseur(int id, string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
             : this(societe, civilite, nom, prenom, email, adresse, status)
         {
-            this.idFournisseur = id;
+            idFournisseur = id;
         }
         #endregion
     }

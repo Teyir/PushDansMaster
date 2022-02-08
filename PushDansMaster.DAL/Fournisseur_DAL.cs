@@ -16,65 +16,69 @@ namespace PushDansMaster.DAL
         #region Getters / Setters
         public int getIdFournisseur
         {
-            get { return idFournisseur; }
-            private set { idFournisseur = value; }
+            get => idFournisseur;
+            private set => idFournisseur = value;
         }
 
         public bool getCiviliteFournisseur
         {
-            get { return civiliteFournisseur; }
-            private set { civiliteFournisseur = value; }
+            get => civiliteFournisseur;
+            private set => civiliteFournisseur = value;
         }
 
         public string getSocieteFournisseur
         {
-            get { return societeFournisseur; }
-            private set { societeFournisseur = value; }
+            get => societeFournisseur;
+            private set => societeFournisseur = value;
         }
         public string getNomFournisseur
         {
-            get { return nomFournisseur; }
-            private set { nomFournisseur = value; }
+            get => nomFournisseur;
+            private set => nomFournisseur = value;
         }
         public string getPrenomFournisseur
         {
-            get { return prenomFournisseur; }
-            private set { prenomFournisseur = value; }
+            get => prenomFournisseur;
+            private set => prenomFournisseur = value;
         }
         public string getEmailFournisseur
         {
-            get { return emailFournisseur; }
-            private set { emailFournisseur = value; }
+            get => emailFournisseur;
+            private set => emailFournisseur = value;
         }
 
         public string getAdresseFournisseur
         {
-            get { return adresseFournisseur; }
-            private set { adresseFournisseur = value; }
+            get => adresseFournisseur;
+            private set => adresseFournisseur = value;
         }
 
         public int getstatusFournisseur
         {
-            get { return statusFournisseur; }
-            private set { statusFournisseur = value; }
+            get => statusFournisseur;
+            private set => statusFournisseur = value;
         }
         #endregion
 
         #region Constructeur
         public Fournisseur_DAL(string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
-           => (societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
-           = (societe, civilite, nom, prenom, email, adresse, status);
+        {
+            (societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
+                      = (societe, civilite, nom, prenom, email, adresse, status);
+        }
 
         public Fournisseur_DAL(int id, string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
-            => (idFournisseur, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
-            = (id, societe, civilite, nom, prenom, email, adresse, status);
+        {
+            (idFournisseur, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
+                       = (id, societe, civilite, nom, prenom, email, adresse, status);
+        }
         #endregion
 
 
         #region Methodes
         internal void addFournisseur(SqlConnection connection)
         {
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse, status)"

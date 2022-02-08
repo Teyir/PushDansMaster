@@ -12,30 +12,33 @@ namespace PushDansMaster.DAL
         #region Getters / Setters
         public int getPrix
         {
-            get { return prix; }
-            private set { prix = value; }
+            get => prix;
+            private set => prix = value;
         }
         public int getIDFournisseur
         {
-            get { return idFournisseur; }
-            private set { idFournisseur = value; }
+            get => idFournisseur;
+            private set => idFournisseur = value;
         }
         public int getIDLignesGlobal
         {
-            get { return idLignesGlobal; }
-            private set { idLignesGlobal = value; }
+            get => idLignesGlobal;
+            private set => idLignesGlobal = value;
         }
         #endregion
 
         #region Constructeur
-        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal) => (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        public Prix_DAL(int Prix, int IdFournisseur, int IdLignesGlobal)
+        {
+            (prix, idFournisseur, idLignesGlobal) = (Prix, IdFournisseur, IdLignesGlobal);
+        }
         #endregion
 
         #region Methodes
         internal void insert(SqlConnection connection)
         {
             // On insert un point dans la BDD
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 // Définir la connexion à utiliser
                 command.Connection = connection;

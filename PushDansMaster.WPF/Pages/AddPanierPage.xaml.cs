@@ -32,12 +32,12 @@ namespace PushDansMaster.WPF.Pages
             DataContext = this;
 
             adh = new ObservableCollection<ComboBoxItem>();
-            var cbItem = new ComboBoxItem { Content = "<--Select-->" };
+            ComboBoxItem cbItem = new ComboBoxItem { Content = "<--Select-->" };
             selectedAdh = cbItem;
             adh.Add(cbItem);
 
-            var clientApi = new Client("https://localhost:44304", new HttpClient());
-            var listAdh = await clientApi.GetallAsync();
+            Client clientApi = new Client("https://localhost:44304", new HttpClient());
+            ICollection<Adherent_DTO> listAdh = await clientApi.GetallAsync();
 
             foreach (Adherent_DTO adhItem in listAdh)
             {
@@ -67,25 +67,25 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Processing(object sender, RoutedEventArgs e, string[] files)
         {
-            var clientApi = new Client("https://localhost:44304", new HttpClient());
+            Client clientApi = new Client("https://localhost:44304", new HttpClient());
 
             string fileExt = System.IO.Path.GetExtension(files[0]);
             string filePath = System.IO.Path.GetFullPath(files[0]);
             if (fileExt == ".csv")
             {
-                var comboBox = sender as ComboBox;
+                ComboBox comboBox = sender as ComboBox;
                 string adhStr = (string)(cbAdh.SelectedItem as ComboBoxItem).Content;
 
                 if (adhStr != "<--Select-->")
                 {
-                    var references = new List<string>();
-                    var quantites = new List<int>();
-                    var dt = DateTime.Now;
+                    List<string> references = new List<string>();
+                    List<int> quantites = new List<int>();
+                    DateTime dt = DateTime.Now;
 
-                    var pG = new PanierGlobal_DTO();
-                    var pA = new PanierAdherent_DTO();
-                    var la = new LigneAdherent_DTO();
-                    var lg = new LigneGlobal_DTO();
+                    PanierGlobal_DTO pG = new PanierGlobal_DTO();
+                    PanierAdherent_DTO pA = new PanierAdherent_DTO();
+                    LigneAdherent_DTO la = new LigneAdherent_DTO();
+                    LigneGlobal_DTO lg = new LigneGlobal_DTO();
 
                     CultureInfo cultureInfo = new CultureInfo("fr-EU");
                     System.Globalization.Calendar calendar = cultureInfo.Calendar;
@@ -93,7 +93,7 @@ namespace PushDansMaster.WPF.Pages
                     DayOfWeek myFirstDOW = cultureInfo.DateTimeFormat.FirstDayOfWeek;
                     int week = calendar.GetWeekOfYear(dt, myCWR, myFirstDOW) - 1;
 
-                    var panierGlobals = await clientApi.Getall4Async();
+                    ICollection<PanierGlobal_DTO> panierGlobals = await clientApi.Getall4Async();
                     bool panierFound = false;
                     foreach (PanierGlobal_DTO pg in panierGlobals)
                     {
@@ -116,11 +116,11 @@ namespace PushDansMaster.WPF.Pages
 
 
                     int adhID = 0;
-                    var panierAdherents = await clientApi.Getall3Async();
+                    ICollection<PanierAdherent_DTO> panierAdherents = await clientApi.Getall3Async();
 
-                    var AdhSelected = ((cbAdh as ComboBox).SelectedItem as Adherent_DTO);
+                    Adherent_DTO AdhSelected = (cbAdh.SelectedItem as Adherent_DTO);
 
-                    var adhs = await clientApi.GetallAsync();
+                    ICollection<Adherent_DTO> adhs = await clientApi.GetallAsync();
                     foreach (Adherent_DTO item in adhs)
                     {
                         if (item.SocieteAdherent == adhStr)
@@ -142,9 +142,9 @@ namespace PushDansMaster.WPF.Pages
                     }
                     if (!foundPanierAdh)
                     {
-                        var listPanierglob = await clientApi.Getall4Async();
-                        var IDtmp = 0;
-                        foreach (var item in listPanierglob)
+                        ICollection<PanierGlobal_DTO> listPanierglob = await clientApi.Getall4Async();
+                        int IDtmp = 0;
+                        foreach (PanierGlobal_DTO item in listPanierglob)
                         {
                             if (item.Semaine == week)
                             {
@@ -159,20 +159,20 @@ namespace PushDansMaster.WPF.Pages
                         await clientApi.Insert5Async(pA);
                     }
 
-                    using (var rd = new StreamReader(filePath))
+                    using (StreamReader rd = new StreamReader(filePath))
                     {
                         while (!rd.EndOfStream)
                         {
-                            var splits = rd.ReadLine().Split(';');
+                            string[] splits = rd.ReadLine().Split(';');
                             if (splits[0] != "reference")
                             {
                                 references.Add(splits[0]);
-                                quantites.Add(Int32.Parse(splits[1]));
+                                quantites.Add(int.Parse(splits[1]));
                             }
                         }
                     }
 
-                    var reference_DTOs = await clientApi.Getall5Async();
+                    ICollection<Reference_DTO> reference_DTOs = await clientApi.Getall5Async();
                     if (reference_DTOs.Count == 0)
                     {
                         MessageBox.Show("Aucune référence dans la BDD", "Erreur référence");
@@ -183,13 +183,13 @@ namespace PushDansMaster.WPF.Pages
 
                         foreach (Reference_DTO reff in reference_DTOs)
                         {
-                            foreach (String refStr in references)
+                            foreach (string refStr in references)
                             {
                                 if (refStr == reff.Reference && v < quantites.Count)
                                 {
                                     int refID = reff.Id;
-                                    var idpatmp = 0;
-                                    foreach (var item in panierAdherents)
+                                    int idpatmp = 0;
+                                    foreach (PanierAdherent_DTO item in panierAdherents)
                                     {
                                         if (item.Id_adherent == AdhSelected.IdAdherent)
                                         {

@@ -17,13 +17,13 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur";
 
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listFournisseur = new List<Fournisseur_DAL>();
+            List<Fournisseur_DAL> listFournisseur = new List<Fournisseur_DAL>();
 
             while (reader.Read())
             {
-                var f = new Fournisseur_DAL(reader.GetInt32(0),
+                Fournisseur_DAL f = new Fournisseur_DAL(reader.GetInt32(0),
                                                 reader.GetString(1),
                                                 reader.GetBoolean(2),
                                                 reader.GetString(3),
@@ -47,9 +47,9 @@ namespace PushDansMaster.DAL
             command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur WHERE id=@id";
 
             command.Parameters.Add(new SqlParameter("@id", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listFournisseur = new List<Fournisseur_DAL>();
+            List<Fournisseur_DAL> listFournisseur = new List<Fournisseur_DAL>();
 
             Fournisseur_DAL f;
             if (reader.Read())
@@ -64,7 +64,9 @@ namespace PushDansMaster.DAL
                                                 reader.GetInt32(7));
             }
             else
+            {
                 throw new Exception($"Pas de fournisseur avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -87,7 +89,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
             command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
 
-            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+            int ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             fournisseur.idFournisseur = ID;
 
@@ -116,7 +118,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
 
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {
@@ -138,7 +140,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE FROM fournisseur WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {
@@ -156,7 +158,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE FROM fournisseur WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

@@ -10,25 +10,25 @@
         #region Getters / Setters
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
         public int getID_panier
         {
-            get { return id_panier; }
-            private set { id_panier = value; }
+            get => id_panier;
+            private set => id_panier = value;
         }
 
         public int getID_reference
         {
-            get { return id_reference; }
-            private set { id_reference = value; }
+            get => id_reference;
+            private set => id_reference = value;
         }
 
         public int getQuantite
         {
-            get { return Quantite; }
-            private set { Quantite = value; }
+            get => Quantite;
+            private set => Quantite = value;
         }
 
         #endregion
@@ -36,15 +36,15 @@
         #region Constructeurs
         public LignesAdherent(int idP, int idR, int qts)
         {
-            this.id_panier = idP;
-            this.id_reference = idR;
-            this.Quantite = qts;
+            id_panier = idP;
+            id_reference = idR;
+            Quantite = qts;
         }
 
         public LignesAdherent(int id, int idP, int idR, int qts)
             : this(idP, idR, qts)
         {
-            this.ID = id;
+            ID = id;
         }
 
         public LignesAdherent()

@@ -13,20 +13,20 @@
         /// </summary>
         public int getStatus
         {
-            get { return status; }
-            private set { status = value; }
+            get => status;
+            private set => status = value;
         }
 
         public int getSemaine
         {
-            get { return semaine; }
-            private set { semaine = value; }
+            get => semaine;
+            private set => semaine = value;
         }
 
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
         #endregion
 
@@ -41,7 +41,7 @@
         public PanierGlobal(int id, int status, int semaine)
             : this(status, semaine)
         {
-            this.ID = id;
+            ID = id;
         }
 
         public PanierGlobal()

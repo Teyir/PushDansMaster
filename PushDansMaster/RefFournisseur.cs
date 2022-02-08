@@ -9,14 +9,14 @@
 
         public int getIDfournisseur
         {
-            get { return id_fournisseur; }
-            private set { id_fournisseur = value; }
+            get => id_fournisseur;
+            private set => id_fournisseur = value;
         }
 
         public int getIDreference
         {
-            get { return id_reference; }
-            private set { id_reference = value; }
+            get => id_reference;
+            private set => id_reference = value;
         }
 
         #endregion

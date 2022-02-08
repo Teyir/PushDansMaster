@@ -19,56 +19,60 @@ namespace PushDansMaster.DAL
 
         public int getIdAdherent
         {
-            get { return idAdherent; }
-            private set { idAdherent = value; }
+            get => idAdherent;
+            private set => idAdherent = value;
         }
 
         public string getSocieteAdherent
         {
-            get { return societeAdherent; }
-            private set { societeAdherent = value; }
+            get => societeAdherent;
+            private set => societeAdherent = value;
         }
         public string getEmailAdherent
         {
-            get { return emailAdherent; }
-            private set { emailAdherent = value; }
+            get => emailAdherent;
+            private set => emailAdherent = value;
         }
         public string getNomAdherent
         {
-            get { return nomAdherent; }
-            private set { nomAdherent = value; }
+            get => nomAdherent;
+            private set => nomAdherent = value;
         }
         public string getPrenomAdherent
         {
-            get { return prenomAdherent; }
-            private set { prenomAdherent = value; }
+            get => prenomAdherent;
+            private set => prenomAdherent = value;
         }
         public string getAdresseAdherent
         {
-            get { return adresseAdherent; }
-            private set { adresseAdherent = value; }
+            get => adresseAdherent;
+            private set => adresseAdherent = value;
         }
         public DateTime getDateAdhesionAdherent
         {
-            get { return dateAdhesionAdherent; }
-            private set { dateAdhesionAdherent = value; }
+            get => dateAdhesionAdherent;
+            private set => dateAdhesionAdherent = value;
         }
         public int getStatus
         {
-            get { return statusAdherent; }
-            private set { statusAdherent = value; }
+            get => statusAdherent;
+            private set => statusAdherent = value;
         }
 
         #endregion
 
         #region Constructeurs
         public Adherent_DAL(string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
-        => (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
-        = (societe, email, nom, prenom, adresse, dateAdhesion, status);
+        {
+            (societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+                   = (societe, email, nom, prenom, adresse, dateAdhesion, status);
+        }
 
         public Adherent_DAL(int id, string societe, string email, string nom, string prenom, string adresse, DateTime dateAdhesion, int status)
-        => (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
-        = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
+        {
+            (idAdherent, societeAdherent, emailAdherent, nomAdherent, prenomAdherent, adresseAdherent, dateAdhesionAdherent, statusAdherent)
+                   = (id, societe, email, nom, prenom, adresse, dateAdhesion, status);
+        }
 
         #endregion
 
@@ -76,7 +80,7 @@ namespace PushDansMaster.DAL
         #region Methodes
         internal void Insert(SqlConnection connection)
         {
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO adherent(societe, email, nom, prenom, adresse, date_adhesion, status"

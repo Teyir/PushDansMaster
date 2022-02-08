@@ -11,8 +11,8 @@
         #region Getters / Setters
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
 
         /// <summary>
@@ -20,26 +20,26 @@
         /// </summary>
         public int getIDPanier
         {
-            get { return id_panier; }
-            private set { id_panier = value; }
+            get => id_panier;
+            private set => id_panier = value;
         }
 
         public int getQuantite
         {
-            get { return quantite; }
-            private set { quantite = value; }
+            get => quantite;
+            private set => quantite = value;
         }
 
         public string getReference
         {
-            get { return reference; }
-            private set { reference = value; }
+            get => reference;
+            private set => reference = value;
         }
 
         public int getIDReference
         {
-            get { return id_reference; }
-            private set { id_reference = value; }
+            get => id_reference;
+            private set => id_reference = value;
         }
 
         #endregion
@@ -54,13 +54,13 @@
             this.id_reference = id_reference;
         }
 
-        LignesGlobal(int id, int id_panier, int quantite, string reference, int id_reference)
+        private LignesGlobal(int id, int id_panier, int quantite, string reference, int id_reference)
             : this(id_panier, quantite, reference, id_reference)
         {
-            this.ID = id;
+            ID = id;
         }
 
-        LignesGlobal()
+        private LignesGlobal()
         {
 
         }

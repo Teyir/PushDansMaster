@@ -20,15 +20,21 @@ namespace PushDansMaster.WPF
         private void DragWithHeader(object sender, MouseButtonEventArgs drag)
         {
             if (drag.ChangedButton == MouseButton.Left)
+            {
                 DragMove();
+            }
         }
 
         private void btnRestore_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
+            {
                 WindowState = WindowState.Maximized;
+            }
             else
+            {
                 WindowState = WindowState.Normal;
+            }
         }
 
         private void btnMinimize_Click(object sender, RoutedEventArgs e)
