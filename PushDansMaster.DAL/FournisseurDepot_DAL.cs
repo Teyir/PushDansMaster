@@ -16,6 +16,7 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur";
+
             var reader = command.ExecuteReader();
 
             var listFournisseur = new List<Fournisseur_DAL>();
@@ -44,6 +45,7 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, societe, civilite, nom, prenom, email, adresse, status FROM fournisseur WHERE id=@id";
+
             command.Parameters.Add(new SqlParameter("@id", ID));
             var reader = command.ExecuteReader();
 
@@ -85,7 +87,6 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
             command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
 
-
             var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             fournisseur.idFournisseur = ID;
@@ -102,6 +103,7 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "UPDATE fournisseur set societe=@societe, civilite=@civilite, nom=@nom, prenom=@prenom, email=@email, adresse=@adresse, status=@status"                     
+
                                     +  " WHERE id=@ID";
 
             command.Parameters.Add(new SqlParameter("@ID", fournisseur.getIdFournisseur));
@@ -112,6 +114,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@email", fournisseur.getEmailFournisseur));
             command.Parameters.Add(new SqlParameter("@adresse", fournisseur.getAdresseFournisseur));
             command.Parameters.Add(new SqlParameter("@status", fournisseur.getstatusFournisseur));
+
 
             var linesAffected = (int)command.ExecuteNonQuery();
 

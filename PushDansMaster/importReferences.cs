@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using PushDansMaster.DAL;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,7 +81,8 @@ namespace PushDansMaster
 
         }
 
-        //todo send to the database
+        ReferenceDepot_DAL dpr = new ReferenceDepot_DAL();
+
 
 
 

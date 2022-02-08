@@ -85,6 +85,7 @@ namespace PushDansMaster.DAL
             adherent.idAdherent = ID;
 
 
+
             closeConnection();
 
             return adherent;
@@ -104,12 +105,15 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@adresse", adherent.getAdresseAdherent));
             command.Parameters.Add(new SqlParameter("@status", adherent.getStatus));
 
+
             var linesAffected = (int)command.ExecuteNonQuery();
 
 
             if (linesAffected != 1)
             {
+
                 throw new Exception($"Impossible de mettre à jour l'adherent {adherent.getIdAdherent}");
+
             }
 
             closeConnection();
@@ -123,6 +127,7 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "DELETE FROM adherent WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", adherent.getIdAdherent));
+
             var nombreDeLignesAffectees = (int)
                 command.ExecuteNonQuery();
 
@@ -146,11 +151,11 @@ namespace PushDansMaster.DAL
             if (linesAffected != 1)
             {
                 throw new Exception($"Impossible de supprimer l'adherent {ID}");
+
             }
 
             closeConnection();
 
         }
-
     }
 }

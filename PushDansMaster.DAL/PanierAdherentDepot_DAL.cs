@@ -18,7 +18,7 @@ namespace PushDansMaster.DAL
             while (reader.Read())
             {
                 var p = new PanierAdherent_DAL(reader.GetInt32(0), 
-                                        reader.GetBoolean(1),
+                                        reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),
                                         reader.GetInt32(4));
@@ -45,7 +45,7 @@ namespace PushDansMaster.DAL
             if (reader.Read())
             {
                 p = new PanierAdherent_DAL(reader.GetInt32(0), 
-                                        reader.GetBoolean(1),
+                                        reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3),
                                         reader.GetInt32(4));
@@ -117,7 +117,7 @@ namespace PushDansMaster.DAL
         {
             createConnection();
 
-            command.CommandText = "DELETE * FROM panier_adherent WHERE id=@ID";
+            command.CommandText = "DELETE FROM panier_adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
             var linesAffected = (int)command.ExecuteNonQuery();

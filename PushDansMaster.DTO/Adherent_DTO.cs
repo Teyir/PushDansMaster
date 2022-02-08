@@ -17,5 +17,6 @@ namespace PushDansMaster.DTO
         public DateTime dateAdhesionAdherent { get; set; }
         public int statusAdherent { get; set; }
 
+
     }
 }

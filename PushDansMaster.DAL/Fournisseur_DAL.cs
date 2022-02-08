@@ -70,6 +70,7 @@ namespace PushDansMaster.DAL
             = (id,societe, civilite, nom, prenom, email, adresse, status);
         #endregion
 
+
         #region Methodes
         internal void addFournisseur(SqlConnection connection)
         {
@@ -78,6 +79,7 @@ namespace PushDansMaster.DAL
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse, status)"
                                        +  " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse, @status)";
+
                 command.Parameters.Add(new SqlParameter("@societe", societeFournisseur));
                 command.Parameters.Add(new SqlParameter("@civilite", civiliteFournisseur));
                 command.Parameters.Add(new SqlParameter("@nom", nomFournisseur));

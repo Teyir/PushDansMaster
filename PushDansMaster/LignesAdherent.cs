@@ -41,6 +41,17 @@
             this.Quantite = qts;
         }
 
+        public LignesAdherent(int id, int idP, int idR, int qts)
+            :this(idP, idR, qts)
+        {
+            this.ID = id;
+        }
+
+        public LignesAdherent()
+        {
+
+        }
+
         #endregion
 
     }
