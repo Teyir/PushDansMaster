@@ -12,12 +12,12 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, societe, email, nom, prenom, adresse, date_adhesion, status FROM adherent";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeAdherent = new List<Adherent_DAL>();
+            List<Adherent_DAL> listeAdherent = new List<Adherent_DAL>();
             while (reader.Read())
             {
-                var tmp = new Adherent_DAL(reader.GetInt32(0),
+                Adherent_DAL tmp = new Adherent_DAL(reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
                                         reader.GetString(3),
@@ -41,9 +41,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT id, societe, email, nom, prenom, adresse, date_adhesion, status FROM adherent WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeAdherent = new List<Adherent_DAL>();
+            List<Adherent_DAL> listeAdherent = new List<Adherent_DAL>();
 
             Adherent_DAL ad;
             if (reader.Read())
@@ -58,7 +58,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(7));
             }
             else
+            {
                 throw new Exception($"Pas d'adherent dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -79,7 +81,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@date_adhesion", adherent.getDateAdhesionAdherent));
             command.Parameters.Add(new SqlParameter("@status", adherent.getStatus));
 
-            var ID = Convert.ToInt32((decimal)
+            int ID = Convert.ToInt32((decimal)
                 command.ExecuteScalar());
 
             adherent.idAdherent = ID;
@@ -106,7 +108,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@status", adherent.getStatus));
 
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
 
             if (linesAffected != 1)
@@ -128,7 +130,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE FROM adherent WHERE id=@id";
             command.Parameters.Add(new SqlParameter("@id", adherent.getIdAdherent));
 
-            var nombreDeLignesAffectees = (int)
+            int nombreDeLignesAffectees =
                 command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
@@ -146,7 +148,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE FROM adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

@@ -9,7 +9,7 @@ namespace PushDansMaster.API.Controllers
     [Route("api/[controller]")]
     public class PanierGlobalController : ControllerBase
     {
-        private IPanierGlobalService service;
+        private readonly IPanierGlobalService service;
 
         public PanierGlobalController(IPanierGlobalService srv)
         {
@@ -32,7 +32,7 @@ namespace PushDansMaster.API.Controllers
         [HttpGet("get/{id}")]
         public ActionResult<PanierGlobal_DTO> GetPanierGlobal(int id)
         {
-            var f = service.getByID(id);
+            PanierGlobal f = service.getByID(id);
 
             if (f == null)
             {
@@ -54,7 +54,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<PanierGlobal_DTO> Insert(PanierGlobal_DTO f)
         {
-            var f_work = service.insert(new PanierGlobal(f.status, f.semaine));
+            PanierGlobal f_work = service.insert(new PanierGlobal(f.status, f.semaine));
             //Je récupère l'id panierGlobal
             f.ID = f_work.getID;
             //je renvoie l'objet DTO

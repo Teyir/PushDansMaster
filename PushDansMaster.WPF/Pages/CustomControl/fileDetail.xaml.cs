@@ -17,8 +17,8 @@ namespace PushDansMaster.WPF.Pages.CustomControl
 
         public string FileName
         {
-            get { return (string)GetValue(FileNameProperty); }
-            set { SetValue(FileNameProperty, value); }
+            get => (string)GetValue(FileNameProperty);
+            set => SetValue(FileNameProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for FileName.  This enables animation, styling, binding, etc...
@@ -29,8 +29,8 @@ namespace PushDansMaster.WPF.Pages.CustomControl
 
         public string FileSize
         {
-            get { return (string)GetValue(FileSizeProperty); }
-            set { SetValue(FileSizeProperty, value); }
+            get => (string)GetValue(FileSizeProperty);
+            set => SetValue(FileSizeProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for FileSize.  This enables animation, styling, binding, etc...
@@ -42,8 +42,8 @@ namespace PushDansMaster.WPF.Pages.CustomControl
 
         public int UploadProgress
         {
-            get { return (int)GetValue(UploadProgressProperty); }
-            set { SetValue(UploadProgressProperty, value); }
+            get => (int)GetValue(UploadProgressProperty);
+            set => SetValue(UploadProgressProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for UploadProgress.  This enables animation, styling, binding, etc...
@@ -54,8 +54,8 @@ namespace PushDansMaster.WPF.Pages.CustomControl
 
         public int UploadSpeed
         {
-            get { return (int)GetValue(UploadSpeedProperty); }
-            set { SetValue(UploadSpeedProperty, value); }
+            get => (int)GetValue(UploadSpeedProperty);
+            set => SetValue(UploadSpeedProperty, value);
         }
 
         // Using a DependencyProperty as the backing store for UploadSpeed.  This enables animation, styling, binding, etc...

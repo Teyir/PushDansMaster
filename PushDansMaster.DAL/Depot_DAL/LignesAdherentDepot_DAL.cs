@@ -11,13 +11,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, quantite, id_reference, id_panier FROM lignes_adherent";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeLignes = new List<LignesAdherent_DAL>();
+            List<LignesAdherent_DAL> listeLignes = new List<LignesAdherent_DAL>();
 
             while (reader.Read())
             {
-                var l = new LignesAdherent_DAL(reader.GetInt32(0),
+                LignesAdherent_DAL l = new LignesAdherent_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetInt32(3));
@@ -36,9 +36,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT id, quantite, id_reference, id_panier FROM lignes_adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDeLignes = new List<LignesAdherent_DAL>();
+            List<LignesAdherent_DAL> listeDeLignes = new List<LignesAdherent_DAL>();
 
             LignesAdherent_DAL l;
             if (reader.Read())
@@ -49,7 +49,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(3));
             }
             else
+            {
                 throw new Exception($"Pas de LignesAdherent dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -66,7 +68,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getIdReference));
             command.Parameters.Add(new SqlParameter("@id_panier", ligne.getIdPanier));
 
-            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+            int ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             ligne.ID = ID;
 
@@ -85,10 +87,12 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantiteAdherent));
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getIdReference));
             command.Parameters.Add(new SqlParameter("@id_panier", ligne.getIdPanier));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de mettre à jour la lignesAdherent d'ID : {ligne.getID}");
+            }
 
             closeConnection();
 
@@ -101,10 +105,12 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "DELETE * from lignes_adherent where id = @ID";
             command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de supprimer la lignesAdherent d'ID {ligne.getID}");
+            }
 
             closeConnection();
         }
@@ -116,7 +122,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE * FROM lignes_adherent WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

@@ -12,12 +12,12 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, libelle, reference, marque, quantite FROM reference";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var references = new List<Reference_DAL>();
+            List<Reference_DAL> references = new List<Reference_DAL>();
             while (reader.Read())
             {
-                var r = new Reference_DAL(reader.GetInt32(0),
+                Reference_DAL r = new Reference_DAL(reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
                                         reader.GetString(3),
@@ -38,9 +38,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT id, libelle, reference, marque, quantite FROM reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDeReference = new List<Reference_DAL>();
+            List<Reference_DAL> listeDeReference = new List<Reference_DAL>();
 
             Reference_DAL r;
             if (reader.Read())
@@ -52,7 +52,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(4));
             }
             else
+            {
                 throw new Exception($"Pas de reference dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -70,7 +72,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
             command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
 
-            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+            int ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             item.ID = ID;
 
@@ -90,10 +92,12 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@reference", item.getReference));
             command.Parameters.Add(new SqlParameter("@marque", item.getMarque));
             command.Parameters.Add(new SqlParameter("@quantite", item.getQuantite));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de mettre à jour la reference d'ID : {item.getID}");
+            }
 
             closeConnection();
 
@@ -105,10 +109,12 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "DELETE * from reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", item.getID));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de supprimer la reference d'ID {item.getID}");
+            }
 
             closeConnection();
         }
@@ -120,7 +126,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE * FROM reference WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

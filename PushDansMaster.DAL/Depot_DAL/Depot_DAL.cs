@@ -15,8 +15,8 @@ namespace PushDansMaster.DAL
         public Depot_DAL()
         {
             //Get the sqlserver configuration
-            var builder = new ConfigurationBuilder();
-            var config = builder.AddJsonFile("appsettings.json", false, true).Build();
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            IConfigurationRoot config = builder.AddJsonFile("appsettings.json", false, true).Build();
 
             connectionString = config.GetSection("ConnectionStrings:default").Value;
         }
@@ -29,8 +29,10 @@ namespace PushDansMaster.DAL
 
             connection.Open();
 
-            command = new SqlCommand();
-            command.Connection = connection;
+            command = new SqlCommand
+            {
+                Connection = connection
+            };
 
         }
 

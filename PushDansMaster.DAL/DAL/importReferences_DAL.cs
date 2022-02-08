@@ -10,14 +10,16 @@ namespace PushDansMaster.DAL
         public string marqueReference { get; set; }
 
         public importReferences_DAL(string libelle, string reference, string marque)
-            => (libelleReference, referenceReference, marqueReference)
-            = (libelle, reference, marque);
+        {
+            (libelleReference, referenceReference, marqueReference)
+                       = (libelle, reference, marque);
+        }
 
 
         //Send to the database
         internal void addRefenrences(SqlConnection connection)
         {
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO references(libelle, reference, marque, quantite)"

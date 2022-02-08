@@ -20,10 +20,10 @@ namespace PushDansMaster.WPF.Pages
         {
             string fileName = "import.sql";
             //Get the sqlserver configuration
-            var builder = new ConfigurationBuilder();
-            var config = builder.AddJsonFile("appsettings.json", false, true).Build();
+            ConfigurationBuilder builder = new ConfigurationBuilder();
+            IConfigurationRoot config = builder.AddJsonFile("appsettings.json", false, true).Build();
 
-            var connectionString = config.GetSection("ConnectionStrings:default").Value;
+            string connectionString = config.GetSection("ConnectionStrings:default").Value;
 
 
             try
@@ -39,7 +39,7 @@ namespace PushDansMaster.WPF.Pages
                     {
                         if (commandString.Trim() != "")
                         {
-                            using (var command = new SqlCommand(commandString, connection))
+                            using (SqlCommand command = new SqlCommand(commandString, connection))
                             {
                                 try
                                 {

@@ -11,32 +11,39 @@ namespace PushDansMaster.DAL
         #region Getters / Setters
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
         public int getSemaine
         {
-            get { return semaine; }
-            private set { semaine = value; }
+            get => semaine;
+            private set => semaine = value;
         }
         public int getStatus
         {
-            get { return status; }
-            private set { status = value; }
+            get => status;
+            private set => status = value;
         }
 
         #endregion
 
         #region Constructeurs
-        public PanierGlobal_DAL(int status, int semaine) => (this.status, this.semaine) = (status, semaine);
-        public PanierGlobal_DAL(int id, int status, int semaine) => (this.ID, this.status, this.semaine) = (id, status, semaine);
+        public PanierGlobal_DAL(int status, int semaine)
+        {
+            (this.status, this.semaine) = (status, semaine);
+        }
+
+        public PanierGlobal_DAL(int id, int status, int semaine)
+        {
+            (ID, this.status, this.semaine) = (id, status, semaine);
+        }
         #endregion
 
 
         #region Methodes
         internal void insert(SqlConnection connection)
         {
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO panier_global(status, semaine) VALUES (@status, @semaine)";

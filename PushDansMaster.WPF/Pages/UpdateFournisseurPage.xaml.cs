@@ -14,16 +14,16 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var fournisseur = await clientApi.Getall2Async();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
 
         private void Click_Btn_Valider_Fournisseur(object sender, RoutedEventArgs e)
         {
-            var fournisseur = new Fournisseurs_DTO();
-            var fourSelected = ((Liste as DataGrid).SelectedItem as Fournisseurs_DTO);
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Fournisseurs_DTO fournisseur = new Fournisseurs_DTO();
+            Fournisseurs_DTO fourSelected = (Liste.SelectedItem as Fournisseurs_DTO);
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
             if (fourSelected is null)
             {
                 MessageBox.Show("Selectionner un fournisseur");

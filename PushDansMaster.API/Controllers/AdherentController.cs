@@ -10,7 +10,7 @@ namespace PushDansMaster.API.Controllers
     [Route("api/[controller]")]
     public class AdherentController : ControllerBase
     {
-        private IAdherentService service;
+        private readonly IAdherentService service;
 
         public AdherentController(IAdherentService srv)
         {
@@ -38,7 +38,7 @@ namespace PushDansMaster.API.Controllers
         [HttpGet("get/{id}")]
         public ActionResult<Adherent_DTO> GetAdherent(int id)
         {
-            var f = service.getByID(id);
+            Adherent f = service.getByID(id);
 
             if (f == null)
             {
@@ -65,7 +65,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<Adherent_DTO> Insert(Adherent_DTO f)
         {
-            var f_work = service.insert(new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, DateTime.Now, f.statusAdherent));
+            Adherent f_work = service.insert(new Adherent(f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, DateTime.Now, f.statusAdherent));
             //Je récupère l'id adherent
             f.idAdherent = f_work.getIdAdherent;
             //je renvoie l'objet DTO
@@ -78,7 +78,7 @@ namespace PushDansMaster.API.Controllers
         {
             f.idAdherent = id;
 
-            var f_work = service.update(new Adherent(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.statusAdherent));
+            Adherent f_work = service.update(new Adherent(f.idAdherent, f.societeAdherent, f.emailAdherent, f.nomAdherent, f.prenomAdherent, f.adresseAdherent, f.statusAdherent));
 
             return f;
         }

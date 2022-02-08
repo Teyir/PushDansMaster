@@ -9,7 +9,7 @@ namespace PushDansMaster.API.Controllers
     [Route("api/[controller]")]
     public class ReferenceController : ControllerBase
     {
-        private IReferenceService service;
+        private readonly IReferenceService service;
 
         public ReferenceController(IReferenceService srv)
         {
@@ -35,7 +35,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<Reference_DTO> Insert(Reference_DTO f)
         {
-            var f_work = service.insert(new Reference(f.libelle, f.reference, f.marque, f.quantite));
+            Reference f_work = service.insert(new Reference(f.libelle, f.reference, f.marque, f.quantite));
             //Je récupère l'id References
             f.ID = f_work.getID;
             //je renvoie l'objet DTO

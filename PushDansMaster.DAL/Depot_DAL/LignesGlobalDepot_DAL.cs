@@ -11,13 +11,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "SELECT id, id_panier, quantite, reference, id_reference FROM lignes_global";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDeLignes = new List<LignesGlobal_DAL>();
+            List<LignesGlobal_DAL> listeDeLignes = new List<LignesGlobal_DAL>();
 
             while (reader.Read())
             {
-                var p = new LignesGlobal_DAL(reader.GetInt32(0),
+                LignesGlobal_DAL p = new LignesGlobal_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetString(3),
@@ -37,9 +37,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "SELECT id, id_panier, quantite, reference, id_reference FROM lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDePoints = new List<LignesGlobal_DAL>();
+            List<LignesGlobal_DAL> listeDePoints = new List<LignesGlobal_DAL>();
 
             LignesGlobal_DAL p;
             if (reader.Read())
@@ -51,7 +51,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(4));
             }
             else
+            {
                 throw new Exception($"Pas de ligne globale dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -69,7 +71,7 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@reference", ligne.getReference));
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getId_reference));
 
-            var ID = Convert.ToInt32((decimal)command.ExecuteScalar());
+            int ID = Convert.ToInt32((decimal)command.ExecuteScalar());
 
             ligne.ID = ID;
 
@@ -89,10 +91,12 @@ namespace PushDansMaster.DAL
             command.Parameters.Add(new SqlParameter("@quantite", ligne.getQuantite));
             command.Parameters.Add(new SqlParameter("@reference", ligne.getReference));
             command.Parameters.Add(new SqlParameter("@id_reference", ligne.getId_reference));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de mettre à jour la ligne globale d'ID : {ligne.getID}");
+            }
 
             closeConnection();
 
@@ -105,10 +109,12 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "DELETE * from lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ligne.getID));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
+            {
                 throw new Exception($"Impossible de supprimer la ligne globale d'ID {ligne.getID}");
+            }
 
             closeConnection();
         }
@@ -120,7 +126,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE * FROM lignes_global WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

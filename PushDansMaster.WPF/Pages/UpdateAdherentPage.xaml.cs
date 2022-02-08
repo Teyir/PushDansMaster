@@ -14,16 +14,16 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var adherent = await clientApi.GetallAsync();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
 
         private void Click_Btn_Valider_Adherent(object sender, RoutedEventArgs e)
         {
-            var adherent = new Adherent_DTO();
-            var adhSelected = ((Liste as DataGrid).SelectedItem as Adherent_DTO);
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Adherent_DTO adherent = new Adherent_DTO();
+            Adherent_DTO adhSelected = (Liste.SelectedItem as Adherent_DTO);
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
             if (adhSelected is null)
             {
                 MessageBox.Show("Selectionner un adherent");

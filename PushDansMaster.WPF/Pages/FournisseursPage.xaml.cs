@@ -17,32 +17,34 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var fournisseur = await clientApi.Getall2Async();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
 
         private async void OnPageLoad(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var fournisseur = await clientApi.Getall2Async();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
 
         private async void Click_Btn_Go_Delete_Fournisseur(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var four = ((Liste as DataGrid).SelectedItem as Fournisseurs_DTO);
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Fournisseurs_DTO four = (Liste.SelectedItem as Fournisseurs_DTO);
 
             if (four is null)
+            {
                 MessageBox.Show("Selectionner un fournisseur");
+            }
             else
             {
                 if (MessageBox.Show("êtes vous sur de vouloir supprimer le fournisseur " + four.NomFournisseur + "?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     await clientApi.Delete2Async(four.IdFournisseur);
 
-                    var fournisseurs = await clientApi.Getall2Async();
+                    System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseurs = await clientApi.Getall2Async();
                     Liste.ItemsSource = null;
                     Liste.ItemsSource = fournisseurs;
                 }
@@ -62,8 +64,8 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Click_Btn_Actualiser(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
-            var fournisseur = await clientApi.Getall2Async();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = null;
             Liste.ItemsSource = fournisseur;
         }

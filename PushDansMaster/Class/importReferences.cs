@@ -47,15 +47,15 @@ namespace PushDansMaster
 
             /// Split csv file 
 
-            var reference = new List<string>();
-            var libelle = new List<string>();
-            var marque = new List<string>();
+            List<string> reference = new List<string>();
+            List<string> libelle = new List<string>();
+            List<string> marque = new List<string>();
 
-            using (var rd = new StreamReader(pathLink))
+            using (StreamReader rd = new StreamReader(pathLink))
             {
                 while (!rd.EndOfStream)
                 {
-                    var splits = rd.ReadLine().Split(';');
+                    string[] splits = rd.ReadLine().Split(';');
                     reference.Add(splits[0]);
                     libelle.Add(splits[1]);
                     marque.Add(splits[2]);
@@ -65,20 +65,25 @@ namespace PushDansMaster
             // print references, libelles, marques
 
             Console.WriteLine("References:");
-            foreach (var element in reference)
+            foreach (string element in reference)
+            {
                 Console.WriteLine(element);
+            }
 
             Console.WriteLine("Libelles:");
-            foreach (var element in libelle)
+            foreach (string element in libelle)
+            {
                 Console.WriteLine(element);
+            }
 
             Console.WriteLine("Marques:");
-            foreach (var element in marque)
+            foreach (string element in marque)
+            {
                 Console.WriteLine(element);
-
+            }
         }
 
-        ReferenceDepot_DAL dpr = new ReferenceDepot_DAL();
+        private readonly ReferenceDepot_DAL dpr = new ReferenceDepot_DAL();
 
 
 

@@ -7,7 +7,7 @@ namespace PushDansMaster.API.Controllers
     [Route("api/[controller]")]
     public class LigneAdherentController : ControllerBase
     {
-        private ILigneAdherentService service;
+        private readonly ILigneAdherentService service;
 
         public LigneAdherentController(ILigneAdherentService srv)
         {
@@ -19,7 +19,7 @@ namespace PushDansMaster.API.Controllers
         [HttpPost("insert/")]
         public ActionResult<LigneAdherent_DTO> Insert(LigneAdherent_DTO f)
         {
-            var f_work = service.insert(new LignesAdherent(f.id_panier, f.id_reference, f.Quantite));
+            LignesAdherent f_work = service.insert(new LignesAdherent(f.id_panier, f.id_reference, f.Quantite));
             //Je récupère l'id LigneAdherent
             f.ID = f_work.getID;
             //je renvoie l'objet DTO

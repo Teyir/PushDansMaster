@@ -11,28 +11,28 @@
         #region Getters / Setters
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
         public string getLibelle
         {
-            get { return libelle; }
-            private set { libelle = value; }
+            get => libelle;
+            private set => libelle = value;
         }
         public string getReference
         {
-            get { return reference; }
-            private set { reference = value; }
+            get => reference;
+            private set => reference = value;
         }
         public string getMarque
         {
-            get { return marque; }
-            private set { marque = value; }
+            get => marque;
+            private set => marque = value;
         }
         public int getQuantite
         {
-            get { return quantite; }
-            private set { quantite = value; }
+            get => quantite;
+            private set => quantite = value;
         }
         #endregion
 
@@ -49,7 +49,7 @@
         public Reference(int id, string libelle, string reference, string marque, int quantite)
             : this(libelle, reference, marque, quantite)
         {
-            this.ID = id;
+            ID = id;
         }
 
         public Reference()

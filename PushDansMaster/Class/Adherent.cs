@@ -16,43 +16,43 @@ namespace PushDansMaster
         #region Getters / Setters
         public int getIdAdherent
         {
-            get { return idAdherent; }
-            private set { idAdherent = value; }
+            get => idAdherent;
+            private set => idAdherent = value;
         }
         public string getSocieteAdherent
         {
-            get { return societeAdherent; }
-            private set { societeAdherent = value; }
+            get => societeAdherent;
+            private set => societeAdherent = value;
         }
         public string getEmailAdherent
         {
-            get { return emailAdherent; }
-            private set { emailAdherent = value; }
+            get => emailAdherent;
+            private set => emailAdherent = value;
         }
         public string getNomAdherent
         {
-            get { return nomAdherent; }
-            private set { nomAdherent = value; }
+            get => nomAdherent;
+            private set => nomAdherent = value;
         }
         public string getPrenomAdherent
         {
-            get { return prenomAdherent; }
-            private set { prenomAdherent = value; }
+            get => prenomAdherent;
+            private set => prenomAdherent = value;
         }
         public string getAdresseAdherent
         {
-            get { return adresseAdherent; }
-            private set { adresseAdherent = value; }
+            get => adresseAdherent;
+            private set => adresseAdherent = value;
         }
         public DateTime getDateAdhesionAdherent
         {
-            get { return dateAdhesionAdherent; }
-            private set { dateAdhesionAdherent = value; }
+            get => dateAdhesionAdherent;
+            private set => dateAdhesionAdherent = value;
         }
         public int getStatusAdherent
         {
-            get { return statusAdherent; }
-            private set { statusAdherent = value; }
+            get => statusAdherent;
+            private set => statusAdherent = value;
         }
 
         #endregion
@@ -60,30 +60,30 @@ namespace PushDansMaster
         #region Constructeurs
         public Adherent(string societe, string email, string nom, string prenom, string adresse, int status)
         {
-            this.societeAdherent = societe;
-            this.emailAdherent = email;
-            this.nomAdherent = nom;
-            this.prenomAdherent = prenom;
-            this.adresseAdherent = adresse;
-            this.statusAdherent = status;
+            societeAdherent = societe;
+            emailAdherent = email;
+            nomAdherent = nom;
+            prenomAdherent = prenom;
+            adresseAdherent = adresse;
+            statusAdherent = status;
         }
 
         public Adherent(int id, string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, int status)
         : this(societe, email, nom, prenom, adresse, date_adhesion, status)
         {
-            this.idAdherent = id;
+            idAdherent = id;
         }
 
         public Adherent(int id, string societe, string email, string nom, string prenom, string adresse, int status)
         : this(societe, email, nom, prenom, adresse, status)
         {
-            this.idAdherent = id;
+            idAdherent = id;
         }
 
         public Adherent(string societe, string email, string nom, string prenom, string adresse, DateTime date_adhesion, int status)
         : this(societe, email, nom, prenom, adresse, status)
         {
-            this.dateAdhesionAdherent = DateTime.Now;
+            dateAdhesionAdherent = DateTime.Now;
         }
 
 

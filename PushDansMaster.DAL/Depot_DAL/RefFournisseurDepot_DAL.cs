@@ -11,13 +11,13 @@ namespace PushDansMaster.DAL
             createConnection();
 
             command.CommandText = "select id_fournisseur, id_reference from ref_fournisseur";
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDeRefFournisseur = new List<RefFournisseur_DAL>();
+            List<RefFournisseur_DAL> listeDeRefFournisseur = new List<RefFournisseur_DAL>();
 
             while (reader.Read())
             {
-                var p = new RefFournisseur_DAL(reader.GetInt32(0),
+                RefFournisseur_DAL p = new RefFournisseur_DAL(reader.GetInt32(0),
                                         reader.GetInt32(1));
 
                 listeDeRefFournisseur.Add(p);
@@ -34,9 +34,9 @@ namespace PushDansMaster.DAL
 
             command.CommandText = "select id_fournisseur, id_reference from ref_fournisseur where CONCAT(id_fournisseur, id_reference)=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
-            var reader = command.ExecuteReader();
+            SqlDataReader reader = command.ExecuteReader();
 
-            var listeDePoints = new List<RefFournisseur_DAL>();
+            List<RefFournisseur_DAL> listeDePoints = new List<RefFournisseur_DAL>();
 
             RefFournisseur_DAL rf;
             if (reader.Read())
@@ -45,7 +45,9 @@ namespace PushDansMaster.DAL
                                         reader.GetInt32(1));
             }
             else
+            {
                 throw new Exception($"Pas de RefFournisseur dans la BDD avec l'ID {ID}");
+            }
 
             closeConnection();
 
@@ -78,7 +80,7 @@ namespace PushDansMaster.DAL
                                    + " where id_fournisseur = @id_reference and id_reference = @id_reference";
             command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
             command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
@@ -98,7 +100,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "delete from ref_fournisseur where id_fournisseur = @id_fournisseur and id_reference = @id_reference";
             command.Parameters.Add(new SqlParameter("@id_fournisseur", refFournisseur.GetIDfournisseur));
             command.Parameters.Add(new SqlParameter("@id_reference", refFournisseur.GetIDreference));
-            var nombreDeLignesAffectees = (int)command.ExecuteNonQuery();
+            int nombreDeLignesAffectees = command.ExecuteNonQuery();
 
             if (nombreDeLignesAffectees != 1)
             {
@@ -116,7 +118,7 @@ namespace PushDansMaster.DAL
             command.CommandText = "DELETE * FROM ref_fournisseur WHERE id=@ID";
             command.Parameters.Add(new SqlParameter("@ID", ID));
 
-            var linesAffected = (int)command.ExecuteNonQuery();
+            int linesAffected = command.ExecuteNonQuery();
 
             if (linesAffected != 1)
             {

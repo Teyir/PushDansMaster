@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using PushDansMaster.WPF.Pages.CustomControl;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -41,21 +40,21 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Processing(object sender, RoutedEventArgs e, string[] files)
         {
-            var clientApi = new Client("https://localhost:44304", new HttpClient());
+            Client clientApi = new Client("https://localhost:44304", new HttpClient());
 
             string fileExt = System.IO.Path.GetExtension(files[0]);
             string filePath = System.IO.Path.GetFullPath(files[0]);
             if (fileExt == ".csv")
             {
-                var reference = new List<string>();
-                var libelle = new List<string>();
-                var marque = new List<string>();
+                List<string> reference = new List<string>();
+                List<string> libelle = new List<string>();
+                List<string> marque = new List<string>();
                 int i = 0;
-                using (var rd = new StreamReader(filePath))
+                using (StreamReader rd = new StreamReader(filePath))
                 {
                     while (!rd.EndOfStream)
                     {
-                        var splits = rd.ReadLine().Split(';');
+                        string[] splits = rd.ReadLine().Split(';');
                         if (splits[0] != "reference")
                         {
                             reference.Add(splits[0]);
@@ -63,13 +62,15 @@ namespace PushDansMaster.WPF.Pages
                             marque.Add(splits[2]);
                         }
                     }
-                    foreach (String reff in reference)
+                    foreach (string reff in reference)
                     {
-                        var refDTO = new Reference_DTO();
-                        refDTO.Reference = reff;
-                        refDTO.Libelle = libelle[i];
-                        refDTO.Marque = marque[i];
-                        refDTO.Quantite = 9999999;
+                        Reference_DTO refDTO = new Reference_DTO
+                        {
+                            Reference = reff,
+                            Libelle = libelle[i],
+                            Marque = marque[i],
+                            Quantite = 9999999
+                        };
                         await clientApi.Insert7Async(refDTO);
                         i++;
                     }

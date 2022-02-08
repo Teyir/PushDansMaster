@@ -14,41 +14,48 @@ namespace PushDansMaster.DAL
         #region Getters / Setters
         public int getID
         {
-            get { return ID; }
-            private set { ID = value; }
+            get => ID;
+            private set => ID = value;
         }
         public int getId_panier
         {
-            get { return id_panier; }
-            private set { id_panier = value; }
+            get => id_panier;
+            private set => id_panier = value;
         }
         public int getQuantite
         {
-            get { return quantite; }
-            private set { quantite = value; }
+            get => quantite;
+            private set => quantite = value;
         }
         public int getId_reference
         {
-            get { return id_reference; }
-            private set { id_reference = value; }
+            get => id_reference;
+            private set => id_reference = value;
         }
         public string getReference
         {
-            get { return reference; }
-            private set { reference = value; }
+            get => reference;
+            private set => reference = value;
         }
 
         #endregion
 
         #region Constructeurs
-        public LignesGlobal_DAL(int id_panier, int quantite, string reference, int id_reference) => (this.id_panier, this.quantite, this.reference, this.id_reference) = (id_panier, quantite, reference, id_reference);
-        public LignesGlobal_DAL(int ID, int id_panier, int quantite, string reference, int id_reference) => (this.ID, this.id_panier, this.quantite, this.reference, this.id_reference) = (ID, id_panier, quantite, reference, id_reference);
+        public LignesGlobal_DAL(int id_panier, int quantite, string reference, int id_reference)
+        {
+            (this.id_panier, this.quantite, this.reference, this.id_reference) = (id_panier, quantite, reference, id_reference);
+        }
+
+        public LignesGlobal_DAL(int ID, int id_panier, int quantite, string reference, int id_reference)
+        {
+            (this.ID, this.id_panier, this.quantite, this.reference, this.id_reference) = (ID, id_panier, quantite, reference, id_reference);
+        }
         #endregion
 
         #region Methodes
         internal void insert(SqlConnection connection)
         {
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO lignes_global(id_panier, quantite, reference, id_reference) values (@id_panier, @quantite, @reference, @id_reference)";

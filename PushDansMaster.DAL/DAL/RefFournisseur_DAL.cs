@@ -10,24 +10,27 @@ namespace PushDansMaster.DAL
         #region Getters / Setters 
         public int GetIDfournisseur
         {
-            get { return id_fournisseur; }
-            private set { id_fournisseur = value; }
+            get => id_fournisseur;
+            private set => id_fournisseur = value;
         }
 
         public int GetIDreference
         {
-            get { return id_reference; }
-            private set { id_reference = value; }
+            get => id_reference;
+            private set => id_reference = value;
         }
         #endregion
         #region Constructeur
-        public RefFournisseur_DAL(int id_fournisseur, int id_reference) => (this.id_fournisseur, this.id_reference) = (id_fournisseur, id_reference);
+        public RefFournisseur_DAL(int id_fournisseur, int id_reference)
+        {
+            (this.id_fournisseur, this.id_reference) = (id_fournisseur, id_reference);
+        }
         #endregion
         #region Méthodes
         internal void insert(SqlConnection connection)
         {
             // On insert un point dans la BDD
-            using (var command = new SqlCommand())
+            using (SqlCommand command = new SqlCommand())
             {
                 // Définir la connexion à utiliser
                 command.Connection = connection;

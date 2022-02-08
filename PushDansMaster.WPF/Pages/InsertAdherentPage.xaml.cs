@@ -14,8 +14,8 @@ namespace PushDansMaster.WPF.Pages
 
         private void Click_Btn_Valider_Adherent(object sender, RoutedEventArgs e)
         {
-            var adherent = new Adherent_DTO();
-            var clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Adherent_DTO adherent = new Adherent_DTO();
+            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
 
             adherent.SocieteAdherent = SocieteInsertAdherent.Text;
 
