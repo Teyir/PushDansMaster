@@ -152,11 +152,24 @@ namespace PushDansMaster.WPF.Pages
                                 break;
                             }
                         }
+
                         pA.Semaine = week;
                         pA.Status = 0;
                         pA.Id_panierGlobal = IDtmp;
                         pA.Id_adherent = AdhSelected.IdAdherent;
+
                         await clientApi.Insert5Async(pA);
+
+                        foreach (PanierAdherent_DTO padhd in panierAdherents)
+                        {
+                            if (padhd.Id_adherent == adhID)
+                            {
+                                foundPanierAdh = true;
+                                IdPanierAdherent = padhd.Id;
+                                break;
+                            }
+                        }
+
                     }
 
                     using (StreamReader rd = new StreamReader(filePath))
@@ -187,22 +200,16 @@ namespace PushDansMaster.WPF.Pages
                             {
                                 if (refStr == reff.Reference && v < quantites.Count)
                                 {
-                                    int refID = reff.Id;
-                                    int idpatmp = 0;
-                                    foreach (PanierAdherent_DTO item in panierAdherents)
-                                    {
-                                        if (item.Id_adherent == AdhSelected.IdAdherent)
-                                        {
-                                            idpatmp = item.Id;
-                                        }
-                                    }
+                                    int refID = reff.Id;                                                    
                                     la.Quantite = quantites[v];
                                     la.Id_reference = refID;
-                                    la.Id_panier = idpatmp;
+                                    la.Id_panier = IdPanierAdherent;
+
                                     lg.Id_panier = IdPanierGlobal;
                                     lg.Quantite = quantites[v];
                                     lg.Reference = reff.Reference;
                                     lg.Id_reference = refID;
+                                    
                                     await clientApi.Insert3Async(la);
                                     await clientApi.Insert4Async(lg);
                                     v++;
