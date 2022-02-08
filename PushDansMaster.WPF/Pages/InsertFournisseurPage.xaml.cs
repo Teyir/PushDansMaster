@@ -15,7 +15,7 @@ namespace PushDansMaster.WPF.Pages
         private void Click_Btn_Valider_Fournisseur(object sender, RoutedEventArgs e)
         {
             Fournisseurs_DTO fournisseur = new Fournisseurs_DTO();
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
 
             fournisseur.SocieteFournisseur = SocieteInsert.Text;
             if ((bool)radio1.IsChecked)

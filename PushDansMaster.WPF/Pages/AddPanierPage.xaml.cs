@@ -36,7 +36,7 @@ namespace PushDansMaster.WPF.Pages
             selectedAdh = cbItem;
             adh.Add(cbItem);
 
-            Client clientApi = new Client("https://localhost:44304", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             ICollection<Adherent_DTO> listAdh = await clientApi.GetallAsync();
 
             foreach (Adherent_DTO adhItem in listAdh)
@@ -67,7 +67,7 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Processing(object sender, RoutedEventArgs e, string[] files)
         {
-            Client clientApi = new Client("https://localhost:44304", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
 
             string fileExt = System.IO.Path.GetExtension(files[0]);
             string filePath = System.IO.Path.GetFullPath(files[0]);

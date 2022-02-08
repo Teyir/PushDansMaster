@@ -17,21 +17,21 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
 
         private async void OnPageLoad(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
 
         private async void Click_Btn_Go_Delete_Fournisseur(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             Fournisseurs_DTO four = (Liste.SelectedItem as Fournisseurs_DTO);
 
             if (four is null)
@@ -64,7 +64,7 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Click_Btn_Actualiser(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = null;
             Liste.ItemsSource = fournisseur;

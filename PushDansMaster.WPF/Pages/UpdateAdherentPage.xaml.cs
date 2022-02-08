@@ -14,7 +14,7 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
@@ -23,7 +23,7 @@ namespace PushDansMaster.WPF.Pages
         {
             Adherent_DTO adherent = new Adherent_DTO();
             Adherent_DTO adhSelected = (Liste.SelectedItem as Adherent_DTO);
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             if (adhSelected is null)
             {
                 MessageBox.Show("Selectionner un adherent");

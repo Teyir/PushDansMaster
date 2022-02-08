@@ -15,21 +15,21 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
 
         private async void OnPageLoad(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
             Liste.ItemsSource = adherent;
         }
 
         private async void Click_Btn_Actualiser(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Adherent_DTO> adherent = await clientApi.GetallAsync();
 
             Liste.ItemsSource = null;
@@ -39,7 +39,7 @@ namespace PushDansMaster.WPF.Pages
 
         private async void Click_Btn_Go_Delete_Adherent(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             Adherent_DTO adh = (Liste.SelectedItem as Adherent_DTO);
 
             if (adh is null)

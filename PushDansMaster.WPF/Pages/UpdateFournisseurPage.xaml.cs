@@ -14,7 +14,7 @@ namespace PushDansMaster.WPF.Pages
 
         private async void WindowIsOpen(object sender, RoutedEventArgs e)
         {
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             System.Collections.Generic.ICollection<Fournisseurs_DTO> fournisseur = await clientApi.Getall2Async();
             Liste.ItemsSource = fournisseur;
         }
@@ -23,7 +23,7 @@ namespace PushDansMaster.WPF.Pages
         {
             Fournisseurs_DTO fournisseur = new Fournisseurs_DTO();
             Fournisseurs_DTO fourSelected = (Liste.SelectedItem as Fournisseurs_DTO);
-            Client clientApi = new Client("https://localhost:44304/", new HttpClient());
+            Client clientApi = new Client(new configAPI().getConfig(), new HttpClient());
             if (fourSelected is null)
             {
                 MessageBox.Show("Selectionner un fournisseur");
