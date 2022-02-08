@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace PushDansMaster.DAL
 {
@@ -25,8 +20,8 @@ namespace PushDansMaster.DAL
             using (var command = new SqlCommand())
             {
                 command.Connection = connection;
-                command.CommandText = "INSERT INTO references(libelle, reference, marque, quantite)" 
-                                        +" VALUES (@libelle, @reference, @marque, 0)";
+                command.CommandText = "INSERT INTO references(libelle, reference, marque, quantite)"
+                                        + " VALUES (@libelle, @reference, @marque, 0)";
                 command.Parameters.Add(new SqlParameter("@libelle", libelleReference));
                 command.Parameters.Add(new SqlParameter("@reference", referenceReference));
                 command.Parameters.Add(new SqlParameter("@marque", marqueReference));

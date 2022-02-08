@@ -66,8 +66,8 @@
             this.adresseFournisseur = adresse;
             this.statusFournisseur = status;
         }
-        public Fournisseur(int id,string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
-            :this(societe,civilite,nom,prenom,email,adresse, status)
+        public Fournisseur(int id, string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
+            : this(societe, civilite, nom, prenom, email, adresse, status)
         {
             this.idFournisseur = id;
         }

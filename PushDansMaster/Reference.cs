@@ -43,11 +43,11 @@
             this.reference = reference;
             this.marque = marque;
             this.quantite = quantite;
-         
+
         }
 
         public Reference(int id, string libelle, string reference, string marque, int quantite)
-            :this(libelle, reference, marque, quantite)
+            : this(libelle, reference, marque, quantite)
         {
             this.ID = id;
         }

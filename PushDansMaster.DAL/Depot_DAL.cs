@@ -6,12 +6,12 @@ namespace PushDansMaster.DAL
 {
     //DAL class
     public abstract class Depot_DAL<Type_DAL> : IDepot_DAL<Type_DAL>
-    { 
+    {
         public string connectionString { get; set; }
-            
+
         protected SqlConnection connection;
         protected SqlCommand command;
-        
+
         public Depot_DAL()
         {
             //Get the sqlserver configuration
@@ -31,7 +31,7 @@ namespace PushDansMaster.DAL
 
             command = new SqlCommand();
             command.Connection = connection;
-            
+
         }
 
         //Close the connection to the sql server

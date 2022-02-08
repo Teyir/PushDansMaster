@@ -28,12 +28,12 @@ namespace PushDansMaster
         {
             get { return emailAdherent; }
             private set { emailAdherent = value; }
-        } 
+        }
         public string getNomAdherent
         {
             get { return nomAdherent; }
             private set { nomAdherent = value; }
-        } 
+        }
         public string getPrenomAdherent
         {
             get { return prenomAdherent; }

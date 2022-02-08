@@ -65,9 +65,9 @@ namespace PushDansMaster.DAL
            => (societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
            = (societe, civilite, nom, prenom, email, adresse, status);
 
-        public Fournisseur_DAL(int id,string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
+        public Fournisseur_DAL(int id, string societe, bool civilite, string nom, string prenom, string email, string adresse, int status)
             => (idFournisseur, societeFournisseur, civiliteFournisseur, nomFournisseur, prenomFournisseur, emailFournisseur, adresseFournisseur, statusFournisseur)
-            = (id,societe, civilite, nom, prenom, email, adresse, status);
+            = (id, societe, civilite, nom, prenom, email, adresse, status);
         #endregion
 
 
@@ -78,7 +78,7 @@ namespace PushDansMaster.DAL
             {
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO fournisseur(societe, civilite, nom, prenom, email, adresse, status)"
-                                       +  " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse, @status)";
+                                       + " VALUES (@societe, @civilite, @nom, @prenom, @email, @adresse, @status)";
 
                 command.Parameters.Add(new SqlParameter("@societe", societeFournisseur));
                 command.Parameters.Add(new SqlParameter("@civilite", civiliteFournisseur));
@@ -90,7 +90,7 @@ namespace PushDansMaster.DAL
 
                 command.ExecuteNonQuery();
             }
-           
+
         }
         #endregion
     }

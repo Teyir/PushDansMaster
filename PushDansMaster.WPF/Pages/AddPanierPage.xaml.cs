@@ -5,19 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PushDansMaster.WPF.Pages
 {
@@ -115,10 +105,10 @@ namespace PushDansMaster.WPF.Pages
                         }
                     }
                     if (!panierFound)
-                    {                 
+                    {
                         pG.Status = 0;
                         pG.Semaine = week;
-                        await clientApi.Insert6Async(pG);                     
+                        await clientApi.Insert6Async(pG);
                     }
 
 
@@ -164,11 +154,11 @@ namespace PushDansMaster.WPF.Pages
                         }
                         pA.Semaine = week;
                         pA.Status = 0;
-                        pA.Id_panierGlobal = IDtmp;                     
-                        pA.Id_adherent = AdhSelected.IdAdherent ;
+                        pA.Id_panierGlobal = IDtmp;
+                        pA.Id_adherent = AdhSelected.IdAdherent;
                         await clientApi.Insert5Async(pA);
                     }
-                        
+
                     using (var rd = new StreamReader(filePath))
                     {
                         while (!rd.EndOfStream)
@@ -190,48 +180,48 @@ namespace PushDansMaster.WPF.Pages
                     else
                     {
                         int v = 0;
-                       
+
                         foreach (Reference_DTO reff in reference_DTOs)
                         {
                             foreach (String refStr in references)
-                            {                              
-                                if (refStr == reff.Reference && v < quantites.Count )
+                            {
+                                if (refStr == reff.Reference && v < quantites.Count)
                                 {
                                     int refID = reff.Id;
-                                    var idpatmp= 0;
+                                    var idpatmp = 0;
                                     foreach (var item in panierAdherents)
                                     {
                                         if (item.Id_adherent == AdhSelected.IdAdherent)
                                         {
-                                            idpatmp =  item.Id;
+                                            idpatmp = item.Id;
                                         }
-                                    }                                  
+                                    }
                                     la.Quantite = quantites[v];
                                     la.Id_reference = refID;
-                                    la.Id_panier = idpatmp;                                   
+                                    la.Id_panier = idpatmp;
                                     lg.Id_panier = IdPanierGlobal;
                                     lg.Quantite = quantites[v];
                                     lg.Reference = reff.Reference;
                                     lg.Id_reference = refID;
                                     await clientApi.Insert3Async(la);
-                                    await clientApi.Insert4Async(lg);                                                                                                                                                       
+                                    await clientApi.Insert4Async(lg);
                                     v++;
                                     break;
-                                }                                                   
-                            }                           
-                        }                    
-                            for (int i = 0; i < files.Length; i++)
+                                }
+                            }
+                        }
+                        for (int i = 0; i < files.Length; i++)
+                        {
+                            string filename = System.IO.Path.GetFileName(files[i]);
+                            FileInfo fileInfo = new FileInfo(files[i]);
+                            UploadingFilesList.Items.Add(new fileDetail()
                             {
-                                string filename = System.IO.Path.GetFileName(files[i]);
-                                FileInfo fileInfo = new FileInfo(files[i]);
-                                UploadingFilesList.Items.Add(new fileDetail()
-                                {
-                                    FileName = filename,
-                                    // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
-                                    FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
-                                    UploadProgress = 100
-                                });
-                            }                     
+                                FileName = filename,
+                                // ici on convertit la taille des fichiers de bits vers MB, la formule est bonne mais je sais pas pourquoi c'est pas bon pour résultat affiché dans le client ^^'
+                                FileSize = string.Format("{0} {1}", (fileInfo.Length / 1.049e+6).ToString("0.0"), "Mb"),
+                                UploadProgress = 100
+                            });
+                        }
                     }
                 }
                 else

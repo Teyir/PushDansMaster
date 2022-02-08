@@ -29,7 +29,7 @@
 
         #region Constructeurs
 
-        public Prix (int prix, int idFournisseur, int idLignesGlobal)
+        public Prix(int prix, int idFournisseur, int idLignesGlobal)
         {
             this.prix = prix;
             this.idFournisseur = idFournisseur;
